@@ -3,7 +3,7 @@
 This is a modification of NVIDIA's DLRM implementation found [here](https://github.com/NVIDIA/DeepLearningExamples/tree/master/PyTorch/Recommendation/DLRM). 
 
 This repository is intended to show how to use the pytorch_embeddings module. 
-Log files attached. 
+The module itself is not included. See the attached log files. 
 
 The original README follows. 
 
