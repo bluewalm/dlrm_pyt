@@ -57,8 +57,7 @@ class MultiTableEmbeddings(Embeddings):
         # Each embedding table has size [num_features, embedding_dim]
         for i, num_features in enumerate(categorical_feature_sizes):
             # Allocate directly on GPU is much faster than allocating on CPU then copying over
-            embedding_weight = torch.empty((num_features, embedding_dim), device=self._embedding_device_map[i])
-            embedding = nn.Embedding.from_pretrained(embedding_weight, freeze=False, sparse=True)
+            embedding = nn.Embedding(num_features, embedding_dim, device=self._embedding_device_map[i], freeze=False, sparse=True)
             embeddings.append(embedding)
 
         self.embeddings = nn.ModuleList(embeddings)
@@ -73,10 +72,12 @@ class MultiTableEmbeddings(Embeddings):
         Returns:
             Tensor: embedding outputs in shape [batch, embedding_num, embedding_dim]
         """
+        categorical_inputs = categorical_inputs.T.contiguous()
+        
         # Put indices on the same device as corresponding embedding
         device_indices = []
         for embedding_id, _ in enumerate(self.embeddings):
-            device_indices.append(categorical_inputs[:, embedding_id].to(self._embedding_device_map[embedding_id]))
+            device_indices.append(categorical_inputs[embedding_id, :].to(self._embedding_device_map[embedding_id]))
 
         # embedding_outputs will be a list of (26 in the case of Criteo) fetched embeddings with shape
         # [batch_size, embedding_size]

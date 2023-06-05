@@ -1,0 +1,75 @@
+Not using distributed mode
+DLL 2023-05-26 06:29:11.874776 - PARAMETER logtostderr : False  alsologtostderr : False  log_dir :   v : 0  verbosity : 0  logger_levels : {}  stderrthreshold : fatal  showprefixforinfo : True  run_with_pdb : False  pdb_post_mortem : False  pdb : False  run_with_profiling : False  profile_file : None  use_cprofile_for_profiling : True  only_check_args : False  mode : inference_benchmark  seed : 12345  batch_size : 65536  test_batch_size : 65536  lr : 24.0  epochs : 1  max_steps : None  warmup_factor : 0  warmup_steps : 8000  decay_steps : 24000  decay_start_step : 48000  decay_power : 2  decay_end_lr : 0.0  embedding_type : multi_table  embedding_compression_type : ['fpd', 'fpd', 'fpd', 'fpd', 'fpd', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native']  frobenius_rank : ['8', '8', '8', '8', '8']  frobenius_blocks : ['4', '4', '4', '4', '4']  alternating_gradients : False  silent : False  embedding_dim : 128  top_mlp_sizes : [1024, 1024, 512, 256, 1]  bottom_mlp_sizes : [512, 256, 128]  interaction_op : cuda_dot  dataset : /data/fl2/binary_dataset/  feature_spec : feature_spec.yaml  dataset_type : parametric  shuffle : False  shuffle_batch_order : False  max_table_size : None  hash_indices : False  synthetic_dataset_num_entries : 33554432  synthetic_dataset_table_sizes : ['100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000']  synthetic_dataset_numerical_features : 13  synthetic_dataset_use_feature_spec : False  load_checkpoint_path : ./fpd8x4_fl2_checkpoint  save_checkpoint_path : None  log_path : ./log.json  test_freq : None  test_after : 0.0  print_freq : 200  benchmark_warmup_steps : 0  base_device : cuda  amp : True  cuda_graphs : False  inference_benchmark_batch_sizes : [64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144]  inference_benchmark_steps : 100000  auc_threshold : None  optimized_mlp : True  auc_device : GPU  backend : nccl  bottom_features_ordered : False  freeze_mlps : False  freeze_embeddings : False  Adam_embedding_optimizer : False  Adam_MLP_optimizer : False  ? : False  help : False  helpshort : False  helpfull : False  helpxml : False 
+DistributedDlrm(
+  interaction_op=cuda_dot, hash_indices=False
+  (bottom_model): DlrmBottom(
+    (embeddings): MultiTableEmbeddings(
+      (embeddings): ModuleList(
+        (0): Embedding(embedding_type=fpd, num_embeddings=89189238, embedding_dim=128, precision=fp32, size=2.3105 MB, frobenius_rank=8, frobenius_blocks=4)
+        (1): Embedding(embedding_type=fpd, num_embeddings=80072576, embedding_dim=128, precision=fp32, size=2.1895 MB, frobenius_rank=8, frobenius_blocks=4)
+        (2): Embedding(embedding_type=fpd, num_embeddings=68920213, embedding_dim=128, precision=fp32, size=2.0312 MB, frobenius_rank=8, frobenius_blocks=4)
+        (3): Embedding(embedding_type=fpd, num_embeddings=49215541, embedding_dim=128, precision=fp32, size=1.7168 MB, frobenius_rank=8, frobenius_blocks=4)
+        (4): Embedding(embedding_type=fpd, num_embeddings=17392387, embedding_dim=128, precision=fp32, size=1.0234 MB, frobenius_rank=8, frobenius_blocks=4)
+        (5): Embedding(embedding_type=native, num_embeddings=1962610, embedding_dim=128, precision=fp32, size=958.3057 MB)
+        (6): Embedding(embedding_type=native, num_embeddings=497862, embedding_dim=128, precision=fp32, size=243.0967 MB)
+        (7): Embedding(embedding_type=native, num_embeddings=368227, embedding_dim=128, precision=fp32, size=179.7983 MB)
+        (8): Embedding(embedding_type=native, num_embeddings=37486, embedding_dim=128, precision=fp32, size=18.3037 MB)
+        (9): Embedding(embedding_type=native, num_embeddings=20250, embedding_dim=128, precision=fp32, size=9.8877 MB)
+        (10): Embedding(embedding_type=native, num_embeddings=17267, embedding_dim=128, precision=fp32, size=8.4312 MB)
+        (11): Embedding(embedding_type=native, num_embeddings=12734, embedding_dim=128, precision=fp32, size=6.2178 MB)
+        (12): Embedding(embedding_type=native, num_embeddings=11472, embedding_dim=128, precision=fp32, size=5.6016 MB)
+        (13): Embedding(embedding_type=native, num_embeddings=7418, embedding_dim=128, precision=fp32, size=3.6221 MB)
+        (14): Embedding(embedding_type=native, num_embeddings=7117, embedding_dim=128, precision=fp32, size=3.4751 MB)
+        (15): Embedding(embedding_type=native, num_embeddings=2209, embedding_dim=128, precision=fp32, size=1.0786 MB)
+        (16): Embedding(embedding_type=native, num_embeddings=1474, embedding_dim=128, precision=fp32, size=0.7197 MB)
+        (17): Embedding(embedding_type=native, num_embeddings=976, embedding_dim=128, precision=fp32, size=0.4766 MB)
+        (18): Embedding(embedding_type=native, num_embeddings=136, embedding_dim=128, precision=fp32, size=0.0664 MB)
+        (19): Embedding(embedding_type=native, num_embeddings=106, embedding_dim=128, precision=fp32, size=0.0518 MB)
+        (20): Embedding(embedding_type=native, num_embeddings=63, embedding_dim=128, precision=fp32, size=0.0308 MB)
+        (21): Embedding(embedding_type=native, num_embeddings=37, embedding_dim=128, precision=fp32, size=0.0181 MB)
+        (22): Embedding(embedding_type=native, num_embeddings=15, embedding_dim=128, precision=fp32, size=0.0073 MB)
+        (23): Embedding(embedding_type=native, num_embeddings=11, embedding_dim=128, precision=fp32, size=0.0054 MB)
+        (24): Embedding(embedding_type=native, num_embeddings=4, embedding_dim=128, precision=fp32, size=0.002 MB)
+        (25): Embedding(embedding_type=native, num_embeddings=4, embedding_dim=128, precision=fp32, size=0.002 MB)
+      )
+    )
+    (mlp): CppMlp(
+      (mlp): AmpMlp(MLP sizes: [13, 512, 256, 128], Bias=1, activation=1)
+    )
+  )
+  (top_model): DlrmTop(
+    (mlp): CppMlp(
+      (mlp): AmpMlp(MLP sizes: [480, 1024, 1024, 512, 256], Bias=1, activation=1)
+    )
+    (out): Linear(in_features=256, out_features=1, bias=True)
+  )
+)
+DLL 2023-05-26 07:00:54.308818 - () mean_inference_latency_batch_64 : 0.002899362242841419 s mean_inference_throughput_batch_64 : 22073.819909194593 samples/s mean_inference_latency_batch_128 : 0.0029148478837567426  mean_inference_throughput_batch_128 : 43913.09773429061  mean_inference_latency_batch_256 : 0.002886764296778043  mean_inference_throughput_batch_256 : 88680.60349981641  mean_inference_latency_batch_512 : 0.002926297853100572  mean_inference_throughput_batch_512 : 174965.10119689564  mean_inference_latency_batch_1024 : 0.0029664995680207173  mean_inference_throughput_batch_1024 : 345187.98217227607  mean_inference_latency_batch_2048 : 0.0030248752424364375  mean_inference_throughput_batch_2048 : 677052.7165115093  mean_inference_latency_batch_4096 : 0.003052022930277313 s mean_inference_throughput_batch_4096 : 1342060.6900970528 samples/s mean_inference_latency_batch_8192 : 0.0031235304012116128  mean_inference_throughput_batch_8192 : 2622673.3688336555  mean_inference_latency_batch_16384 : 0.0032908997687598088  mean_inference_throughput_batch_16384 : 4978577.638715016  mean_inference_latency_batch_32768 : 0.004609711273092047  mean_inference_throughput_batch_32768 : 7108471.237943775  mean_inference_latency_batch_65536 : 0.007430703617042299  mean_inference_throughput_batch_65536 : 8819622.390764363  mean_inference_latency_batch_131072 : 0.013261006947956568  mean_inference_throughput_batch_131072 : 9884015.63428766  mean_inference_latency_batch_262144 : 0.025318439633464526  mean_inference_throughput_batch_262144 : 10353876.61305606 
+{
+    "mean_inference_latency_batch_64": 0.002899362242841419,
+    "mean_inference_throughput_batch_64": 22073.819909194593,
+    "mean_inference_latency_batch_128": 0.0029148478837567426,
+    "mean_inference_throughput_batch_128": 43913.09773429061,
+    "mean_inference_latency_batch_256": 0.002886764296778043,
+    "mean_inference_throughput_batch_256": 88680.60349981641,
+    "mean_inference_latency_batch_512": 0.002926297853100572,
+    "mean_inference_throughput_batch_512": 174965.10119689564,
+    "mean_inference_latency_batch_1024": 0.0029664995680207173,
+    "mean_inference_throughput_batch_1024": 345187.98217227607,
+    "mean_inference_latency_batch_2048": 0.0030248752424364375,
+    "mean_inference_throughput_batch_2048": 677052.7165115093,
+    "mean_inference_latency_batch_4096": 0.003052022930277313,
+    "mean_inference_throughput_batch_4096": 1342060.6900970528,
+    "mean_inference_latency_batch_8192": 0.0031235304012116128,
+    "mean_inference_throughput_batch_8192": 2622673.3688336555,
+    "mean_inference_latency_batch_16384": 0.0032908997687598088,
+    "mean_inference_throughput_batch_16384": 4978577.638715016,
+    "mean_inference_latency_batch_32768": 0.004609711273092047,
+    "mean_inference_throughput_batch_32768": 7108471.237943775,
+    "mean_inference_latency_batch_65536": 0.007430703617042299,
+    "mean_inference_throughput_batch_65536": 8819622.390764363,
+    "mean_inference_latency_batch_131072": 0.013261006947956568,
+    "mean_inference_throughput_batch_131072": 9884015.63428766,
+    "mean_inference_latency_batch_262144": 0.025318439633464526,
+    "mean_inference_throughput_batch_262144": 10353876.61305606
+}

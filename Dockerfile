@@ -12,8 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ARG FROM_IMAGE_NAME=nvcr.io/nvidia/pytorch:21.10-py3
+ARG FROM_IMAGE_NAME=nvcr.io/nvidia/pytorch:22.12-py3
 FROM ${FROM_IMAGE_NAME}
+
+RUN apt-get update && \
+    apt-get install -y mc
 
 ADD requirements.txt .
 RUN pip install -r requirements.txt
@@ -21,6 +24,8 @@ RUN pip install -r requirements.txt
 WORKDIR /workspace/dlrm
 
 COPY . .
+
+RUN cd pytorch_embeddings; python setup.py develop --sm80; cd ..
 
 RUN chmod +x bind.sh
 RUN pip install --no-cache-dir -e .

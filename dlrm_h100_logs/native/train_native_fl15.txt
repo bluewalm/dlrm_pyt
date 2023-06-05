@@ -1,0 +1,1714 @@
+Not using distributed mode
+DLL 2023-05-21 17:22:01.163887 - PARAMETER logtostderr : False  alsologtostderr : False  log_dir :   v : 0  verbosity : 0  logger_levels : {}  stderrthreshold : fatal  showprefixforinfo : True  run_with_pdb : False  pdb_post_mortem : False  pdb : False  run_with_profiling : False  profile_file : None  use_cprofile_for_profiling : True  only_check_args : False  mode : train  seed : 12345  batch_size : 65536  test_batch_size : 65536  lr : 24.0  epochs : 2  max_steps : None  warmup_factor : 0  warmup_steps : 8000  decay_steps : 24000  decay_start_step : 112000  decay_power : 2  decay_end_lr : 0.0  embedding_type : multi_table  embedding_compression_type : ['native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native', 'native']  frobenius_rank : None  frobenius_blocks : None  alternating_gradients : False  silent : False  embedding_dim : 128  top_mlp_sizes : [1024, 1024, 512, 256, 1]  bottom_mlp_sizes : [512, 256, 128]  interaction_op : dot  dataset : /data/fl15/binary_dataset/  feature_spec : feature_spec.yaml  dataset_type : parametric  shuffle : False  shuffle_batch_order : False  max_table_size : None  hash_indices : False  synthetic_dataset_num_entries : 33554432  synthetic_dataset_table_sizes : ['100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000', '100000']  synthetic_dataset_numerical_features : 13  synthetic_dataset_use_feature_spec : False  load_checkpoint_path : None  save_checkpoint_path : ./native_fl15_checkpoint  log_path : ./log.json  test_freq : 1000  test_after : 0.0  print_freq : 200  benchmark_warmup_steps : 0  base_device : cuda  amp : True  cuda_graphs : False  inference_benchmark_batch_sizes : [64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144]  inference_benchmark_steps : 200  auc_threshold : None  optimized_mlp : True  auc_device : GPU  backend : nccl  bottom_features_ordered : False  freeze_mlps : False  freeze_embeddings : False  Adam_embedding_optimizer : False  Adam_MLP_optimizer : False  ? : False  help : False  helpshort : False  helpfull : False  helpxml : False 
+DistributedDlrm(
+  interaction_op=dot, hash_indices=False
+  (bottom_model): DlrmBottom(
+    (embeddings): MultiTableEmbeddings(
+      (embeddings): ModuleList(
+        (0): Embedding(embedding_type=native, num_embeddings=8165896, embedding_dim=128, precision=fp32, size=3987.2539 MB)
+        (1): Embedding(embedding_type=native, num_embeddings=7912889, embedding_dim=128, precision=fp32, size=3863.7153 MB)
+        (2): Embedding(embedding_type=native, num_embeddings=7156453, embedding_dim=128, precision=fp32, size=3494.3618 MB)
+        (3): Embedding(embedding_type=native, num_embeddings=5554114, embedding_dim=128, precision=fp32, size=2711.9697 MB)
+        (4): Embedding(embedding_type=native, num_embeddings=2675940, embedding_dim=128, precision=fp32, size=1306.6113 MB)
+        (5): Embedding(embedding_type=native, num_embeddings=582469, embedding_dim=128, precision=fp32, size=284.4087 MB)
+        (6): Embedding(embedding_type=native, num_embeddings=302516, embedding_dim=128, precision=fp32, size=147.7129 MB)
+        (7): Embedding(embedding_type=native, num_embeddings=245828, embedding_dim=128, precision=fp32, size=120.0332 MB)
+        (8): Embedding(embedding_type=native, num_embeddings=33823, embedding_dim=128, precision=fp32, size=16.5151 MB)
+        (9): Embedding(embedding_type=native, num_embeddings=20046, embedding_dim=128, precision=fp32, size=9.7881 MB)
+        (10): Embedding(embedding_type=native, num_embeddings=17139, embedding_dim=128, precision=fp32, size=8.3687 MB)
+        (11): Embedding(embedding_type=native, num_embeddings=12022, embedding_dim=128, precision=fp32, size=5.8701 MB)
+        (12): Embedding(embedding_type=native, num_embeddings=10667, embedding_dim=128, precision=fp32, size=5.2085 MB)
+        (13): Embedding(embedding_type=native, num_embeddings=7339, embedding_dim=128, precision=fp32, size=3.5835 MB)
+        (14): Embedding(embedding_type=native, num_embeddings=7105, embedding_dim=128, precision=fp32, size=3.4692 MB)
+        (15): Embedding(embedding_type=native, num_embeddings=2209, embedding_dim=128, precision=fp32, size=1.0786 MB)
+        (16): Embedding(embedding_type=native, num_embeddings=1382, embedding_dim=128, precision=fp32, size=0.6748 MB)
+        (17): Embedding(embedding_type=native, num_embeddings=968, embedding_dim=128, precision=fp32, size=0.4727 MB)
+        (18): Embedding(embedding_type=native, num_embeddings=104, embedding_dim=128, precision=fp32, size=0.0508 MB)
+        (19): Embedding(embedding_type=native, num_embeddings=97, embedding_dim=128, precision=fp32, size=0.0474 MB)
+        (20): Embedding(embedding_type=native, num_embeddings=63, embedding_dim=128, precision=fp32, size=0.0308 MB)
+        (21): Embedding(embedding_type=native, num_embeddings=35, embedding_dim=128, precision=fp32, size=0.0171 MB)
+        (22): Embedding(embedding_type=native, num_embeddings=15, embedding_dim=128, precision=fp32, size=0.0073 MB)
+        (23): Embedding(embedding_type=native, num_embeddings=11, embedding_dim=128, precision=fp32, size=0.0054 MB)
+        (24): Embedding(embedding_type=native, num_embeddings=4, embedding_dim=128, precision=fp32, size=0.002 MB)
+        (25): Embedding(embedding_type=native, num_embeddings=4, embedding_dim=128, precision=fp32, size=0.002 MB)
+      )
+    )
+    (mlp): CppMlp(
+      (mlp): AmpMlp(MLP sizes: [13, 512, 256, 128], Bias=1, activation=1)
+    )
+  )
+  (top_model): DlrmTop(
+    (mlp): CppMlp(
+      (mlp): AmpMlp(MLP sizes: [480, 1024, 1024, 512, 256], Bias=1, activation=1)
+    )
+    (out): Linear(in_features=256, out_features=1, bias=True)
+  )
+)
+Epoch:[0/2] [200/64013]  eta: 0:30:20  loss: 0.18204649  step_time: 0.028530  lr: 0.6030
+Epoch:[0/2] [400/64013]  eta: 0:30:15  loss: 0.13939972  step_time: 0.028536  lr: 1.2030
+Epoch:[0/2] [600/64013]  eta: 0:30:12  loss: 0.13827829  step_time: 0.028661  lr: 1.8030
+Epoch:[0/2] [800/64013]  eta: 0:30:07  loss: 0.13674735  step_time: 0.028644  lr: 2.4030
+Epoch:[0/2] [1000/64013]  eta: 0:30:02  loss: 0.13635212  step_time: 0.028653  lr: 3.0030
+Test: [200/1361]  step_time: 0.0451
+Test: [400/1361]  step_time: 0.0179
+Test: [600/1361]  step_time: 0.0084
+Test: [800/1361]  step_time: 0.0116
+Test: [1000/1361]  step_time: 0.0149
+Test: [1200/1361]  step_time: 0.0083
+test loss: 0.13819636
+Epoch 0 step 1000. auc 0.725420
+Epoch:[0/2] [1200/64013]  eta: 0:29:55  loss: 0.13535342  step_time: 0.028469  lr: 3.6030
+Epoch:[0/2] [1400/64013]  eta: 0:29:47  loss: 0.13409197  step_time: 0.028322  lr: 4.2030
+Epoch:[0/2] [1600/64013]  eta: 0:29:41  loss: 0.13318956  step_time: 0.028503  lr: 4.8030
+Epoch:[0/2] [1800/64013]  eta: 0:29:34  loss: 0.13220277  step_time: 0.028328  lr: 5.4030
+Epoch:[0/2] [2000/64013]  eta: 0:30:37  loss: 0.13190043  step_time: 0.039737  lr: 6.0030
+Test: [200/1361]  step_time: 0.0083
+Test: [400/1361]  step_time: 0.0443
+Test: [600/1361]  step_time: 0.0164
+Test: [800/1361]  step_time: 0.0294
+Test: [1000/1361]  step_time: 0.0123
+Test: [1200/1361]  step_time: 0.0081
+test loss: 0.13309568
+Epoch 0 step 2000. auc 0.758631
+Epoch:[0/2] [2200/64013]  eta: 0:31:05  loss: 0.13091679  step_time: 0.035535  lr: 6.6030
+Epoch:[0/2] [2400/64013]  eta: 0:30:51  loss: 0.13013612  step_time: 0.028719  lr: 7.2030
+Epoch:[0/2] [2600/64013]  eta: 0:30:38  loss: 0.12973429  step_time: 0.028435  lr: 7.8030
+Epoch:[0/2] [2800/64013]  eta: 0:30:25  loss: 0.12997451  step_time: 0.028439  lr: 8.4030
+Epoch:[0/2] [3000/64013]  eta: 0:30:14  loss: 0.12956364  step_time: 0.028601  lr: 9.0030
+Test: [200/1361]  step_time: 0.0085
+Test: [400/1361]  step_time: 0.0271
+Test: [600/1361]  step_time: 0.0082
+Test: [800/1361]  step_time: 0.0082
+Test: [1000/1361]  step_time: 0.0081
+Test: [1200/1361]  step_time: 0.0135
+test loss: 0.13430309
+Epoch 0 step 3000. auc 0.768165
+Epoch:[0/2] [3200/64013]  eta: 0:30:04  loss: 0.12945828  step_time: 0.028618  lr: 9.6030
+Epoch:[0/2] [3400/64013]  eta: 0:29:54  loss: 0.12939881  step_time: 0.028666  lr: 10.2030
+Epoch:[0/2] [3600/64013]  eta: 0:29:46  loss: 0.12942217  step_time: 0.028892  lr: 10.8030
+Epoch:[0/2] [3800/64013]  eta: 0:29:37  loss: 0.12943651  step_time: 0.028656  lr: 11.4030
+Epoch:[0/2] [4000/64013]  eta: 0:29:29  loss: 0.12919652  step_time: 0.028742  lr: 12.0030
+Test: [200/1361]  step_time: 0.0411
+Test: [400/1361]  step_time: 0.0299
+Test: [600/1361]  step_time: 0.0090
+Test: [800/1361]  step_time: 0.0084
+Test: [1000/1361]  step_time: 0.0152
+Test: [1200/1361]  step_time: 0.0188
+test loss: 0.13216199
+Epoch 0 step 4000. auc 0.772732
+Epoch:[0/2] [4200/64013]  eta: 0:29:22  loss: 0.12946247  step_time: 0.029048  lr: 12.6030
+Epoch:[0/2] [4400/64013]  eta: 0:29:14  loss: 0.12919420  step_time: 0.028594  lr: 13.2030
+Epoch:[0/2] [4600/64013]  eta: 0:29:06  loss: 0.12893257  step_time: 0.028773  lr: 13.8030
+Epoch:[0/2] [4800/64013]  eta: 0:28:58  loss: 0.12903276  step_time: 0.028573  lr: 14.4030
+Epoch:[0/2] [5000/64013]  eta: 0:28:50  loss: 0.12870122  step_time: 0.028493  lr: 15.0030
+Test: [200/1361]  step_time: 0.0385
+Test: [400/1361]  step_time: 0.0155
+Test: [600/1361]  step_time: 0.0082
+Test: [800/1361]  step_time: 0.0087
+Test: [1000/1361]  step_time: 0.0090
+Test: [1200/1361]  step_time: 0.0083
+test loss: 0.13275142
+Epoch 0 step 5000. auc 0.776472
+Epoch:[0/2] [5200/64013]  eta: 0:28:43  loss: 0.12913045  step_time: 0.028766  lr: 15.6030
+Epoch:[0/2] [5400/64013]  eta: 0:28:36  loss: 0.12870058  step_time: 0.028617  lr: 16.2030
+Epoch:[0/2] [5600/64013]  eta: 0:28:29  loss: 0.12875551  step_time: 0.028657  lr: 16.8030
+Epoch:[0/2] [5800/64013]  eta: 0:28:22  loss: 0.12857518  step_time: 0.028973  lr: 17.4030
+Epoch:[0/2] [6000/64013]  eta: 0:28:15  loss: 0.12853867  step_time: 0.028682  lr: 18.0030
+Test: [200/1361]  step_time: 0.0241
+Test: [400/1361]  step_time: 0.0152
+Test: [600/1361]  step_time: 0.0081
+Test: [800/1361]  step_time: 0.0200
+Test: [1000/1361]  step_time: 0.0084
+Test: [1200/1361]  step_time: 0.0081
+test loss: 0.13135959
+Epoch 0 step 6000. auc 0.778872
+Epoch:[0/2] [6200/64013]  eta: 0:28:08  loss: 0.12836313  step_time: 0.028760  lr: 18.6030
+Epoch:[0/2] [6400/64013]  eta: 0:28:01  loss: 0.12839817  step_time: 0.028582  lr: 19.2030
+Epoch:[0/2] [6600/64013]  eta: 0:27:54  loss: 0.12844028  step_time: 0.028507  lr: 19.8030
+Epoch:[0/2] [6800/64013]  eta: 0:27:48  loss: 0.12793395  step_time: 0.028571  lr: 20.4030
+Epoch:[0/2] [7000/64013]  eta: 0:27:41  loss: 0.12797782  step_time: 0.028575  lr: 21.0030
+Test: [200/1361]  step_time: 0.0171
+Test: [400/1361]  step_time: 0.0081
+Test: [600/1361]  step_time: 0.0147
+Test: [800/1361]  step_time: 0.0082
+Test: [1000/1361]  step_time: 0.0320
+Test: [1200/1361]  step_time: 0.0084
+test loss: 0.13048029
+Epoch 0 step 7000. auc 0.780905
+Epoch:[0/2] [7200/64013]  eta: 0:27:34  loss: 0.12802655  step_time: 0.028634  lr: 21.6030
+Epoch:[0/2] [7400/64013]  eta: 0:27:28  loss: 0.12791789  step_time: 0.028953  lr: 22.2030
+Epoch:[0/2] [7600/64013]  eta: 0:27:22  loss: 0.12792468  step_time: 0.028853  lr: 22.8030
+Epoch:[0/2] [7800/64013]  eta: 0:27:16  loss: 0.12764227  step_time: 0.028867  lr: 23.4030
+Epoch:[0/2] [8000/64013]  eta: 0:27:10  loss: 0.12784307  step_time: 0.028865  lr: 24.0000
+Test: [200/1361]  step_time: 0.0083
+Test: [400/1361]  step_time: 0.0136
+Test: [600/1361]  step_time: 0.0153
+Test: [800/1361]  step_time: 0.0128
+Test: [1000/1361]  step_time: 0.0081
+Test: [1200/1361]  step_time: 0.0199
+test loss: 0.13153759
+Epoch 0 step 8000. auc 0.782955
+Epoch:[0/2] [8200/64013]  eta: 0:27:03  loss: 0.12755720  step_time: 0.028424  lr: 24.0000
+Epoch:[0/2] [8400/64013]  eta: 0:26:56  loss: 0.12723805  step_time: 0.028447  lr: 24.0000
+Epoch:[0/2] [8600/64013]  eta: 0:26:50  loss: 0.12729813  step_time: 0.028895  lr: 24.0000
+Epoch:[0/2] [8800/64013]  eta: 0:26:43  loss: 0.12686992  step_time: 0.028425  lr: 24.0000
+Epoch:[0/2] [9000/64013]  eta: 0:26:37  loss: 0.12689057  step_time: 0.028833  lr: 24.0000
+Test: [200/1361]  step_time: 0.0082
+Test: [400/1361]  step_time: 0.0088
+Test: [600/1361]  step_time: 0.0160
+Test: [800/1361]  step_time: 0.0212
+Test: [1000/1361]  step_time: 0.0194
+Test: [1200/1361]  step_time: 0.0082
+test loss: 0.12877358
+Epoch 0 step 9000. auc 0.784997
+Epoch:[0/2] [9200/64013]  eta: 0:26:31  loss: 0.12649961  step_time: 0.028431  lr: 24.0000
+Epoch:[0/2] [9400/64013]  eta: 0:26:25  loss: 0.12688853  step_time: 0.028850  lr: 24.0000
+Epoch:[0/2] [9600/64013]  eta: 0:26:19  loss: 0.12663271  step_time: 0.028768  lr: 24.0000
+Epoch:[0/2] [9800/64013]  eta: 0:26:13  loss: 0.12618212  step_time: 0.028693  lr: 24.0000
+Epoch:[0/2] [10000/64013]  eta: 0:26:06  loss: 0.12622580  step_time: 0.028707  lr: 24.0000
+Test: [200/1361]  step_time: 0.0089
+Test: [400/1361]  step_time: 0.0148
+Test: [600/1361]  step_time: 0.0158
+Test: [800/1361]  step_time: 0.0241
+Test: [1000/1361]  step_time: 0.0264
+Test: [1200/1361]  step_time: 0.0147
+test loss: 0.12856130
+Epoch 0 step 10000. auc 0.786758
+Epoch:[0/2] [10200/64013]  eta: 0:26:00  loss: 0.12625581  step_time: 0.028665  lr: 24.0000
+Epoch:[0/2] [10400/64013]  eta: 0:25:54  loss: 0.12628981  step_time: 0.028419  lr: 24.0000
+Epoch:[0/2] [10600/64013]  eta: 0:25:48  loss: 0.12633009  step_time: 0.028907  lr: 24.0000
+Epoch:[0/2] [10800/64013]  eta: 0:25:42  loss: 0.12627147  step_time: 0.028527  lr: 24.0000
+Epoch:[0/2] [11000/64013]  eta: 0:25:36  loss: 0.12568145  step_time: 0.028577  lr: 24.0000
+Test: [200/1361]  step_time: 0.0082
+Test: [400/1361]  step_time: 0.0320
+Test: [600/1361]  step_time: 0.0090
+Test: [800/1361]  step_time: 0.0176
+Test: [1000/1361]  step_time: 0.0154
+Test: [1200/1361]  step_time: 0.0081
+test loss: 0.12825337
+Epoch 0 step 11000. auc 0.787831
+Epoch:[0/2] [11200/64013]  eta: 0:25:29  loss: 0.12601565  step_time: 0.028566  lr: 24.0000
+Epoch:[0/2] [11400/64013]  eta: 0:25:23  loss: 0.12574616  step_time: 0.028722  lr: 24.0000
+Epoch:[0/2] [11600/64013]  eta: 0:25:17  loss: 0.12589191  step_time: 0.028551  lr: 24.0000
+Epoch:[0/2] [11800/64013]  eta: 0:25:11  loss: 0.12553591  step_time: 0.028742  lr: 24.0000
+Epoch:[0/2] [12000/64013]  eta: 0:25:05  loss: 0.12557606  step_time: 0.028846  lr: 24.0000
+Test: [200/1361]  step_time: 0.0139
+Test: [400/1361]  step_time: 0.0128
+Test: [600/1361]  step_time: 0.0196
+Test: [800/1361]  step_time: 0.0177
+Test: [1000/1361]  step_time: 0.0177
+Test: [1200/1361]  step_time: 0.0085
+test loss: 0.12970385
+Epoch 0 step 12000. auc 0.788293
+Epoch:[0/2] [12200/64013]  eta: 0:24:59  loss: 0.12568423  step_time: 0.028448  lr: 24.0000
+Epoch:[0/2] [12400/64013]  eta: 0:24:53  loss: 0.12532090  step_time: 0.028729  lr: 24.0000
+Epoch:[0/2] [12600/64013]  eta: 0:24:47  loss: 0.12577923  step_time: 0.028555  lr: 24.0000
+Epoch:[0/2] [12800/64013]  eta: 0:24:43  loss: 0.12547512  step_time: 0.030998  lr: 24.0000
+Epoch:[0/2] [13000/64013]  eta: 0:24:37  loss: 0.12557054  step_time: 0.028697  lr: 24.0000
+Test: [200/1361]  step_time: 0.0085
+Test: [400/1361]  step_time: 0.0218
+Test: [600/1361]  step_time: 0.0081
+Test: [800/1361]  step_time: 0.0088
+Test: [1000/1361]  step_time: 0.0147
+Test: [1200/1361]  step_time: 0.0244
+test loss: 0.12869439
+Epoch 0 step 13000. auc 0.789491
+Epoch:[0/2] [13200/64013]  eta: 0:24:31  loss: 0.12520263  step_time: 0.028913  lr: 24.0000
+Epoch:[0/2] [13400/64013]  eta: 0:24:25  loss: 0.12528431  step_time: 0.028794  lr: 24.0000
+Epoch:[0/2] [13600/64013]  eta: 0:24:19  loss: 0.12549359  step_time: 0.028845  lr: 24.0000
+Epoch:[0/2] [13800/64013]  eta: 0:24:13  loss: 0.12529057  step_time: 0.028912  lr: 24.0000
+Epoch:[0/2] [14000/64013]  eta: 0:24:07  loss: 0.12559715  step_time: 0.028716  lr: 24.0000
+Test: [200/1361]  step_time: 0.0081
+Test: [400/1361]  step_time: 0.0084
+Test: [600/1361]  step_time: 0.0084
+Test: [800/1361]  step_time: 0.0081
+Test: [1000/1361]  step_time: 0.0198
+Test: [1200/1361]  step_time: 0.0081
+test loss: 0.12803248
+Epoch 0 step 14000. auc 0.790365
+Epoch:[0/2] [14200/64013]  eta: 0:24:01  loss: 0.12546660  step_time: 0.028528  lr: 24.0000
+Epoch:[0/2] [14400/64013]  eta: 0:23:55  loss: 0.12487885  step_time: 0.028473  lr: 24.0000
+Epoch:[0/2] [14600/64013]  eta: 0:23:49  loss: 0.12525302  step_time: 0.028466  lr: 24.0000
+Epoch:[0/2] [14800/64013]  eta: 0:23:43  loss: 0.12495726  step_time: 0.028489  lr: 24.0000
+Epoch:[0/2] [15000/64013]  eta: 0:23:37  loss: 0.12504563  step_time: 0.028738  lr: 24.0000
+Test: [200/1361]  step_time: 0.0243
+Test: [400/1361]  step_time: 0.0085
+Test: [600/1361]  step_time: 0.0240
+Test: [800/1361]  step_time: 0.0145
+Test: [1000/1361]  step_time: 0.0083
+Test: [1200/1361]  step_time: 0.0164
+test loss: 0.12865672
+Epoch 0 step 15000. auc 0.790990
+Epoch:[0/2] [15200/64013]  eta: 0:23:31  loss: 0.12503910  step_time: 0.028798  lr: 24.0000
+Epoch:[0/2] [15400/64013]  eta: 0:23:26  loss: 0.12515493  step_time: 0.029407  lr: 24.0000
+Epoch:[0/2] [15600/64013]  eta: 0:23:20  loss: 0.12511307  step_time: 0.028600  lr: 24.0000
+Epoch:[0/2] [15800/64013]  eta: 0:23:14  loss: 0.12494829  step_time: 0.028752  lr: 24.0000
+Epoch:[0/2] [16000/64013]  eta: 0:23:08  loss: 0.12467369  step_time: 0.028848  lr: 24.0000
+Test: [200/1361]  step_time: 0.0092
+Test: [400/1361]  step_time: 0.0253
+Test: [600/1361]  step_time: 0.0165
+Test: [800/1361]  step_time: 0.0232
+Test: [1000/1361]  step_time: 0.0085
+Test: [1200/1361]  step_time: 0.0082
+test loss: 0.12759672
+Epoch 0 step 16000. auc 0.791902
+Epoch:[0/2] [16200/64013]  eta: 0:23:02  loss: 0.12504975  step_time: 0.028641  lr: 24.0000
+Epoch:[0/2] [16400/64013]  eta: 0:22:56  loss: 0.12487734  step_time: 0.028598  lr: 24.0000
+Epoch:[0/2] [16600/64013]  eta: 0:22:50  loss: 0.12467289  step_time: 0.028504  lr: 24.0000
+Epoch:[0/2] [16800/64013]  eta: 0:22:44  loss: 0.12504199  step_time: 0.028649  lr: 24.0000
+Epoch:[0/2] [17000/64013]  eta: 0:22:39  loss: 0.12469203  step_time: 0.029009  lr: 24.0000
+Test: [200/1361]  step_time: 0.0175
+Test: [400/1361]  step_time: 0.0082
+Test: [600/1361]  step_time: 0.0129
+Test: [800/1361]  step_time: 0.0248
+Test: [1000/1361]  step_time: 0.0108
+Test: [1200/1361]  step_time: 0.0180
+test loss: 0.12774353
+Epoch 0 step 17000. auc 0.792237
+Epoch:[0/2] [17200/64013]  eta: 0:22:33  loss: 0.12488094  step_time: 0.028732  lr: 24.0000
+Epoch:[0/2] [17400/64013]  eta: 0:22:27  loss: 0.12473215  step_time: 0.028701  lr: 24.0000
+Epoch:[0/2] [17600/64013]  eta: 0:22:21  loss: 0.12450994  step_time: 0.028727  lr: 24.0000
+Epoch:[0/2] [17800/64013]  eta: 0:22:15  loss: 0.12474081  step_time: 0.028592  lr: 24.0000
+Epoch:[0/2] [18000/64013]  eta: 0:22:09  loss: 0.12431139  step_time: 0.028505  lr: 24.0000
+Test: [200/1361]  step_time: 0.0081
+Test: [400/1361]  step_time: 0.0190
+Test: [600/1361]  step_time: 0.0240
+Test: [800/1361]  step_time: 0.0160
+Test: [1000/1361]  step_time: 0.0084
+Test: [1200/1361]  step_time: 0.0081
+test loss: 0.12755689
+Epoch 0 step 18000. auc 0.792362
+Epoch:[0/2] [18200/64013]  eta: 0:22:03  loss: 0.12485334  step_time: 0.028672  lr: 24.0000
+Epoch:[0/2] [18400/64013]  eta: 0:21:57  loss: 0.12466472  step_time: 0.028672  lr: 24.0000
+Epoch:[0/2] [18600/64013]  eta: 0:21:51  loss: 0.12476059  step_time: 0.029028  lr: 24.0000
+Epoch:[0/2] [18800/64013]  eta: 0:21:46  loss: 0.12456422  step_time: 0.028587  lr: 24.0000
+Epoch:[0/2] [19000/64013]  eta: 0:21:40  loss: 0.12446371  step_time: 0.028605  lr: 24.0000
+Test: [200/1361]  step_time: 0.0092
+Test: [400/1361]  step_time: 0.0162
+Test: [600/1361]  step_time: 0.0081
+Test: [800/1361]  step_time: 0.0191
+Test: [1000/1361]  step_time: 0.0134
+Test: [1200/1361]  step_time: 0.0082
+test loss: 0.12887742
+Epoch 0 step 19000. auc 0.792933
+Epoch:[0/2] [19200/64013]  eta: 0:21:34  loss: 0.12437902  step_time: 0.028749  lr: 24.0000
+Epoch:[0/2] [19400/64013]  eta: 0:21:28  loss: 0.12449303  step_time: 0.028481  lr: 24.0000
+Epoch:[0/2] [19600/64013]  eta: 0:21:22  loss: 0.12442984  step_time: 0.028784  lr: 24.0000
+Epoch:[0/2] [19800/64013]  eta: 0:21:17  loss: 0.12427752  step_time: 0.030769  lr: 24.0000
+Epoch:[0/2] [20000/64013]  eta: 0:21:11  loss: 0.12434179  step_time: 0.028886  lr: 24.0000
+Test: [200/1361]  step_time: 0.0086
+Test: [400/1361]  step_time: 0.0083
+Test: [600/1361]  step_time: 0.0082
+Test: [800/1361]  step_time: 0.0092
+Test: [1000/1361]  step_time: 0.0183
+Test: [1200/1361]  step_time: 0.0134
+test loss: 0.12781781
+Epoch 0 step 20000. auc 0.793960
+Epoch:[0/2] [20200/64013]  eta: 0:21:07  loss: 0.12435672  step_time: 0.031778  lr: 24.0000
+Epoch:[0/2] [20400/64013]  eta: 0:21:01  loss: 0.12460787  step_time: 0.028702  lr: 24.0000
+Epoch:[0/2] [20600/64013]  eta: 0:20:55  loss: 0.12475813  step_time: 0.028386  lr: 24.0000
+Epoch:[0/2] [20800/64013]  eta: 0:20:49  loss: 0.12458780  step_time: 0.028600  lr: 24.0000
+Epoch:[0/2] [21000/64013]  eta: 0:20:43  loss: 0.12443212  step_time: 0.028741  lr: 24.0000
+Test: [200/1361]  step_time: 0.0249
+Test: [400/1361]  step_time: 0.0081
+Test: [600/1361]  step_time: 0.0081
+Test: [800/1361]  step_time: 0.0221
+Test: [1000/1361]  step_time: 0.0095
+Test: [1200/1361]  step_time: 0.0123
+test loss: 0.12717414
+Epoch 0 step 21000. auc 0.794331
+Epoch:[0/2] [21200/64013]  eta: 0:20:37  loss: 0.12451503  step_time: 0.028632  lr: 24.0000
+Epoch:[0/2] [21400/64013]  eta: 0:20:31  loss: 0.12450436  step_time: 0.028518  lr: 24.0000
+Epoch:[0/2] [21600/64013]  eta: 0:20:25  loss: 0.12471890  step_time: 0.028472  lr: 24.0000
+Epoch:[0/2] [21800/64013]  eta: 0:20:19  loss: 0.12414861  step_time: 0.028554  lr: 24.0000
+Epoch:[0/2] [22000/64013]  eta: 0:20:14  loss: 0.12427069  step_time: 0.028597  lr: 24.0000
+Test: [200/1361]  step_time: 0.0126
+Test: [400/1361]  step_time: 0.0175
+Test: [600/1361]  step_time: 0.0126
+Test: [800/1361]  step_time: 0.0189
+Test: [1000/1361]  step_time: 0.0081
+Test: [1200/1361]  step_time: 0.0145
+test loss: 0.12709577
+Epoch 0 step 22000. auc 0.794710
+Epoch:[0/2] [22200/64013]  eta: 0:20:08  loss: 0.12439656  step_time: 0.028875  lr: 24.0000
+Epoch:[0/2] [22400/64013]  eta: 0:20:02  loss: 0.12393215  step_time: 0.028696  lr: 24.0000
+Epoch:[0/2] [22600/64013]  eta: 0:19:56  loss: 0.12432140  step_time: 0.028393  lr: 24.0000
+Epoch:[0/2] [22800/64013]  eta: 0:19:50  loss: 0.12407000  step_time: 0.028924  lr: 24.0000
+Epoch:[0/2] [23000/64013]  eta: 0:19:44  loss: 0.12413872  step_time: 0.028711  lr: 24.0000
+Test: [200/1361]  step_time: 0.0086
+Test: [400/1361]  step_time: 0.0104
+Test: [600/1361]  step_time: 0.0081
+Test: [800/1361]  step_time: 0.0156
+Test: [1000/1361]  step_time: 0.0083
+Test: [1200/1361]  step_time: 0.0536
+test loss: 0.12716191
+Epoch 0 step 23000. auc 0.794920
+Epoch:[0/2] [23200/64013]  eta: 0:19:42  loss: 0.12416141  step_time: 0.038051  lr: 24.0000
+Epoch:[0/2] [23400/64013]  eta: 0:19:36  loss: 0.12424470  step_time: 0.029036  lr: 24.0000
+Epoch:[0/2] [23600/64013]  eta: 0:19:30  loss: 0.12398059  step_time: 0.028550  lr: 24.0000
+Epoch:[0/2] [23800/64013]  eta: 0:19:24  loss: 0.12428910  step_time: 0.028757  lr: 24.0000
+Epoch:[0/2] [24000/64013]  eta: 0:19:19  loss: 0.12396285  step_time: 0.031428  lr: 24.0000
+Test: [200/1361]  step_time: 0.0166
+Test: [400/1361]  step_time: 0.0202
+Test: [600/1361]  step_time: 0.0081
+Test: [800/1361]  step_time: 0.0160
+Test: [1000/1361]  step_time: 0.0369
+Test: [1200/1361]  step_time: 0.0229
+test loss: 0.12701643
+Epoch 0 step 24000. auc 0.795298
+Epoch:[0/2] [24200/64013]  eta: 0:19:13  loss: 0.12363973  step_time: 0.028672  lr: 24.0000
+Epoch:[0/2] [24400/64013]  eta: 0:19:07  loss: 0.12401932  step_time: 0.028387  lr: 24.0000
+Epoch:[0/2] [24600/64013]  eta: 0:19:01  loss: 0.12427872  step_time: 0.028638  lr: 24.0000
+Epoch:[0/2] [24800/64013]  eta: 0:18:55  loss: 0.12389380  step_time: 0.028482  lr: 24.0000
+Epoch:[0/2] [25000/64013]  eta: 0:18:50  loss: 0.12414184  step_time: 0.028456  lr: 24.0000
+Test: [200/1361]  step_time: 0.0082
+Test: [400/1361]  step_time: 0.0149
+Test: [600/1361]  step_time: 0.0189
+Test: [800/1361]  step_time: 0.0235
+Test: [1000/1361]  step_time: 0.0083
+Test: [1200/1361]  step_time: 0.0190
+test loss: 0.12719002
+Epoch 0 step 25000. auc 0.795671
+Epoch:[0/2] [25200/64013]  eta: 0:18:44  loss: 0.12362406  step_time: 0.028380  lr: 24.0000
+Epoch:[0/2] [25400/64013]  eta: 0:18:40  loss: 0.12408373  step_time: 0.036470  lr: 24.0000
+Epoch:[0/2] [25600/64013]  eta: 0:18:34  loss: 0.12385698  step_time: 0.028738  lr: 24.0000
+Epoch:[0/2] [25800/64013]  eta: 0:18:29  loss: 0.12417994  step_time: 0.032302  lr: 24.0000
+Epoch:[0/2] [26000/64013]  eta: 0:18:23  loss: 0.12397907  step_time: 0.028724  lr: 24.0000
+Test: [200/1361]  step_time: 0.0210
+Test: [400/1361]  step_time: 0.0087
+Test: [600/1361]  step_time: 0.0082
+Test: [800/1361]  step_time: 0.0267
+Test: [1000/1361]  step_time: 0.0137
+Test: [1200/1361]  step_time: 0.0100
+test loss: 0.12732184
+Epoch 0 step 26000. auc 0.795777
+Epoch:[0/2] [26200/64013]  eta: 0:18:17  loss: 0.12398318  step_time: 0.028648  lr: 24.0000
+Epoch:[0/2] [26400/64013]  eta: 0:18:12  loss: 0.12375559  step_time: 0.028645  lr: 24.0000
+Epoch:[0/2] [26600/64013]  eta: 0:18:06  loss: 0.12395804  step_time: 0.030342  lr: 24.0000
+Epoch:[0/2] [26800/64013]  eta: 0:18:00  loss: 0.12380307  step_time: 0.028655  lr: 24.0000
+Epoch:[0/2] [27000/64013]  eta: 0:17:54  loss: 0.12372593  step_time: 0.028549  lr: 24.0000
+Test: [200/1361]  step_time: 0.0201
+Test: [400/1361]  step_time: 0.0220
+Test: [600/1361]  step_time: 0.0080
+Test: [800/1361]  step_time: 0.0083
+Test: [1000/1361]  step_time: 0.0185
+Test: [1200/1361]  step_time: 0.0166
+test loss: 0.12701517
+Epoch 0 step 27000. auc 0.796347
+Epoch:[0/2] [27200/64013]  eta: 0:17:48  loss: 0.12402120  step_time: 0.028623  lr: 24.0000
+Epoch:[0/2] [27400/64013]  eta: 0:17:42  loss: 0.12366189  step_time: 0.028528  lr: 24.0000
+Epoch:[0/2] [27600/64013]  eta: 0:17:37  loss: 0.12382842  step_time: 0.028760  lr: 24.0000
+Epoch:[0/2] [27800/64013]  eta: 0:17:31  loss: 0.12433087  step_time: 0.028540  lr: 24.0000
+Epoch:[0/2] [28000/64013]  eta: 0:17:25  loss: 0.12409993  step_time: 0.028747  lr: 24.0000
+Test: [200/1361]  step_time: 0.0247
+Test: [400/1361]  step_time: 0.0232
+Test: [600/1361]  step_time: 0.0083
+Test: [800/1361]  step_time: 0.0169
+Test: [1000/1361]  step_time: 0.0196
+Test: [1200/1361]  step_time: 0.0156
+test loss: 0.12676950
+Epoch 0 step 28000. auc 0.796666
+Epoch:[0/2] [28200/64013]  eta: 0:17:19  loss: 0.12406220  step_time: 0.028401  lr: 24.0000
+Epoch:[0/2] [28400/64013]  eta: 0:17:13  loss: 0.12361274  step_time: 0.028393  lr: 24.0000
+Epoch:[0/2] [28600/64013]  eta: 0:17:07  loss: 0.12358759  step_time: 0.028831  lr: 24.0000
+Epoch:[0/2] [28800/64013]  eta: 0:17:01  loss: 0.12387180  step_time: 0.028774  lr: 24.0000
+Epoch:[0/2] [29000/64013]  eta: 0:16:55  loss: 0.12397596  step_time: 0.028646  lr: 24.0000
+Test: [200/1361]  step_time: 0.0081
+Test: [400/1361]  step_time: 0.0151
+Test: [600/1361]  step_time: 0.0083
+Test: [800/1361]  step_time: 0.0162
+Test: [1000/1361]  step_time: 0.0084
+Test: [1200/1361]  step_time: 0.0123
+test loss: 0.12704496
+Epoch 0 step 29000. auc 0.796761
+Epoch:[0/2] [29200/64013]  eta: 0:16:49  loss: 0.12380090  step_time: 0.028410  lr: 24.0000
+Epoch:[0/2] [29400/64013]  eta: 0:16:44  loss: 0.12369623  step_time: 0.030316  lr: 24.0000
+Epoch:[0/2] [29600/64013]  eta: 0:16:38  loss: 0.12395032  step_time: 0.028553  lr: 24.0000
+Epoch:[0/2] [29800/64013]  eta: 0:16:32  loss: 0.12378781  step_time: 0.028460  lr: 24.0000
+Epoch:[0/2] [30000/64013]  eta: 0:16:26  loss: 0.12377692  step_time: 0.028620  lr: 24.0000
+Test: [200/1361]  step_time: 0.0088
+Test: [400/1361]  step_time: 0.0288
+Test: [600/1361]  step_time: 0.0083
+Test: [800/1361]  step_time: 0.0154
+Test: [1000/1361]  step_time: 0.0215
+Test: [1200/1361]  step_time: 0.0125
+test loss: 0.12700626
+Epoch 0 step 30000. auc 0.796793
+Epoch:[0/2] [30200/64013]  eta: 0:16:20  loss: 0.12372145  step_time: 0.028466  lr: 24.0000
+Epoch:[0/2] [30400/64013]  eta: 0:16:14  loss: 0.12351128  step_time: 0.028434  lr: 24.0000
+Epoch:[0/2] [30600/64013]  eta: 0:16:08  loss: 0.12383208  step_time: 0.028566  lr: 24.0000
+Epoch:[0/2] [30800/64013]  eta: 0:16:02  loss: 0.12378678  step_time: 0.028432  lr: 24.0000
+Epoch:[0/2] [31000/64013]  eta: 0:15:56  loss: 0.12358314  step_time: 0.028428  lr: 24.0000
+Test: [200/1361]  step_time: 0.0082
+Test: [400/1361]  step_time: 0.0189
+Test: [600/1361]  step_time: 0.0187
+Test: [800/1361]  step_time: 0.0136
+Test: [1000/1361]  step_time: 0.0169
+Test: [1200/1361]  step_time: 0.0247
+test loss: 0.12783314
+Epoch 0 step 31000. auc 0.797037
+Epoch:[0/2] [31200/64013]  eta: 0:15:51  loss: 0.12388232  step_time: 0.028405  lr: 24.0000
+Epoch:[0/2] [31400/64013]  eta: 0:15:45  loss: 0.12363168  step_time: 0.028450  lr: 24.0000
+Epoch:[0/2] [31600/64013]  eta: 0:15:39  loss: 0.12340982  step_time: 0.028453  lr: 24.0000
+Epoch:[0/2] [31800/64013]  eta: 0:15:33  loss: 0.12379351  step_time: 0.028749  lr: 24.0000
+Epoch:[0/2] [32000/64013]  eta: 0:15:27  loss: 0.12379991  step_time: 0.028360  lr: 24.0000
+Test: [200/1361]  step_time: 0.0157
+Test: [400/1361]  step_time: 0.0081
+Test: [600/1361]  step_time: 0.0208
+Test: [800/1361]  step_time: 0.0082
+Test: [1000/1361]  step_time: 0.0396
+Test: [1200/1361]  step_time: 0.0207
+test loss: 0.12668538
+Epoch 0 step 32000. auc 0.797205
+Epoch:[0/2] [32200/64013]  eta: 0:15:24  loss: 0.12386286  step_time: 0.044070  lr: 24.0000
+Epoch:[0/2] [32400/64013]  eta: 0:15:18  loss: 0.12390088  step_time: 0.028388  lr: 24.0000
+Epoch:[0/2] [32600/64013]  eta: 0:15:12  loss: 0.12378464  step_time: 0.028630  lr: 24.0000
+Epoch:[0/2] [32800/64013]  eta: 0:15:06  loss: 0.12376966  step_time: 0.028790  lr: 24.0000
+Epoch:[0/2] [33000/64013]  eta: 0:15:02  loss: 0.12357126  step_time: 0.034306  lr: 24.0000
+Test: [200/1361]  step_time: 0.0082
+Test: [400/1361]  step_time: 0.0081
+Test: [600/1361]  step_time: 0.0087
+Test: [800/1361]  step_time: 0.0201
+Test: [1000/1361]  step_time: 0.0465
+Test: [1200/1361]  step_time: 0.0228
+test loss: 0.12658128
+Epoch 0 step 33000. auc 0.797876
+Epoch:[0/2] [33200/64013]  eta: 0:14:56  loss: 0.12344739  step_time: 0.028505  lr: 24.0000
+Epoch:[0/2] [33400/64013]  eta: 0:14:50  loss: 0.12361684  step_time: 0.028752  lr: 24.0000
+Epoch:[0/2] [33600/64013]  eta: 0:14:44  loss: 0.12376373  step_time: 0.028574  lr: 24.0000
+Epoch:[0/2] [33800/64013]  eta: 0:14:38  loss: 0.12376319  step_time: 0.028712  lr: 24.0000
+Epoch:[0/2] [34000/64013]  eta: 0:14:32  loss: 0.12368941  step_time: 0.028748  lr: 24.0000
+Test: [200/1361]  step_time: 0.0230
+Test: [400/1361]  step_time: 0.0152
+Test: [600/1361]  step_time: 0.0158
+Test: [800/1361]  step_time: 0.0134
+Test: [1000/1361]  step_time: 0.0367
+Test: [1200/1361]  step_time: 0.0085
+test loss: 0.12679638
+Epoch 0 step 34000. auc 0.797896
+Epoch:[0/2] [34200/64013]  eta: 0:14:26  loss: 0.12350749  step_time: 0.028793  lr: 24.0000
+Epoch:[0/2] [34400/64013]  eta: 0:14:20  loss: 0.12360703  step_time: 0.028735  lr: 24.0000
+Epoch:[0/2] [34600/64013]  eta: 0:14:15  loss: 0.12349293  step_time: 0.028453  lr: 24.0000
+Epoch:[0/2] [34800/64013]  eta: 0:14:09  loss: 0.12358291  step_time: 0.028546  lr: 24.0000
+Epoch:[0/2] [35000/64013]  eta: 0:14:03  loss: 0.12342835  step_time: 0.028684  lr: 24.0000
+Test: [200/1361]  step_time: 0.0085
+Test: [400/1361]  step_time: 0.0269
+Test: [600/1361]  step_time: 0.0138
+Test: [800/1361]  step_time: 0.0084
+Test: [1000/1361]  step_time: 0.0081
+Test: [1200/1361]  step_time: 0.0138
+test loss: 0.12692122
+Epoch 0 step 35000. auc 0.797821
+Epoch:[0/2] [35200/64013]  eta: 0:13:57  loss: 0.12346149  step_time: 0.028500  lr: 24.0000
+Epoch:[0/2] [35400/64013]  eta: 0:13:51  loss: 0.12323915  step_time: 0.031730  lr: 24.0000
+Epoch:[0/2] [35600/64013]  eta: 0:13:46  loss: 0.12343856  step_time: 0.028490  lr: 24.0000
+Epoch:[0/2] [35800/64013]  eta: 0:13:40  loss: 0.12335524  step_time: 0.028575  lr: 24.0000
+Epoch:[0/2] [36000/64013]  eta: 0:13:34  loss: 0.12342616  step_time: 0.029902  lr: 24.0000
+Test: [200/1361]  step_time: 0.0185
+Test: [400/1361]  step_time: 0.0087
+Test: [600/1361]  step_time: 0.0280
+Test: [800/1361]  step_time: 0.0141
+Test: [1000/1361]  step_time: 0.0144
+Test: [1200/1361]  step_time: 0.0156
+test loss: 0.12670232
+Epoch 0 step 36000. auc 0.798120
+Epoch:[0/2] [36200/64013]  eta: 0:13:28  loss: 0.12346786  step_time: 0.028685  lr: 24.0000
+Epoch:[0/2] [36400/64013]  eta: 0:13:22  loss: 0.12348679  step_time: 0.028470  lr: 24.0000
+Epoch:[0/2] [36600/64013]  eta: 0:13:16  loss: 0.12359765  step_time: 0.028443  lr: 24.0000
+Epoch:[0/2] [36800/64013]  eta: 0:13:11  loss: 0.12353614  step_time: 0.031788  lr: 24.0000
+Epoch:[0/2] [37000/64013]  eta: 0:13:05  loss: 0.12357289  step_time: 0.028386  lr: 24.0000
+Test: [200/1361]  step_time: 0.0284
+Test: [400/1361]  step_time: 0.0161
+Test: [600/1361]  step_time: 0.0136
+Test: [800/1361]  step_time: 0.0086
+Test: [1000/1361]  step_time: 0.0158
+Test: [1200/1361]  step_time: 0.0940
+test loss: 0.12675448
+Epoch 0 step 37000. auc 0.798171
+Epoch:[0/2] [37200/64013]  eta: 0:12:59  loss: 0.12357442  step_time: 0.028616  lr: 24.0000
+Epoch:[0/2] [37400/64013]  eta: 0:12:54  loss: 0.12328169  step_time: 0.037148  lr: 24.0000
+Epoch:[0/2] [37600/64013]  eta: 0:12:49  loss: 0.12349807  step_time: 0.028659  lr: 24.0000
+Epoch:[0/2] [37800/64013]  eta: 0:12:43  loss: 0.12351856  step_time: 0.028539  lr: 24.0000
+Epoch:[0/2] [38000/64013]  eta: 0:12:37  loss: 0.12327134  step_time: 0.031903  lr: 24.0000
+Test: [200/1361]  step_time: 0.0146
+Test: [400/1361]  step_time: 0.0156
+Test: [600/1361]  step_time: 0.0085
+Test: [800/1361]  step_time: 0.0132
+Test: [1000/1361]  step_time: 0.0083
+Test: [1200/1361]  step_time: 0.0161
+test loss: 0.12689416
+Epoch 0 step 38000. auc 0.798430
+Epoch:[0/2] [38200/64013]  eta: 0:12:31  loss: 0.12323972  step_time: 0.028670  lr: 24.0000
+Epoch:[0/2] [38400/64013]  eta: 0:12:25  loss: 0.12330740  step_time: 0.028511  lr: 24.0000
+Epoch:[0/2] [38600/64013]  eta: 0:12:19  loss: 0.12336838  step_time: 0.028568  lr: 24.0000
+Epoch:[0/2] [38800/64013]  eta: 0:12:14  loss: 0.12332456  step_time: 0.028448  lr: 24.0000
+Epoch:[0/2] [39000/64013]  eta: 0:12:08  loss: 0.12344966  step_time: 0.028609  lr: 24.0000
+Test: [200/1361]  step_time: 0.0084
+Test: [400/1361]  step_time: 0.0155
+Test: [600/1361]  step_time: 0.0082
+Test: [800/1361]  step_time: 0.0081
+Test: [1000/1361]  step_time: 0.0119
+Test: [1200/1361]  step_time: 0.0171
+test loss: 0.12650649
+Epoch 0 step 39000. auc 0.798556
+Epoch:[0/2] [39200/64013]  eta: 0:12:02  loss: 0.12347707  step_time: 0.028640  lr: 24.0000
+Epoch:[0/2] [39400/64013]  eta: 0:11:56  loss: 0.12352967  step_time: 0.029251  lr: 24.0000
+Epoch:[0/2] [39600/64013]  eta: 0:11:50  loss: 0.12365279  step_time: 0.028619  lr: 24.0000
+Epoch:[0/2] [39800/64013]  eta: 0:11:44  loss: 0.12376346  step_time: 0.028845  lr: 24.0000
+Epoch:[0/2] [40000/64013]  eta: 0:11:38  loss: 0.12339733  step_time: 0.028664  lr: 24.0000
+Test: [200/1361]  step_time: 0.0091
+Test: [400/1361]  step_time: 0.0082
+Test: [600/1361]  step_time: 0.0187
+Test: [800/1361]  step_time: 0.0081
+Test: [1000/1361]  step_time: 0.0120
+Test: [1200/1361]  step_time: 0.0105
+test loss: 0.12677591
+Epoch 0 step 40000. auc 0.798633
+Epoch:[0/2] [40200/64013]  eta: 0:11:32  loss: 0.12341885  step_time: 0.028508  lr: 24.0000
+Epoch:[0/2] [40400/64013]  eta: 0:11:27  loss: 0.12332628  step_time: 0.028412  lr: 24.0000
+Epoch:[0/2] [40600/64013]  eta: 0:11:21  loss: 0.12308157  step_time: 0.028546  lr: 24.0000
+Epoch:[0/2] [40800/64013]  eta: 0:11:15  loss: 0.12375095  step_time: 0.032504  lr: 24.0000
+Epoch:[0/2] [41000/64013]  eta: 0:11:09  loss: 0.12371192  step_time: 0.028623  lr: 24.0000
+Test: [200/1361]  step_time: 0.0087
+Test: [400/1361]  step_time: 0.0099
+Test: [600/1361]  step_time: 0.0082
+Test: [800/1361]  step_time: 0.0085
+Test: [1000/1361]  step_time: 0.0082
+Test: [1200/1361]  step_time: 0.0088
+test loss: 0.12635012
+Epoch 0 step 41000. auc 0.799051
+Epoch:[0/2] [41200/64013]  eta: 0:11:04  loss: 0.12318377  step_time: 0.028537  lr: 24.0000
+Epoch:[0/2] [41400/64013]  eta: 0:10:58  loss: 0.12330129  step_time: 0.028878  lr: 24.0000
+Epoch:[0/2] [41600/64013]  eta: 0:10:52  loss: 0.12349240  step_time: 0.028613  lr: 24.0000
+Epoch:[0/2] [41800/64013]  eta: 0:10:46  loss: 0.12349565  step_time: 0.028897  lr: 24.0000
+Epoch:[0/2] [42000/64013]  eta: 0:10:40  loss: 0.12331092  step_time: 0.028520  lr: 24.0000
+Test: [200/1361]  step_time: 0.0193
+Test: [400/1361]  step_time: 0.0084
+Test: [600/1361]  step_time: 0.0083
+Test: [800/1361]  step_time: 0.0189
+Test: [1000/1361]  step_time: 0.0081
+Test: [1200/1361]  step_time: 0.0150
+test loss: 0.12646656
+Epoch 0 step 42000. auc 0.798495
+Epoch:[0/2] [42200/64013]  eta: 0:10:34  loss: 0.12339065  step_time: 0.028626  lr: 24.0000
+Epoch:[0/2] [42400/64013]  eta: 0:10:28  loss: 0.12349150  step_time: 0.028472  lr: 24.0000
+Epoch:[0/2] [42600/64013]  eta: 0:10:22  loss: 0.12333365  step_time: 0.028644  lr: 24.0000
+Epoch:[0/2] [42800/64013]  eta: 0:10:17  loss: 0.12336727  step_time: 0.028907  lr: 24.0000
+Epoch:[0/2] [43000/64013]  eta: 0:10:11  loss: 0.12317035  step_time: 0.028415  lr: 24.0000
+Test: [200/1361]  step_time: 0.0210
+Test: [400/1361]  step_time: 0.0197
+Test: [600/1361]  step_time: 0.0201
+Test: [800/1361]  step_time: 0.0278
+Test: [1000/1361]  step_time: 0.0300
+Test: [1200/1361]  step_time: 0.0161
+test loss: 0.12669633
+Epoch 0 step 43000. auc 0.799250
+Epoch:[0/2] [43200/64013]  eta: 0:10:05  loss: 0.12341826  step_time: 0.028570  lr: 24.0000
+Epoch:[0/2] [43400/64013]  eta: 0:09:59  loss: 0.12342211  step_time: 0.028665  lr: 24.0000
+Epoch:[0/2] [43600/64013]  eta: 0:09:53  loss: 0.12314618  step_time: 0.028618  lr: 24.0000
+Epoch:[0/2] [43800/64013]  eta: 0:09:47  loss: 0.12336226  step_time: 0.028553  lr: 24.0000
+Epoch:[0/2] [44000/64013]  eta: 0:09:41  loss: 0.12338621  step_time: 0.028437  lr: 24.0000
+Test: [200/1361]  step_time: 0.0129
+Test: [400/1361]  step_time: 0.0082
+Test: [600/1361]  step_time: 0.0083
+Test: [800/1361]  step_time: 0.0244
+Test: [1000/1361]  step_time: 0.0133
+Test: [1200/1361]  step_time: 0.0083
+test loss: 0.12656136
+Epoch 0 step 44000. auc 0.799246
+Epoch:[0/2] [44200/64013]  eta: 0:09:36  loss: 0.12333203  step_time: 0.028417  lr: 24.0000
+Epoch:[0/2] [44400/64013]  eta: 0:09:30  loss: 0.12325798  step_time: 0.028617  lr: 24.0000
+Epoch:[0/2] [44600/64013]  eta: 0:09:24  loss: 0.12339414  step_time: 0.028653  lr: 24.0000
+Epoch:[0/2] [44800/64013]  eta: 0:09:18  loss: 0.12341209  step_time: 0.028740  lr: 24.0000
+Epoch:[0/2] [45000/64013]  eta: 0:09:12  loss: 0.12310021  step_time: 0.028773  lr: 24.0000
+Test: [200/1361]  step_time: 0.0160
+Test: [400/1361]  step_time: 0.0344
+Test: [600/1361]  step_time: 0.0085
+Test: [800/1361]  step_time: 0.0274
+Test: [1000/1361]  step_time: 0.0087
+Test: [1200/1361]  step_time: 0.0280
+test loss: 0.12648711
+Epoch 0 step 45000. auc 0.799322
+Epoch:[0/2] [45200/64013]  eta: 0:09:06  loss: 0.12340964  step_time: 0.028371  lr: 24.0000
+Epoch:[0/2] [45400/64013]  eta: 0:09:00  loss: 0.12322029  step_time: 0.028331  lr: 24.0000
+Epoch:[0/2] [45600/64013]  eta: 0:08:55  loss: 0.12324654  step_time: 0.028582  lr: 24.0000
+Epoch:[0/2] [45800/64013]  eta: 0:08:49  loss: 0.12324827  step_time: 0.028515  lr: 24.0000
+Epoch:[0/2] [46000/64013]  eta: 0:08:43  loss: 0.12313610  step_time: 0.028426  lr: 24.0000
+Test: [200/1361]  step_time: 0.0081
+Test: [400/1361]  step_time: 0.0192
+Test: [600/1361]  step_time: 0.0081
+Test: [800/1361]  step_time: 0.0084
+Test: [1000/1361]  step_time: 0.0191
+Test: [1200/1361]  step_time: 0.0166
+test loss: 0.12631842
+Epoch 0 step 46000. auc 0.799472
+Epoch:[0/2] [46200/64013]  eta: 0:08:37  loss: 0.12332061  step_time: 0.034322  lr: 24.0000
+Epoch:[0/2] [46400/64013]  eta: 0:08:32  loss: 0.12327975  step_time: 0.028450  lr: 24.0000
+Epoch:[0/2] [46600/64013]  eta: 0:08:26  loss: 0.12311779  step_time: 0.028715  lr: 24.0000
+Epoch:[0/2] [46800/64013]  eta: 0:08:20  loss: 0.12310822  step_time: 0.028733  lr: 24.0000
+Epoch:[0/2] [47000/64013]  eta: 0:08:14  loss: 0.12308113  step_time: 0.028611  lr: 24.0000
+Test: [200/1361]  step_time: 0.0155
+Test: [400/1361]  step_time: 0.0081
+Test: [600/1361]  step_time: 0.0199
+Test: [800/1361]  step_time: 0.0083
+Test: [1000/1361]  step_time: 0.0106
+Test: [1200/1361]  step_time: 0.0195
+test loss: 0.12629272
+Epoch 0 step 47000. auc 0.799806
+Epoch:[0/2] [47200/64013]  eta: 0:08:08  loss: 0.12302684  step_time: 0.028493  lr: 24.0000
+Epoch:[0/2] [47400/64013]  eta: 0:08:02  loss: 0.12315072  step_time: 0.028838  lr: 24.0000
+Epoch:[0/2] [47600/64013]  eta: 0:07:57  loss: 0.12308099  step_time: 0.028926  lr: 24.0000
+Epoch:[0/2] [47800/64013]  eta: 0:07:51  loss: 0.12329298  step_time: 0.028626  lr: 24.0000
+Epoch:[0/2] [48000/64013]  eta: 0:07:45  loss: 0.12317341  step_time: 0.028609  lr: 24.0000
+Test: [200/1361]  step_time: 0.0211
+Test: [400/1361]  step_time: 0.0125
+Test: [600/1361]  step_time: 0.0082
+Test: [800/1361]  step_time: 0.0091
+Test: [1000/1361]  step_time: 0.0233
+Test: [1200/1361]  step_time: 0.0263
+test loss: 0.12667215
+Epoch 0 step 48000. auc 0.799871
+Epoch:[0/2] [48200/64013]  eta: 0:07:39  loss: 0.12351654  step_time: 0.028879  lr: 24.0000
+Epoch:[0/2] [48400/64013]  eta: 0:07:33  loss: 0.12303006  step_time: 0.028416  lr: 24.0000
+Epoch:[0/2] [48600/64013]  eta: 0:07:28  loss: 0.12329331  step_time: 0.045189  lr: 24.0000
+Epoch:[0/2] [48800/64013]  eta: 0:07:23  loss: 0.12319646  step_time: 0.028607  lr: 24.0000
+Epoch:[0/2] [49000/64013]  eta: 0:07:17  loss: 0.12316915  step_time: 0.028355  lr: 24.0000
+Test: [200/1361]  step_time: 0.0097
+Test: [400/1361]  step_time: 0.0086
+Test: [600/1361]  step_time: 0.0101
+Test: [800/1361]  step_time: 0.0225
+Test: [1000/1361]  step_time: 0.0174
+Test: [1200/1361]  step_time: 0.0081
+test loss: 0.12618282
+Epoch 0 step 49000. auc 0.800010
+Epoch:[0/2] [49200/64013]  eta: 0:07:11  loss: 0.12292839  step_time: 0.028680  lr: 24.0000
+Epoch:[0/2] [49400/64013]  eta: 0:07:05  loss: 0.12310845  step_time: 0.028660  lr: 24.0000
+Epoch:[0/2] [49600/64013]  eta: 0:06:59  loss: 0.12314116  step_time: 0.028475  lr: 24.0000
+Epoch:[0/2] [49800/64013]  eta: 0:06:53  loss: 0.12311992  step_time: 0.028503  lr: 24.0000
+Epoch:[0/2] [50000/64013]  eta: 0:06:47  loss: 0.12325388  step_time: 0.028636  lr: 24.0000
+Test: [200/1361]  step_time: 0.0083
+Test: [400/1361]  step_time: 0.0083
+Test: [600/1361]  step_time: 0.0080
+Test: [800/1361]  step_time: 0.0084
+Test: [1000/1361]  step_time: 0.0080
+Test: [1200/1361]  step_time: 0.0159
+test loss: 0.12672286
+Epoch 0 step 50000. auc 0.800177
+Epoch:[0/2] [50200/64013]  eta: 0:06:42  loss: 0.12296919  step_time: 0.028691  lr: 24.0000
+Epoch:[0/2] [50400/64013]  eta: 0:06:36  loss: 0.12317146  step_time: 0.028477  lr: 24.0000
+Epoch:[0/2] [50600/64013]  eta: 0:06:30  loss: 0.12295515  step_time: 0.028606  lr: 24.0000
+Epoch:[0/2] [50800/64013]  eta: 0:06:24  loss: 0.12318008  step_time: 0.028553  lr: 24.0000
+Epoch:[0/2] [51000/64013]  eta: 0:06:18  loss: 0.12296411  step_time: 0.028415  lr: 24.0000
+Test: [200/1361]  step_time: 0.0102
+Test: [400/1361]  step_time: 0.0083
+Test: [600/1361]  step_time: 0.0144
+Test: [800/1361]  step_time: 0.0088
+Test: [1000/1361]  step_time: 0.0083
+Test: [1200/1361]  step_time: 0.0299
+test loss: 0.12619661
+Epoch 0 step 51000. auc 0.800171
+Epoch:[0/2] [51200/64013]  eta: 0:06:12  loss: 0.12298799  step_time: 0.028712  lr: 24.0000
+Epoch:[0/2] [51400/64013]  eta: 0:06:06  loss: 0.12325867  step_time: 0.028530  lr: 24.0000
+Epoch:[0/2] [51600/64013]  eta: 0:06:01  loss: 0.12312797  step_time: 0.028684  lr: 24.0000
+Epoch:[0/2] [51800/64013]  eta: 0:05:55  loss: 0.12315261  step_time: 0.028402  lr: 24.0000
+Epoch:[0/2] [52000/64013]  eta: 0:05:49  loss: 0.12295860  step_time: 0.028624  lr: 24.0000
+Test: [200/1361]  step_time: 0.0080
+Test: [400/1361]  step_time: 0.0084
+Test: [600/1361]  step_time: 0.0202
+Test: [800/1361]  step_time: 0.0152
+Test: [1000/1361]  step_time: 0.0139
+Test: [1200/1361]  step_time: 0.0111
+test loss: 0.12655395
+Epoch 0 step 52000. auc 0.800094
+Epoch:[0/2] [52200/64013]  eta: 0:05:43  loss: 0.12286408  step_time: 0.028950  lr: 24.0000
+Epoch:[0/2] [52400/64013]  eta: 0:05:37  loss: 0.12255976  step_time: 0.028527  lr: 24.0000
+Epoch:[0/2] [52600/64013]  eta: 0:05:32  loss: 0.12341215  step_time: 0.032864  lr: 24.0000
+Epoch:[0/2] [52800/64013]  eta: 0:05:26  loss: 0.12283461  step_time: 0.028456  lr: 24.0000
+Epoch:[0/2] [53000/64013]  eta: 0:05:20  loss: 0.12292515  step_time: 0.028502  lr: 24.0000
+Test: [200/1361]  step_time: 0.0173
+Test: [400/1361]  step_time: 0.0148
+Test: [600/1361]  step_time: 0.0082
+Test: [800/1361]  step_time: 0.0264
+Test: [1000/1361]  step_time: 0.0081
+Test: [1200/1361]  step_time: 0.0137
+test loss: 0.12652591
+Epoch 0 step 53000. auc 0.800147
+Epoch:[0/2] [53200/64013]  eta: 0:05:14  loss: 0.12333843  step_time: 0.028428  lr: 24.0000
+Epoch:[0/2] [53400/64013]  eta: 0:05:08  loss: 0.12288825  step_time: 0.028491  lr: 24.0000
+Epoch:[0/2] [53600/64013]  eta: 0:05:02  loss: 0.12293372  step_time: 0.028346  lr: 24.0000
+Epoch:[0/2] [53800/64013]  eta: 0:04:57  loss: 0.12292708  step_time: 0.028436  lr: 24.0000
+Epoch:[0/2] [54000/64013]  eta: 0:04:51  loss: 0.12309838  step_time: 0.028544  lr: 24.0000
+Test: [200/1361]  step_time: 0.0178
+Test: [400/1361]  step_time: 0.0085
+Test: [600/1361]  step_time: 0.0134
+Test: [800/1361]  step_time: 0.0117
+Test: [1000/1361]  step_time: 0.0083
+Test: [1200/1361]  step_time: 0.0135
+test loss: 0.12612130
+Epoch 0 step 54000. auc 0.800259
+Epoch:[0/2] [54200/64013]  eta: 0:04:45  loss: 0.12317178  step_time: 0.028754  lr: 24.0000
+Epoch:[0/2] [54400/64013]  eta: 0:04:39  loss: 0.12316795  step_time: 0.028591  lr: 24.0000
+Epoch:[0/2] [54600/64013]  eta: 0:04:33  loss: 0.12314496  step_time: 0.028751  lr: 24.0000
+Epoch:[0/2] [54800/64013]  eta: 0:04:27  loss: 0.12320974  step_time: 0.028822  lr: 24.0000
+Epoch:[0/2] [55000/64013]  eta: 0:04:22  loss: 0.12316330  step_time: 0.028659  lr: 24.0000
+Test: [200/1361]  step_time: 0.0174
+Test: [400/1361]  step_time: 0.0088
+Test: [600/1361]  step_time: 0.0100
+Test: [800/1361]  step_time: 0.0088
+Test: [1000/1361]  step_time: 0.0213
+Test: [1200/1361]  step_time: 0.0086
+test loss: 0.12613603
+Epoch 0 step 55000. auc 0.800587
+Epoch:[0/2] [55200/64013]  eta: 0:04:16  loss: 0.12304165  step_time: 0.028538  lr: 24.0000
+Epoch:[0/2] [55400/64013]  eta: 0:04:10  loss: 0.12290143  step_time: 0.028651  lr: 24.0000
+Epoch:[0/2] [55600/64013]  eta: 0:04:04  loss: 0.12294494  step_time: 0.028628  lr: 24.0000
+Epoch:[0/2] [55800/64013]  eta: 0:03:58  loss: 0.12308721  step_time: 0.028766  lr: 24.0000
+Epoch:[0/2] [56000/64013]  eta: 0:03:52  loss: 0.12330140  step_time: 0.028660  lr: 24.0000
+Test: [200/1361]  step_time: 0.0084
+Test: [400/1361]  step_time: 0.0083
+Test: [600/1361]  step_time: 0.0228
+Test: [800/1361]  step_time: 0.0083
+Test: [1000/1361]  step_time: 0.0244
+Test: [1200/1361]  step_time: 0.0121
+test loss: 0.12607050
+Epoch 0 step 56000. auc 0.800600
+Epoch:[0/2] [56200/64013]  eta: 0:03:47  loss: 0.12287967  step_time: 0.028533  lr: 24.0000
+Epoch:[0/2] [56400/64013]  eta: 0:03:41  loss: 0.12304384  step_time: 0.028596  lr: 24.0000
+Epoch:[0/2] [56600/64013]  eta: 0:03:35  loss: 0.12310046  step_time: 0.028616  lr: 24.0000
+Epoch:[0/2] [56800/64013]  eta: 0:03:29  loss: 0.12281335  step_time: 0.028549  lr: 24.0000
+Epoch:[0/2] [57000/64013]  eta: 0:03:23  loss: 0.12298190  step_time: 0.028682  lr: 24.0000
+Test: [200/1361]  step_time: 0.0150
+Test: [400/1361]  step_time: 0.0084
+Test: [600/1361]  step_time: 0.0082
+Test: [800/1361]  step_time: 0.0081
+Test: [1000/1361]  step_time: 0.0206
+Test: [1200/1361]  step_time: 0.0216
+test loss: 0.12609261
+Epoch 0 step 57000. auc 0.800474
+Epoch:[0/2] [57200/64013]  eta: 0:03:18  loss: 0.12298582  step_time: 0.030236  lr: 24.0000
+Epoch:[0/2] [57400/64013]  eta: 0:03:12  loss: 0.12273519  step_time: 0.040040  lr: 24.0000
+Epoch:[0/2] [57600/64013]  eta: 0:03:06  loss: 0.12325732  step_time: 0.028543  lr: 24.0000
+Epoch:[0/2] [57800/64013]  eta: 0:03:01  loss: 0.12253575  step_time: 0.053551  lr: 24.0000
+Epoch:[0/2] [58000/64013]  eta: 0:02:55  loss: 0.12275848  step_time: 0.028841  lr: 24.0000
+Test: [200/1361]  step_time: 0.0193
+Test: [400/1361]  step_time: 0.0083
+Test: [600/1361]  step_time: 0.0262
+Test: [800/1361]  step_time: 0.0087
+Test: [1000/1361]  step_time: 0.0152
+Test: [1200/1361]  step_time: 0.0081
+test loss: 0.12689933
+Epoch 0 step 58000. auc 0.800607
+Epoch:[0/2] [58200/64013]  eta: 0:02:49  loss: 0.12299357  step_time: 0.028617  lr: 24.0000
+Epoch:[0/2] [58400/64013]  eta: 0:02:44  loss: 0.12324959  step_time: 0.078762  lr: 24.0000
+Epoch:[0/2] [58600/64013]  eta: 0:02:38  loss: 0.12278283  step_time: 0.028576  lr: 24.0000
+Epoch:[0/2] [58800/64013]  eta: 0:02:32  loss: 0.12277196  step_time: 0.028824  lr: 24.0000
+Epoch:[0/2] [59000/64013]  eta: 0:02:27  loss: 0.12286352  step_time: 0.038329  lr: 24.0000
+Test: [200/1361]  step_time: 0.0083
+Test: [400/1361]  step_time: 0.0081
+Test: [600/1361]  step_time: 0.0086
+Test: [800/1361]  step_time: 0.0231
+Test: [1000/1361]  step_time: 0.0147
+Test: [1200/1361]  step_time: 0.0134
+test loss: 0.12621811
+Epoch 0 step 59000. auc 0.801009
+Epoch:[0/2] [59200/64013]  eta: 0:02:21  loss: 0.12279549  step_time: 0.028898  lr: 24.0000
+Epoch:[0/2] [59400/64013]  eta: 0:02:15  loss: 0.12302204  step_time: 0.034153  lr: 24.0000
+Epoch:[0/2] [59600/64013]  eta: 0:02:09  loss: 0.12290676  step_time: 0.028679  lr: 24.0000
+Epoch:[0/2] [59800/64013]  eta: 0:02:03  loss: 0.12316001  step_time: 0.028335  lr: 24.0000
+Epoch:[0/2] [60000/64013]  eta: 0:01:57  loss: 0.12287038  step_time: 0.028706  lr: 24.0000
+Test: [200/1361]  step_time: 0.0086
+Test: [400/1361]  step_time: 0.0084
+Test: [600/1361]  step_time: 0.0152
+Test: [800/1361]  step_time: 0.0178
+Test: [1000/1361]  step_time: 0.0089
+Test: [1200/1361]  step_time: 0.0080
+test loss: 0.12634118
+Epoch 0 step 60000. auc 0.801075
+Epoch:[0/2] [60200/64013]  eta: 0:01:52  loss: 0.12325781  step_time: 0.028461  lr: 24.0000
+Epoch:[0/2] [60400/64013]  eta: 0:01:46  loss: 0.12302061  step_time: 0.028459  lr: 24.0000
+Epoch:[0/2] [60600/64013]  eta: 0:01:40  loss: 0.12285447  step_time: 0.028715  lr: 24.0000
+Epoch:[0/2] [60800/64013]  eta: 0:01:34  loss: 0.12285038  step_time: 0.028393  lr: 24.0000
+Epoch:[0/2] [61000/64013]  eta: 0:01:28  loss: 0.12279143  step_time: 0.028634  lr: 24.0000
+Test: [200/1361]  step_time: 0.0083
+Test: [400/1361]  step_time: 0.0171
+Test: [600/1361]  step_time: 0.0189
+Test: [800/1361]  step_time: 0.0197
+Test: [1000/1361]  step_time: 0.0143
+Test: [1200/1361]  step_time: 0.0250
+test loss: 0.12607953
+Epoch 0 step 61000. auc 0.801047
+Epoch:[0/2] [61200/64013]  eta: 0:01:22  loss: 0.12298532  step_time: 0.028614  lr: 24.0000
+Epoch:[0/2] [61400/64013]  eta: 0:01:16  loss: 0.12285841  step_time: 0.028993  lr: 24.0000
+Epoch:[0/2] [61600/64013]  eta: 0:01:10  loss: 0.12277947  step_time: 0.028595  lr: 24.0000
+Epoch:[0/2] [61800/64013]  eta: 0:01:04  loss: 0.12295327  step_time: 0.028590  lr: 24.0000
+Epoch:[0/2] [62000/64013]  eta: 0:00:59  loss: 0.12294725  step_time: 0.028793  lr: 24.0000
+Test: [200/1361]  step_time: 0.0086
+Test: [400/1361]  step_time: 0.0186
+Test: [600/1361]  step_time: 0.0254
+Test: [800/1361]  step_time: 0.0082
+Test: [1000/1361]  step_time: 0.0095
+Test: [1200/1361]  step_time: 0.0167
+test loss: 0.12598196
+Epoch 0 step 62000. auc 0.801056
+Epoch:[0/2] [62200/64013]  eta: 0:00:53  loss: 0.12290278  step_time: 0.028709  lr: 24.0000
+Epoch:[0/2] [62400/64013]  eta: 0:00:47  loss: 0.12298077  step_time: 0.028370  lr: 24.0000
+Epoch:[0/2] [62600/64013]  eta: 0:00:41  loss: 0.12285399  step_time: 0.028494  lr: 24.0000
+Epoch:[0/2] [62800/64013]  eta: 0:00:35  loss: 0.12288079  step_time: 0.028665  lr: 24.0000
+Epoch:[0/2] [63000/64013]  eta: 0:00:29  loss: 0.12273942  step_time: 0.028580  lr: 24.0000
+Test: [200/1361]  step_time: 0.0180
+Test: [400/1361]  step_time: 0.0082
+Test: [600/1361]  step_time: 0.0189
+Test: [800/1361]  step_time: 0.0081
+Test: [1000/1361]  step_time: 0.0080
+Test: [1200/1361]  step_time: 0.0086
+test loss: 0.12607254
+Epoch 0 step 63000. auc 0.801117
+Epoch:[0/2] [63200/64013]  eta: 0:00:23  loss: 0.12307149  step_time: 0.028584  lr: 24.0000
+Epoch:[0/2] [63400/64013]  eta: 0:00:17  loss: 0.12268765  step_time: 0.028867  lr: 24.0000
+Epoch:[0/2] [63600/64013]  eta: 0:00:12  loss: 0.12287701  step_time: 0.028629  lr: 24.0000
+Epoch:[0/2] [63800/64013]  eta: 0:00:06  loss: 0.12282415  step_time: 0.036253  lr: 24.0000
+Epoch:[0/2] [64000/64013]  eta: 0:00:00  loss: 0.12291665  step_time: 0.028487  lr: 24.0000
+Test: [200/1361]  step_time: 0.0084
+Test: [400/1361]  step_time: 0.0081
+Test: [600/1361]  step_time: 0.0179
+Test: [800/1361]  step_time: 0.0084
+Test: [1000/1361]  step_time: 0.0190
+Test: [1200/1361]  step_time: 0.0182
+test loss: 0.12611870
+Epoch 0 step 64000. auc 0.801129
+Finished epoch 0 in 0:53:31. 
+Started epoch 1...
+Epoch:[1/2] [200/64013]  eta: 0:31:13  loss: 0.13096464  step_time: 0.028570  lr: 24.0000
+Epoch:[1/2] [400/64013]  eta: 0:31:07  loss: 0.12268856  step_time: 0.028836  lr: 24.0000
+Epoch:[1/2] [600/64013]  eta: 0:31:02  loss: 0.12297807  step_time: 0.035999  lr: 24.0000
+Epoch:[1/2] [800/64013]  eta: 0:30:56  loss: 0.12280492  step_time: 0.029293  lr: 24.0000
+Test: [200/1361]  step_time: 0.0102
+Test: [400/1361]  step_time: 0.0120
+Test: [600/1361]  step_time: 0.0336
+Test: [800/1361]  step_time: 0.0203
+Test: [1000/1361]  step_time: 0.0176
+Test: [1200/1361]  step_time: 0.0082
+test loss: 0.12605366
+Epoch 1 step 987. auc 0.801189
+Epoch:[1/2] [1000/64013]  eta: 0:30:50  loss: 0.12298959  step_time: 0.028396  lr: 24.0000
+Epoch:[1/2] [1200/64013]  eta: 0:30:44  loss: 0.12287872  step_time: 0.028446  lr: 24.0000
+Epoch:[1/2] [1400/64013]  eta: 0:30:38  loss: 0.12264057  step_time: 0.028449  lr: 24.0000
+Epoch:[1/2] [1600/64013]  eta: 0:30:32  loss: 0.12283573  step_time: 0.028549  lr: 24.0000
+Epoch:[1/2] [1800/64013]  eta: 0:30:28  loss: 0.12271633  step_time: 0.037592  lr: 24.0000
+Test: [200/1361]  step_time: 0.0081
+Test: [400/1361]  step_time: 0.0230
+Test: [600/1361]  step_time: 0.0179
+Test: [800/1361]  step_time: 0.0169
+Test: [1000/1361]  step_time: 0.0482
+Test: [1200/1361]  step_time: 0.0087
+test loss: 0.12632103
+Epoch 1 step 1987. auc 0.801187
+Epoch:[1/2] [2000/64013]  eta: 0:30:22  loss: 0.12310711  step_time: 0.028525  lr: 24.0000
+Epoch:[1/2] [2200/64013]  eta: 0:30:16  loss: 0.12288515  step_time: 0.028996  lr: 24.0000
+Epoch:[1/2] [2400/64013]  eta: 0:30:10  loss: 0.12270274  step_time: 0.028485  lr: 24.0000
+Epoch:[1/2] [2600/64013]  eta: 0:30:04  loss: 0.12252992  step_time: 0.028473  lr: 24.0000
+Epoch:[1/2] [2800/64013]  eta: 0:29:58  loss: 0.12292309  step_time: 0.028611  lr: 24.0000
+Test: [200/1361]  step_time: 0.0145
+Test: [400/1361]  step_time: 0.0101
+Test: [600/1361]  step_time: 0.0184
+Test: [800/1361]  step_time: 0.0226
+Test: [1000/1361]  step_time: 0.0089
+Test: [1200/1361]  step_time: 0.0081
+test loss: 0.12652318
+Epoch 1 step 2987. auc 0.801276
+Epoch:[1/2] [3000/64013]  eta: 0:29:52  loss: 0.12273366  step_time: 0.028764  lr: 24.0000
+Epoch:[1/2] [3200/64013]  eta: 0:29:46  loss: 0.12274346  step_time: 0.028609  lr: 24.0000
+Epoch:[1/2] [3400/64013]  eta: 0:29:40  loss: 0.12268116  step_time: 0.028467  lr: 24.0000
+Epoch:[1/2] [3600/64013]  eta: 0:29:34  loss: 0.12282613  step_time: 0.028436  lr: 24.0000
+Epoch:[1/2] [3800/64013]  eta: 0:29:28  loss: 0.12282701  step_time: 0.028557  lr: 24.0000
+Test: [200/1361]  step_time: 0.0227
+Test: [400/1361]  step_time: 0.0086
+Test: [600/1361]  step_time: 0.0198
+Test: [800/1361]  step_time: 0.0170
+Test: [1000/1361]  step_time: 0.0081
+Test: [1200/1361]  step_time: 0.0131
+test loss: 0.12597707
+Epoch 1 step 3987. auc 0.801527
+Epoch:[1/2] [4000/64013]  eta: 0:29:22  loss: 0.12275901  step_time: 0.028508  lr: 24.0000
+Epoch:[1/2] [4200/64013]  eta: 0:29:16  loss: 0.12294546  step_time: 0.030888  lr: 24.0000
+Epoch:[1/2] [4400/64013]  eta: 0:29:10  loss: 0.12270930  step_time: 0.028703  lr: 24.0000
+Epoch:[1/2] [4600/64013]  eta: 0:29:04  loss: 0.12267178  step_time: 0.028531  lr: 24.0000
+Epoch:[1/2] [4800/64013]  eta: 0:28:58  loss: 0.12280273  step_time: 0.028622  lr: 24.0000
+Test: [200/1361]  step_time: 0.0184
+Test: [400/1361]  step_time: 0.0080
+Test: [600/1361]  step_time: 0.0087
+Test: [800/1361]  step_time: 0.0083
+Test: [1000/1361]  step_time: 0.0081
+Test: [1200/1361]  step_time: 0.0138
+test loss: 0.12586775
+Epoch 1 step 4987. auc 0.801827
+Epoch:[1/2] [5000/64013]  eta: 0:28:52  loss: 0.12249748  step_time: 0.028471  lr: 24.0000
+Epoch:[1/2] [5200/64013]  eta: 0:28:46  loss: 0.12291390  step_time: 0.028360  lr: 24.0000
+Epoch:[1/2] [5400/64013]  eta: 0:28:40  loss: 0.12253665  step_time: 0.028308  lr: 24.0000
+Epoch:[1/2] [5600/64013]  eta: 0:28:34  loss: 0.12275334  step_time: 0.028633  lr: 24.0000
+Epoch:[1/2] [5800/64013]  eta: 0:28:28  loss: 0.12271037  step_time: 0.028719  lr: 24.0000
+Test: [200/1361]  step_time: 0.0082
+Test: [400/1361]  step_time: 0.0230
+Test: [600/1361]  step_time: 0.0092
+Test: [800/1361]  step_time: 0.0233
+Test: [1000/1361]  step_time: 0.0213
+Test: [1200/1361]  step_time: 0.0252
+test loss: 0.12583707
+Epoch 1 step 5987. auc 0.801743
+Epoch:[1/2] [6000/64013]  eta: 0:28:22  loss: 0.12257818  step_time: 0.028673  lr: 24.0000
+Epoch:[1/2] [6200/64013]  eta: 0:28:16  loss: 0.12264753  step_time: 0.028705  lr: 24.0000
+Epoch:[1/2] [6400/64013]  eta: 0:28:10  loss: 0.12264165  step_time: 0.028511  lr: 24.0000
+Epoch:[1/2] [6600/64013]  eta: 0:28:04  loss: 0.12280025  step_time: 0.028836  lr: 24.0000
+Epoch:[1/2] [6800/64013]  eta: 0:27:58  loss: 0.12255059  step_time: 0.028657  lr: 24.0000
+Test: [200/1361]  step_time: 0.0082
+Test: [400/1361]  step_time: 0.0087
+Test: [600/1361]  step_time: 0.0133
+Test: [800/1361]  step_time: 0.0319
+Test: [1000/1361]  step_time: 0.0176
+Test: [1200/1361]  step_time: 0.0166
+test loss: 0.12645477
+Epoch 1 step 6987. auc 0.801687
+Epoch:[1/2] [7000/64013]  eta: 0:27:52  loss: 0.12268813  step_time: 0.028629  lr: 24.0000
+Epoch:[1/2] [7200/64013]  eta: 0:27:49  loss: 0.12270948  step_time: 0.043583  lr: 24.0000
+Epoch:[1/2] [7400/64013]  eta: 0:27:43  loss: 0.12275274  step_time: 0.028846  lr: 24.0000
+Epoch:[1/2] [7600/64013]  eta: 0:27:37  loss: 0.12274113  step_time: 0.031725  lr: 24.0000
+Epoch:[1/2] [7800/64013]  eta: 0:27:31  loss: 0.12252300  step_time: 0.028407  lr: 24.0000
+Test: [200/1361]  step_time: 0.0338
+Test: [400/1361]  step_time: 0.0227
+Test: [600/1361]  step_time: 0.0198
+Test: [800/1361]  step_time: 0.0089
+Test: [1000/1361]  step_time: 0.0128
+Test: [1200/1361]  step_time: 0.0196
+test loss: 0.12600917
+Epoch 1 step 7987. auc 0.801799
+Epoch:[1/2] [8000/64013]  eta: 0:27:25  loss: 0.12262716  step_time: 0.028756  lr: 24.0000
+Epoch:[1/2] [8200/64013]  eta: 0:27:21  loss: 0.12261663  step_time: 0.039367  lr: 24.0000
+Epoch:[1/2] [8400/64013]  eta: 0:27:15  loss: 0.12262180  step_time: 0.028593  lr: 24.0000
+Epoch:[1/2] [8600/64013]  eta: 0:27:16  loss: 0.12294663  step_time: 0.077114  lr: 24.0000
+Epoch:[1/2] [8800/64013]  eta: 0:27:10  loss: 0.12266762  step_time: 0.028570  lr: 24.0000
+Test: [200/1361]  step_time: 0.0192
+Test: [400/1361]  step_time: 0.0257
+Test: [600/1361]  step_time: 0.0085
+Test: [800/1361]  step_time: 0.0087
+Test: [1000/1361]  step_time: 0.0204
+Test: [1200/1361]  step_time: 0.0092
+test loss: 0.12584601
+Epoch 1 step 8987. auc 0.801763
+Epoch:[1/2] [9000/64013]  eta: 0:27:04  loss: 0.12278871  step_time: 0.028584  lr: 24.0000
+Epoch:[1/2] [9200/64013]  eta: 0:26:58  loss: 0.12254617  step_time: 0.028473  lr: 24.0000
+Epoch:[1/2] [9400/64013]  eta: 0:26:52  loss: 0.12283982  step_time: 0.028456  lr: 24.0000
+Epoch:[1/2] [9600/64013]  eta: 0:26:46  loss: 0.12286203  step_time: 0.028464  lr: 24.0000
+Epoch:[1/2] [9800/64013]  eta: 0:26:40  loss: 0.12254163  step_time: 0.029381  lr: 24.0000
+Test: [200/1361]  step_time: 0.0084
+Test: [400/1361]  step_time: 0.0154
+Test: [600/1361]  step_time: 0.0086
+Test: [800/1361]  step_time: 0.0131
+Test: [1000/1361]  step_time: 0.0083
+Test: [1200/1361]  step_time: 0.0080
+test loss: 0.12608895
+Epoch 1 step 9987. auc 0.801720
+Epoch:[1/2] [10000/64013]  eta: 0:26:34  loss: 0.12258948  step_time: 0.028851  lr: 24.0000
+Epoch:[1/2] [10200/64013]  eta: 0:26:28  loss: 0.12270644  step_time: 0.028836  lr: 24.0000
+Epoch:[1/2] [10400/64013]  eta: 0:26:22  loss: 0.12280325  step_time: 0.028889  lr: 24.0000
+Epoch:[1/2] [10600/64013]  eta: 0:26:16  loss: 0.12286659  step_time: 0.028556  lr: 24.0000
+Epoch:[1/2] [10800/64013]  eta: 0:26:10  loss: 0.12283549  step_time: 0.028525  lr: 24.0000
+Test: [200/1361]  step_time: 0.0080
+Test: [400/1361]  step_time: 0.0275
+Test: [600/1361]  step_time: 0.0081
+Test: [800/1361]  step_time: 0.0088
+Test: [1000/1361]  step_time: 0.0284
+Test: [1200/1361]  step_time: 0.0230
+test loss: 0.12626179
+Epoch 1 step 10987. auc 0.801720
+Epoch:[1/2] [11000/64013]  eta: 0:26:04  loss: 0.12248870  step_time: 0.028338  lr: 24.0000
+Epoch:[1/2] [11200/64013]  eta: 0:25:58  loss: 0.12261739  step_time: 0.029026  lr: 24.0000
+Epoch:[1/2] [11400/64013]  eta: 0:25:52  loss: 0.12250512  step_time: 0.028660  lr: 24.0000
+Epoch:[1/2] [11600/64013]  eta: 0:25:46  loss: 0.12265404  step_time: 0.028527  lr: 24.0000
+Epoch:[1/2] [11800/64013]  eta: 0:25:40  loss: 0.12240808  step_time: 0.028978  lr: 24.0000
+Test: [200/1361]  step_time: 0.0126
+Test: [400/1361]  step_time: 0.0081
+Test: [600/1361]  step_time: 0.0090
+Test: [800/1361]  step_time: 0.0113
+Test: [1000/1361]  step_time: 0.0192
+Test: [1200/1361]  step_time: 0.0142
+test loss: 0.12581442
+Epoch 1 step 11987. auc 0.802057
+Epoch:[1/2] [12000/64013]  eta: 0:25:34  loss: 0.12253454  step_time: 0.028548  lr: 24.0000
+Epoch:[1/2] [12200/64013]  eta: 0:25:28  loss: 0.12256132  step_time: 0.028826  lr: 24.0000
+Epoch:[1/2] [12400/64013]  eta: 0:25:22  loss: 0.12228069  step_time: 0.028597  lr: 24.0000
+Epoch:[1/2] [12600/64013]  eta: 0:25:23  loss: 0.12272631  step_time: 0.084162  lr: 24.0000
+Epoch:[1/2] [12800/64013]  eta: 0:25:17  loss: 0.12252150  step_time: 0.028577  lr: 24.0000
+Test: [200/1361]  step_time: 0.0082
+Test: [400/1361]  step_time: 0.0205
+Test: [600/1361]  step_time: 0.0165
+Test: [800/1361]  step_time: 0.0143
+Test: [1000/1361]  step_time: 0.0144
+Test: [1200/1361]  step_time: 0.0080
+test loss: 0.12602988
+Epoch 1 step 12987. auc 0.802050
+Epoch:[1/2] [13000/64013]  eta: 0:25:11  loss: 0.12268452  step_time: 0.028510  lr: 24.0000
+Epoch:[1/2] [13200/64013]  eta: 0:25:05  loss: 0.12250182  step_time: 0.028502  lr: 24.0000
+Epoch:[1/2] [13400/64013]  eta: 0:24:59  loss: 0.12241718  step_time: 0.028880  lr: 24.0000
+Epoch:[1/2] [13600/64013]  eta: 0:24:53  loss: 0.12266441  step_time: 0.028787  lr: 24.0000
+Epoch:[1/2] [13800/64013]  eta: 0:24:47  loss: 0.12247947  step_time: 0.028426  lr: 24.0000
+Test: [200/1361]  step_time: 0.0085
+Test: [400/1361]  step_time: 0.0082
+Test: [600/1361]  step_time: 0.0090
+Test: [800/1361]  step_time: 0.0082
+Test: [1000/1361]  step_time: 0.0083
+Test: [1200/1361]  step_time: 0.0081
+test loss: 0.12591991
+Epoch 1 step 13987. auc 0.802045
+Epoch:[1/2] [14000/64013]  eta: 0:24:41  loss: 0.12269147  step_time: 0.028477  lr: 24.0000
+Epoch:[1/2] [14200/64013]  eta: 0:24:35  loss: 0.12277207  step_time: 0.028443  lr: 24.0000
+Epoch:[1/2] [14400/64013]  eta: 0:24:29  loss: 0.12225598  step_time: 0.028470  lr: 24.0000
+Epoch:[1/2] [14600/64013]  eta: 0:24:23  loss: 0.12265361  step_time: 0.028451  lr: 24.0000
+Epoch:[1/2] [14800/64013]  eta: 0:24:16  loss: 0.12237638  step_time: 0.028747  lr: 24.0000
+Test: [200/1361]  step_time: 0.0083
+Test: [400/1361]  step_time: 0.0087
+Test: [600/1361]  step_time: 0.0086
+Test: [800/1361]  step_time: 0.0081
+Test: [1000/1361]  step_time: 0.0080
+Test: [1200/1361]  step_time: 0.0081
+test loss: 0.12581876
+Epoch 1 step 14987. auc 0.802005
+Epoch:[1/2] [15000/64013]  eta: 0:24:10  loss: 0.12244810  step_time: 0.028438  lr: 24.0000
+Epoch:[1/2] [15200/64013]  eta: 0:24:04  loss: 0.12249126  step_time: 0.028362  lr: 24.0000
+Epoch:[1/2] [15400/64013]  eta: 0:23:58  loss: 0.12265999  step_time: 0.028425  lr: 24.0000
+Epoch:[1/2] [15600/64013]  eta: 0:23:52  loss: 0.12250880  step_time: 0.028497  lr: 24.0000
+Epoch:[1/2] [15800/64013]  eta: 0:23:46  loss: 0.12243275  step_time: 0.028555  lr: 24.0000
+Test: [200/1361]  step_time: 0.0144
+Test: [400/1361]  step_time: 0.0152
+Test: [600/1361]  step_time: 0.0169
+Test: [800/1361]  step_time: 0.0230
+Test: [1000/1361]  step_time: 0.0259
+Test: [1200/1361]  step_time: 0.0092
+test loss: 0.12577648
+Epoch 1 step 15987. auc 0.802133
+Epoch:[1/2] [16000/64013]  eta: 0:23:40  loss: 0.12228367  step_time: 0.028484  lr: 24.0000
+Epoch:[1/2] [16200/64013]  eta: 0:23:34  loss: 0.12252309  step_time: 0.028781  lr: 24.0000
+Epoch:[1/2] [16400/64013]  eta: 0:23:28  loss: 0.12243164  step_time: 0.028813  lr: 24.0000
+Epoch:[1/2] [16600/64013]  eta: 0:23:22  loss: 0.12223527  step_time: 0.028358  lr: 24.0000
+Epoch:[1/2] [16800/64013]  eta: 0:23:16  loss: 0.12264964  step_time: 0.031963  lr: 24.0000
+Test: [200/1361]  step_time: 0.0157
+Test: [400/1361]  step_time: 0.0081
+Test: [600/1361]  step_time: 0.0198
+Test: [800/1361]  step_time: 0.0113
+Test: [1000/1361]  step_time: 0.0168
+Test: [1200/1361]  step_time: 0.0137
+test loss: 0.12633787
+Epoch 1 step 16987. auc 0.801853
+Epoch:[1/2] [17000/64013]  eta: 0:23:10  loss: 0.12230069  step_time: 0.028593  lr: 24.0000
+Epoch:[1/2] [17200/64013]  eta: 0:23:04  loss: 0.12250983  step_time: 0.028598  lr: 24.0000
+Epoch:[1/2] [17400/64013]  eta: 0:22:58  loss: 0.12240328  step_time: 0.028430  lr: 24.0000
+Epoch:[1/2] [17600/64013]  eta: 0:22:52  loss: 0.12225663  step_time: 0.028504  lr: 24.0000
+Epoch:[1/2] [17800/64013]  eta: 0:22:46  loss: 0.12238070  step_time: 0.028568  lr: 24.0000
+Test: [200/1361]  step_time: 0.0180
+Test: [400/1361]  step_time: 0.0163
+Test: [600/1361]  step_time: 0.0088
+Test: [800/1361]  step_time: 0.0267
+Test: [1000/1361]  step_time: 0.0194
+Test: [1200/1361]  step_time: 0.0129
+test loss: 0.12606886
+Epoch 1 step 17987. auc 0.801966
+Epoch:[1/2] [18000/64013]  eta: 0:22:40  loss: 0.12213325  step_time: 0.028478  lr: 24.0000
+Epoch:[1/2] [18200/64013]  eta: 0:22:34  loss: 0.12253655  step_time: 0.028617  lr: 24.0000
+Epoch:[1/2] [18400/64013]  eta: 0:22:28  loss: 0.12246289  step_time: 0.028356  lr: 24.0000
+Epoch:[1/2] [18600/64013]  eta: 0:22:22  loss: 0.12250497  step_time: 0.028608  lr: 24.0000
+Epoch:[1/2] [18800/64013]  eta: 0:22:16  loss: 0.12238808  step_time: 0.028656  lr: 24.0000
+Test: [200/1361]  step_time: 0.0215
+Test: [400/1361]  step_time: 0.0214
+Test: [600/1361]  step_time: 0.0136
+Test: [800/1361]  step_time: 0.0104
+Test: [1000/1361]  step_time: 0.0081
+Test: [1200/1361]  step_time: 0.0168
+test loss: 0.12656204
+Epoch 1 step 18987. auc 0.801917
+Epoch:[1/2] [19000/64013]  eta: 0:22:10  loss: 0.12232157  step_time: 0.028402  lr: 24.0000
+Epoch:[1/2] [19200/64013]  eta: 0:22:04  loss: 0.12221266  step_time: 0.028449  lr: 24.0000
+Epoch:[1/2] [19400/64013]  eta: 0:21:58  loss: 0.12241884  step_time: 0.028431  lr: 24.0000
+Epoch:[1/2] [19600/64013]  eta: 0:21:52  loss: 0.12230668  step_time: 0.028625  lr: 24.0000
+Epoch:[1/2] [19800/64013]  eta: 0:21:46  loss: 0.12216268  step_time: 0.028673  lr: 24.0000
+Test: [200/1361]  step_time: 0.0085
+Test: [400/1361]  step_time: 0.0171
+Test: [600/1361]  step_time: 0.0082
+Test: [800/1361]  step_time: 0.0187
+Test: [1000/1361]  step_time: 0.0086
+Test: [1200/1361]  step_time: 0.0367
+test loss: 0.12598594
+Epoch 1 step 19987. auc 0.802141
+Epoch:[1/2] [20000/64013]  eta: 0:21:40  loss: 0.12227610  step_time: 0.028491  lr: 24.0000
+Epoch:[1/2] [20200/64013]  eta: 0:21:34  loss: 0.12223275  step_time: 0.028453  lr: 24.0000
+Epoch:[1/2] [20400/64013]  eta: 0:21:28  loss: 0.12256223  step_time: 0.028663  lr: 24.0000
+Epoch:[1/2] [20600/64013]  eta: 0:21:22  loss: 0.12266660  step_time: 0.028649  lr: 24.0000
+Epoch:[1/2] [20800/64013]  eta: 0:21:16  loss: 0.12257428  step_time: 0.032269  lr: 24.0000
+Test: [200/1361]  step_time: 0.0164
+Test: [400/1361]  step_time: 0.0132
+Test: [600/1361]  step_time: 0.0128
+Test: [800/1361]  step_time: 0.0085
+Test: [1000/1361]  step_time: 0.0088
+Test: [1200/1361]  step_time: 0.0126
+test loss: 0.12589030
+Epoch 1 step 20987. auc 0.802275
+Epoch:[1/2] [21000/64013]  eta: 0:21:10  loss: 0.12239721  step_time: 0.028677  lr: 24.0000
+Epoch:[1/2] [21200/64013]  eta: 0:21:05  loss: 0.12250958  step_time: 0.034806  lr: 24.0000
+Epoch:[1/2] [21400/64013]  eta: 0:20:59  loss: 0.12247768  step_time: 0.028572  lr: 24.0000
+Epoch:[1/2] [21600/64013]  eta: 0:20:53  loss: 0.12264474  step_time: 0.028468  lr: 24.0000
+Epoch:[1/2] [21800/64013]  eta: 0:20:47  loss: 0.12213840  step_time: 0.028520  lr: 24.0000
+Test: [200/1361]  step_time: 0.0081
+Test: [400/1361]  step_time: 0.0083
+Test: [600/1361]  step_time: 0.0151
+Test: [800/1361]  step_time: 0.0080
+Test: [1000/1361]  step_time: 0.0090
+Test: [1200/1361]  step_time: 0.0088
+test loss: 0.12602173
+Epoch 1 step 21987. auc 0.802079
+Epoch:[1/2] [22000/64013]  eta: 0:20:41  loss: 0.12233905  step_time: 0.028365  lr: 24.0000
+Epoch:[1/2] [22200/64013]  eta: 0:20:35  loss: 0.12243225  step_time: 0.028844  lr: 24.0000
+Epoch:[1/2] [22400/64013]  eta: 0:20:29  loss: 0.12198520  step_time: 0.028450  lr: 24.0000
+Epoch:[1/2] [22600/64013]  eta: 0:20:23  loss: 0.12235405  step_time: 0.028640  lr: 24.0000
+Epoch:[1/2] [22800/64013]  eta: 0:20:17  loss: 0.12222321  step_time: 0.031500  lr: 24.0000
+Test: [200/1361]  step_time: 0.0080
+Test: [400/1361]  step_time: 0.0175
+Test: [600/1361]  step_time: 0.0085
+Test: [800/1361]  step_time: 0.0189
+Test: [1000/1361]  step_time: 0.0091
+Test: [1200/1361]  step_time: 0.0086
+test loss: 0.12581997
+Epoch 1 step 22987. auc 0.801956
+Epoch:[1/2] [23000/64013]  eta: 0:20:11  loss: 0.12221906  step_time: 0.028644  lr: 24.0000
+Epoch:[1/2] [23200/64013]  eta: 0:20:05  loss: 0.12230808  step_time: 0.028553  lr: 24.0000
+Epoch:[1/2] [23400/64013]  eta: 0:19:59  loss: 0.12236987  step_time: 0.028538  lr: 24.0000
+Epoch:[1/2] [23600/64013]  eta: 0:19:53  loss: 0.12212972  step_time: 0.028653  lr: 24.0000
+Epoch:[1/2] [23800/64013]  eta: 0:19:47  loss: 0.12244561  step_time: 0.029063  lr: 24.0000
+Test: [200/1361]  step_time: 0.0200
+Test: [400/1361]  step_time: 0.0165
+Test: [600/1361]  step_time: 0.0308
+Test: [800/1361]  step_time: 0.0164
+Test: [1000/1361]  step_time: 0.0089
+Test: [1200/1361]  step_time: 0.0202
+test loss: 0.12577112
+Epoch 1 step 23987. auc 0.802209
+Epoch:[1/2] [24000/64013]  eta: 0:19:41  loss: 0.12214532  step_time: 0.028478  lr: 24.0000
+Epoch:[1/2] [24200/64013]  eta: 0:19:35  loss: 0.12185077  step_time: 0.028605  lr: 24.0000
+Epoch:[1/2] [24400/64013]  eta: 0:19:29  loss: 0.12220900  step_time: 0.028380  lr: 24.0000
+Epoch:[1/2] [24600/64013]  eta: 0:19:23  loss: 0.12242117  step_time: 0.028879  lr: 24.0000
+Epoch:[1/2] [24800/64013]  eta: 0:19:17  loss: 0.12204539  step_time: 0.028510  lr: 24.0000
+Test: [200/1361]  step_time: 0.0136
+Test: [400/1361]  step_time: 0.0256
+Test: [600/1361]  step_time: 0.0082
+Test: [800/1361]  step_time: 0.0159
+Test: [1000/1361]  step_time: 0.0083
+Test: [1200/1361]  step_time: 0.0093
+test loss: 0.12577295
+Epoch 1 step 24987. auc 0.802244
+Epoch:[1/2] [25000/64013]  eta: 0:19:11  loss: 0.12230451  step_time: 0.028528  lr: 24.0000
+Epoch:[1/2] [25200/64013]  eta: 0:19:05  loss: 0.12185708  step_time: 0.028592  lr: 24.0000
+Epoch:[1/2] [25400/64013]  eta: 0:18:59  loss: 0.12234070  step_time: 0.028861  lr: 24.0000
+Epoch:[1/2] [25600/64013]  eta: 0:18:53  loss: 0.12209668  step_time: 0.028365  lr: 24.0000
+Epoch:[1/2] [25800/64013]  eta: 0:18:48  loss: 0.12239198  step_time: 0.037338  lr: 24.0000
+Test: [200/1361]  step_time: 0.0141
+Test: [400/1361]  step_time: 0.0081
+Test: [600/1361]  step_time: 0.0130
+Test: [800/1361]  step_time: 0.0242
+Test: [1000/1361]  step_time: 0.0081
+Test: [1200/1361]  step_time: 0.0141
+test loss: 0.12630050
+Epoch 1 step 25987. auc 0.802161
+Epoch:[1/2] [26000/64013]  eta: 0:18:42  loss: 0.12219793  step_time: 0.028737  lr: 24.0000
+Epoch:[1/2] [26200/64013]  eta: 0:18:36  loss: 0.12227007  step_time: 0.028458  lr: 24.0000
+Epoch:[1/2] [26400/64013]  eta: 0:18:30  loss: 0.12195449  step_time: 0.028473  lr: 24.0000
+Epoch:[1/2] [26600/64013]  eta: 0:18:24  loss: 0.12221692  step_time: 0.028814  lr: 24.0000
+Epoch:[1/2] [26800/64013]  eta: 0:18:18  loss: 0.12215188  step_time: 0.028362  lr: 24.0000
+Test: [200/1361]  step_time: 0.0086
+Test: [400/1361]  step_time: 0.0171
+Test: [600/1361]  step_time: 0.0242
+Test: [800/1361]  step_time: 0.0084
+Test: [1000/1361]  step_time: 0.0086
+Test: [1200/1361]  step_time: 0.0255
+test loss: 0.12649575
+Epoch 1 step 26987. auc 0.802320
+Epoch:[1/2] [27000/64013]  eta: 0:18:12  loss: 0.12200988  step_time: 0.028490  lr: 24.0000
+Epoch:[1/2] [27200/64013]  eta: 0:18:06  loss: 0.12228287  step_time: 0.028788  lr: 24.0000
+Epoch:[1/2] [27400/64013]  eta: 0:18:00  loss: 0.12203922  step_time: 0.028687  lr: 24.0000
+Epoch:[1/2] [27600/64013]  eta: 0:17:54  loss: 0.12213974  step_time: 0.028610  lr: 24.0000
+Epoch:[1/2] [27800/64013]  eta: 0:17:49  loss: 0.12260198  step_time: 0.034067  lr: 24.0000
+Test: [200/1361]  step_time: 0.0083
+Test: [400/1361]  step_time: 0.0082
+Test: [600/1361]  step_time: 0.0086
+Test: [800/1361]  step_time: 0.0088
+Test: [1000/1361]  step_time: 0.0188
+Test: [1200/1361]  step_time: 0.0087
+test loss: 0.12580372
+Epoch 1 step 27987. auc 0.802086
+Epoch:[1/2] [28000/64013]  eta: 0:17:43  loss: 0.12240780  step_time: 0.028621  lr: 24.0000
+Epoch:[1/2] [28200/64013]  eta: 0:17:37  loss: 0.12240254  step_time: 0.028680  lr: 24.0000
+Epoch:[1/2] [28400/64013]  eta: 0:17:31  loss: 0.12192760  step_time: 0.028694  lr: 24.0000
+Epoch:[1/2] [28600/64013]  eta: 0:17:25  loss: 0.12194665  step_time: 0.028648  lr: 24.0000
+Epoch:[1/2] [28800/64013]  eta: 0:17:19  loss: 0.12224087  step_time: 0.028389  lr: 24.0000
+Test: [200/1361]  step_time: 0.0161
+Test: [400/1361]  step_time: 0.0112
+Test: [600/1361]  step_time: 0.0221
+Test: [800/1361]  step_time: 0.0163
+Test: [1000/1361]  step_time: 0.0081
+Test: [1200/1361]  step_time: 0.0334
+test loss: 0.12584825
+Epoch 1 step 28987. auc 0.801901
+Epoch:[1/2] [29000/64013]  eta: 0:17:13  loss: 0.12231547  step_time: 0.028710  lr: 24.0000
+Epoch:[1/2] [29200/64013]  eta: 0:17:07  loss: 0.12210855  step_time: 0.028428  lr: 24.0000
+Epoch:[1/2] [29400/64013]  eta: 0:17:01  loss: 0.12207090  step_time: 0.028367  lr: 24.0000
+Epoch:[1/2] [29600/64013]  eta: 0:16:55  loss: 0.12229269  step_time: 0.028489  lr: 24.0000
+Epoch:[1/2] [29800/64013]  eta: 0:16:49  loss: 0.12216857  step_time: 0.028461  lr: 24.0000
+Test: [200/1361]  step_time: 0.0081
+Test: [400/1361]  step_time: 0.0081
+Test: [600/1361]  step_time: 0.0282
+Test: [800/1361]  step_time: 0.0269
+Test: [1000/1361]  step_time: 0.0153
+Test: [1200/1361]  step_time: 0.0082
+test loss: 0.12575899
+Epoch 1 step 29987. auc 0.802317
+Epoch:[1/2] [30000/64013]  eta: 0:16:43  loss: 0.12212703  step_time: 0.028542  lr: 24.0000
+Epoch:[1/2] [30200/64013]  eta: 0:16:37  loss: 0.12209670  step_time: 0.028587  lr: 24.0000
+Epoch:[1/2] [30400/64013]  eta: 0:16:31  loss: 0.12193040  step_time: 0.028582  lr: 24.0000
+Epoch:[1/2] [30600/64013]  eta: 0:16:25  loss: 0.12218991  step_time: 0.028668  lr: 24.0000
+Epoch:[1/2] [30800/64013]  eta: 0:16:19  loss: 0.12220928  step_time: 0.028448  lr: 24.0000
+Test: [200/1361]  step_time: 0.0081
+Test: [400/1361]  step_time: 0.0246
+Test: [600/1361]  step_time: 0.0210
+Test: [800/1361]  step_time: 0.0162
+Test: [1000/1361]  step_time: 0.0238
+Test: [1200/1361]  step_time: 0.0082
+test loss: 0.12575586
+Epoch 1 step 30987. auc 0.802404
+Epoch:[1/2] [31000/64013]  eta: 0:16:13  loss: 0.12205016  step_time: 0.028615  lr: 24.0000
+Epoch:[1/2] [31200/64013]  eta: 0:16:07  loss: 0.12235474  step_time: 0.028469  lr: 24.0000
+Epoch:[1/2] [31400/64013]  eta: 0:16:01  loss: 0.12201935  step_time: 0.028524  lr: 24.0000
+Epoch:[1/2] [31600/64013]  eta: 0:15:55  loss: 0.12185215  step_time: 0.029029  lr: 24.0000
+Epoch:[1/2] [31800/64013]  eta: 0:15:49  loss: 0.12221986  step_time: 0.028594  lr: 24.0000
+Test: [200/1361]  step_time: 0.0216
+Test: [400/1361]  step_time: 0.0164
+Test: [600/1361]  step_time: 0.0123
+Test: [800/1361]  step_time: 0.0082
+Test: [1000/1361]  step_time: 0.0255
+Test: [1200/1361]  step_time: 0.0160
+test loss: 0.12576203
+Epoch 1 step 31987. auc 0.802343
+Epoch:[1/2] [32000/64013]  eta: 0:15:43  loss: 0.12224941  step_time: 0.028895  lr: 24.0000
+Epoch:[1/2] [32200/64013]  eta: 0:15:37  loss: 0.12230406  step_time: 0.028458  lr: 24.0000
+Epoch:[1/2] [32400/64013]  eta: 0:15:31  loss: 0.12235726  step_time: 0.028460  lr: 24.0000
+Epoch:[1/2] [32600/64013]  eta: 0:15:26  loss: 0.12225780  step_time: 0.028571  lr: 24.0000
+Epoch:[1/2] [32800/64013]  eta: 0:15:20  loss: 0.12221418  step_time: 0.029535  lr: 24.0000
+Test: [200/1361]  step_time: 0.0080
+Test: [400/1361]  step_time: 0.0174
+Test: [600/1361]  step_time: 0.0238
+Test: [800/1361]  step_time: 0.0157
+Test: [1000/1361]  step_time: 0.0080
+Test: [1200/1361]  step_time: 0.0253
+test loss: 0.12609248
+Epoch 1 step 32987. auc 0.802114
+Epoch:[1/2] [33000/64013]  eta: 0:15:14  loss: 0.12207702  step_time: 0.028776  lr: 24.0000
+Epoch:[1/2] [33200/64013]  eta: 0:15:08  loss: 0.12190674  step_time: 0.028637  lr: 24.0000
+Epoch:[1/2] [33400/64013]  eta: 0:15:02  loss: 0.12210016  step_time: 0.028708  lr: 24.0000
+Epoch:[1/2] [33600/64013]  eta: 0:14:56  loss: 0.12224388  step_time: 0.028417  lr: 24.0000
+Epoch:[1/2] [33800/64013]  eta: 0:14:50  loss: 0.12226520  step_time: 0.028638  lr: 24.0000
+Test: [200/1361]  step_time: 0.0083
+Test: [400/1361]  step_time: 0.0087
+Test: [600/1361]  step_time: 0.0087
+Test: [800/1361]  step_time: 0.0107
+Test: [1000/1361]  step_time: 0.0081
+Test: [1200/1361]  step_time: 0.0133
+test loss: 0.12619248
+Epoch 1 step 33987. auc 0.802232
+Epoch:[1/2] [34000/64013]  eta: 0:14:44  loss: 0.12220958  step_time: 0.028422  lr: 24.0000
+Epoch:[1/2] [34200/64013]  eta: 0:14:38  loss: 0.12201460  step_time: 0.028359  lr: 24.0000
+Epoch:[1/2] [34400/64013]  eta: 0:14:32  loss: 0.12212096  step_time: 0.028557  lr: 24.0000
+Epoch:[1/2] [34600/64013]  eta: 0:14:26  loss: 0.12200509  step_time: 0.028563  lr: 24.0000
+Epoch:[1/2] [34800/64013]  eta: 0:14:20  loss: 0.12209224  step_time: 0.029013  lr: 24.0000
+Test: [200/1361]  step_time: 0.0089
+Test: [400/1361]  step_time: 0.0080
+Test: [600/1361]  step_time: 0.0149
+Test: [800/1361]  step_time: 0.0211
+Test: [1000/1361]  step_time: 0.0095
+Test: [1200/1361]  step_time: 0.0178
+test loss: 0.12649885
+Epoch 1 step 34987. auc 0.802193
+Epoch:[1/2] [35000/64013]  eta: 0:14:14  loss: 0.12199821  step_time: 0.028424  lr: 24.0000
+Epoch:[1/2] [35200/64013]  eta: 0:14:08  loss: 0.12199908  step_time: 0.028697  lr: 24.0000
+Epoch:[1/2] [35400/64013]  eta: 0:14:02  loss: 0.12178716  step_time: 0.028674  lr: 24.0000
+Epoch:[1/2] [35600/64013]  eta: 0:13:56  loss: 0.12196341  step_time: 0.028667  lr: 24.0000
+Epoch:[1/2] [35800/64013]  eta: 0:13:50  loss: 0.12193049  step_time: 0.028481  lr: 24.0000
+Test: [200/1361]  step_time: 0.0310
+Test: [400/1361]  step_time: 0.0151
+Test: [600/1361]  step_time: 0.0224
+Test: [800/1361]  step_time: 0.0091
+Test: [1000/1361]  step_time: 0.0082
+Test: [1200/1361]  step_time: 0.0083
+test loss: 0.12579554
+Epoch 1 step 35987. auc 0.802438
+Epoch:[1/2] [36000/64013]  eta: 0:13:44  loss: 0.12197975  step_time: 0.028523  lr: 24.0000
+Epoch:[1/2] [36200/64013]  eta: 0:13:39  loss: 0.12203912  step_time: 0.028465  lr: 24.0000
+Epoch:[1/2] [36400/64013]  eta: 0:13:33  loss: 0.12205150  step_time: 0.028775  lr: 24.0000
+Epoch:[1/2] [36600/64013]  eta: 0:13:27  loss: 0.12215767  step_time: 0.028556  lr: 24.0000
+Epoch:[1/2] [36800/64013]  eta: 0:13:21  loss: 0.12207294  step_time: 0.033749  lr: 24.0000
+Test: [200/1361]  step_time: 0.0144
+Test: [400/1361]  step_time: 0.0083
+Test: [600/1361]  step_time: 0.0143
+Test: [800/1361]  step_time: 0.0088
+Test: [1000/1361]  step_time: 0.0083
+Test: [1200/1361]  step_time: 0.0136
+test loss: 0.12585594
+Epoch 1 step 36987. auc 0.802274
+Epoch:[1/2] [37000/64013]  eta: 0:13:15  loss: 0.12215174  step_time: 0.028396  lr: 24.0000
+Epoch:[1/2] [37200/64013]  eta: 0:13:09  loss: 0.12212637  step_time: 0.028512  lr: 24.0000
+Epoch:[1/2] [37400/64013]  eta: 0:13:03  loss: 0.12184063  step_time: 0.028495  lr: 24.0000
+Epoch:[1/2] [37600/64013]  eta: 0:12:57  loss: 0.12207894  step_time: 0.028414  lr: 24.0000
+Epoch:[1/2] [37800/64013]  eta: 0:12:51  loss: 0.12212536  step_time: 0.028535  lr: 24.0000
+Test: [200/1361]  step_time: 0.0081
+Test: [400/1361]  step_time: 0.0148
+Test: [600/1361]  step_time: 0.0085
+Test: [800/1361]  step_time: 0.0159
+Test: [1000/1361]  step_time: 0.0085
+Test: [1200/1361]  step_time: 0.0167
+test loss: 0.12585387
+Epoch 1 step 37987. auc 0.802376
+Epoch:[1/2] [38000/64013]  eta: 0:12:45  loss: 0.12190171  step_time: 0.028315  lr: 24.0000
+Epoch:[1/2] [38200/64013]  eta: 0:12:39  loss: 0.12183400  step_time: 0.028493  lr: 24.0000
+Epoch:[1/2] [38400/64013]  eta: 0:12:34  loss: 0.12192730  step_time: 0.028647  lr: 24.0000
+Epoch:[1/2] [38600/64013]  eta: 0:12:28  loss: 0.12195130  step_time: 0.028491  lr: 24.0000
+Epoch:[1/2] [38800/64013]  eta: 0:12:22  loss: 0.12191034  step_time: 0.028500  lr: 24.0000
+Test: [200/1361]  step_time: 0.0086
+Test: [400/1361]  step_time: 0.0082
+Test: [600/1361]  step_time: 0.0081
+Test: [800/1361]  step_time: 0.0082
+Test: [1000/1361]  step_time: 0.0083
+Test: [1200/1361]  step_time: 0.0080
+test loss: 0.12604758
+Epoch 1 step 38987. auc 0.802082
+Epoch:[1/2] [39000/64013]  eta: 0:12:16  loss: 0.12206387  step_time: 0.028938  lr: 24.0000
+Epoch:[1/2] [39200/64013]  eta: 0:12:11  loss: 0.12208612  step_time: 0.050016  lr: 24.0000
+Epoch:[1/2] [39400/64013]  eta: 0:12:05  loss: 0.12214832  step_time: 0.028719  lr: 24.0000
+Epoch:[1/2] [39600/64013]  eta: 0:11:59  loss: 0.12225983  step_time: 0.029174  lr: 24.0000
+Epoch:[1/2] [39800/64013]  eta: 0:11:53  loss: 0.12238070  step_time: 0.028377  lr: 24.0000
+Test: [200/1361]  step_time: 0.0226
+Test: [400/1361]  step_time: 0.0152
+Test: [600/1361]  step_time: 0.0208
+Test: [800/1361]  step_time: 0.0236
+Test: [1000/1361]  step_time: 0.0175
+Test: [1200/1361]  step_time: 0.0081
+test loss: 0.12601532
+Epoch 1 step 39987. auc 0.802357
+Epoch:[1/2] [40000/64013]  eta: 0:11:47  loss: 0.12205262  step_time: 0.028352  lr: 24.0000
+Epoch:[1/2] [40200/64013]  eta: 0:11:41  loss: 0.12202471  step_time: 0.028522  lr: 24.0000
+Epoch:[1/2] [40400/64013]  eta: 0:11:35  loss: 0.12198357  step_time: 0.028781  lr: 24.0000
+Epoch:[1/2] [40600/64013]  eta: 0:11:29  loss: 0.12174182  step_time: 0.028444  lr: 24.0000
+Epoch:[1/2] [40800/64013]  eta: 0:11:23  loss: 0.12237013  step_time: 0.028596  lr: 24.0000
+Test: [200/1361]  step_time: 0.0139
+Test: [400/1361]  step_time: 0.0111
+Test: [600/1361]  step_time: 0.0086
+Test: [800/1361]  step_time: 0.0128
+Test: [1000/1361]  step_time: 0.0374
+Test: [1200/1361]  step_time: 0.0089
+test loss: 0.12591098
+Epoch 1 step 40987. auc 0.802073
+Epoch:[1/2] [41000/64013]  eta: 0:11:17  loss: 0.12238393  step_time: 0.028752  lr: 24.0000
+Epoch:[1/2] [41200/64013]  eta: 0:11:12  loss: 0.12184279  step_time: 0.028498  lr: 24.0000
+Epoch:[1/2] [41400/64013]  eta: 0:11:06  loss: 0.12195152  step_time: 0.033447  lr: 24.0000
+Epoch:[1/2] [41600/64013]  eta: 0:11:00  loss: 0.12212612  step_time: 0.028556  lr: 24.0000
+Epoch:[1/2] [41800/64013]  eta: 0:10:55  loss: 0.12215931  step_time: 0.047180  lr: 24.0000
+Test: [200/1361]  step_time: 0.0181
+Test: [400/1361]  step_time: 0.0155
+Test: [600/1361]  step_time: 0.0083
+Test: [800/1361]  step_time: 0.0082
+Test: [1000/1361]  step_time: 0.0141
+Test: [1200/1361]  step_time: 0.0409
+test loss: 0.12613660
+Epoch 1 step 41987. auc 0.802115
+Epoch:[1/2] [42000/64013]  eta: 0:10:49  loss: 0.12203053  step_time: 0.028831  lr: 24.0000
+Epoch:[1/2] [42200/64013]  eta: 0:10:43  loss: 0.12203219  step_time: 0.028479  lr: 24.0000
+Epoch:[1/2] [42400/64013]  eta: 0:10:37  loss: 0.12218615  step_time: 0.028635  lr: 24.0000
+Epoch:[1/2] [42600/64013]  eta: 0:10:31  loss: 0.12198810  step_time: 0.028689  lr: 24.0000
+Epoch:[1/2] [42800/64013]  eta: 0:10:25  loss: 0.12203265  step_time: 0.033625  lr: 24.0000
+Test: [200/1361]  step_time: 0.0086
+Test: [400/1361]  step_time: 0.0082
+Test: [600/1361]  step_time: 0.0194
+Test: [800/1361]  step_time: 0.0366
+Test: [1000/1361]  step_time: 0.0177
+Test: [1200/1361]  step_time: 0.0081
+test loss: 0.12574486
+Epoch 1 step 42987. auc 0.802266
+Epoch:[1/2] [43000/64013]  eta: 0:10:19  loss: 0.12187358  step_time: 0.028420  lr: 24.0000
+Epoch:[1/2] [43200/64013]  eta: 0:10:13  loss: 0.12210967  step_time: 0.028483  lr: 24.0000
+Epoch:[1/2] [43400/64013]  eta: 0:10:08  loss: 0.12207065  step_time: 0.032591  lr: 24.0000
+Epoch:[1/2] [43600/64013]  eta: 0:10:02  loss: 0.12181472  step_time: 0.028717  lr: 24.0000
+Epoch:[1/2] [43800/64013]  eta: 0:09:56  loss: 0.12201908  step_time: 0.028524  lr: 24.0000
+Test: [200/1361]  step_time: 0.0083
+Test: [400/1361]  step_time: 0.0082
+Test: [600/1361]  step_time: 0.0173
+Test: [800/1361]  step_time: 0.0315
+Test: [1000/1361]  step_time: 0.0117
+Test: [1200/1361]  step_time: 0.0233
+test loss: 0.12585764
+Epoch 1 step 43987. auc 0.802365
+Epoch:[1/2] [44000/64013]  eta: 0:09:50  loss: 0.12207344  step_time: 0.028607  lr: 24.0000
+Epoch:[1/2] [44200/64013]  eta: 0:09:44  loss: 0.12204555  step_time: 0.031444  lr: 24.0000
+Epoch:[1/2] [44400/64013]  eta: 0:09:38  loss: 0.12196432  step_time: 0.028749  lr: 24.0000
+Epoch:[1/2] [44600/64013]  eta: 0:09:32  loss: 0.12207673  step_time: 0.028578  lr: 24.0000
+Epoch:[1/2] [44800/64013]  eta: 0:09:27  loss: 0.12212209  step_time: 0.058402  lr: 24.0000
+Test: [200/1361]  step_time: 0.0256
+Test: [400/1361]  step_time: 0.0143
+Test: [600/1361]  step_time: 0.0146
+Test: [800/1361]  step_time: 0.0111
+Test: [1000/1361]  step_time: 0.0083
+Test: [1200/1361]  step_time: 0.0086
+test loss: 0.12607063
+Epoch 1 step 44987. auc 0.802206
+Epoch:[1/2] [45000/64013]  eta: 0:09:21  loss: 0.12182017  step_time: 0.028750  lr: 24.0000
+Epoch:[1/2] [45200/64013]  eta: 0:09:15  loss: 0.12214264  step_time: 0.028726  lr: 24.0000
+Epoch:[1/2] [45400/64013]  eta: 0:09:09  loss: 0.12193879  step_time: 0.028553  lr: 24.0000
+Epoch:[1/2] [45600/64013]  eta: 0:09:03  loss: 0.12197511  step_time: 0.028671  lr: 24.0000
+Epoch:[1/2] [45800/64013]  eta: 0:08:58  loss: 0.12198479  step_time: 0.040324  lr: 24.0000
+Test: [200/1361]  step_time: 0.0248
+Test: [400/1361]  step_time: 0.0227
+Test: [600/1361]  step_time: 0.0087
+Test: [800/1361]  step_time: 0.0179
+Test: [1000/1361]  step_time: 0.0196
+Test: [1200/1361]  step_time: 0.0081
+test loss: 0.12581559
+Epoch 1 step 45987. auc 0.802357
+Epoch:[1/2] [46000/64013]  eta: 0:08:52  loss: 0.12186012  step_time: 0.028731  lr: 24.0000
+Epoch:[1/2] [46200/64013]  eta: 0:08:46  loss: 0.12204664  step_time: 0.028538  lr: 24.0000
+Epoch:[1/2] [46400/64013]  eta: 0:08:40  loss: 0.12199740  step_time: 0.028587  lr: 24.0000
+Epoch:[1/2] [46600/64013]  eta: 0:08:34  loss: 0.12183050  step_time: 0.028702  lr: 24.0000
+Epoch:[1/2] [46800/64013]  eta: 0:08:28  loss: 0.12183525  step_time: 0.028378  lr: 24.0000
+Test: [200/1361]  step_time: 0.0434
+Test: [400/1361]  step_time: 0.0081
+Test: [600/1361]  step_time: 0.0083
+Test: [800/1361]  step_time: 0.0299
+Test: [1000/1361]  step_time: 0.0143
+Test: [1200/1361]  step_time: 0.0082
+test loss: 0.12583449
+Epoch 1 step 46987. auc 0.802349
+Epoch:[1/2] [47000/64013]  eta: 0:08:22  loss: 0.12180933  step_time: 0.028952  lr: 24.0000
+Epoch:[1/2] [47200/64013]  eta: 0:08:16  loss: 0.12177661  step_time: 0.031212  lr: 24.0000
+Epoch:[1/2] [47400/64013]  eta: 0:08:10  loss: 0.12189276  step_time: 0.028373  lr: 24.0000
+Epoch:[1/2] [47600/64013]  eta: 0:08:05  loss: 0.12184797  step_time: 0.028613  lr: 24.0000
+Epoch:[1/2] [47800/64013]  eta: 0:07:59  loss: 0.12204844  step_time: 0.028682  lr: 24.0000
+Test: [200/1361]  step_time: 0.0083
+Test: [400/1361]  step_time: 0.0143
+Test: [600/1361]  step_time: 0.0142
+Test: [800/1361]  step_time: 0.0179
+Test: [1000/1361]  step_time: 0.0132
+Test: [1200/1361]  step_time: 0.0143
+test loss: 0.12584941
+Epoch 1 step 47987. auc 0.802027
+Epoch:[1/2] [48000/64013]  eta: 0:07:53  loss: 0.12192617  step_time: 0.028563  lr: 23.9720
+Epoch:[1/2] [48200/64013]  eta: 0:07:47  loss: 0.12223972  step_time: 0.028598  lr: 23.5739
+Epoch:[1/2] [48400/64013]  eta: 0:07:41  loss: 0.12174613  step_time: 0.028672  lr: 23.1791
+Epoch:[1/2] [48600/64013]  eta: 0:07:35  loss: 0.12197388  step_time: 0.028672  lr: 22.7877
+Epoch:[1/2] [48800/64013]  eta: 0:07:29  loss: 0.12190021  step_time: 0.028627  lr: 22.3996
+Test: [200/1361]  step_time: 0.0081
+Test: [400/1361]  step_time: 0.0085
+Test: [600/1361]  step_time: 0.0089
+Test: [800/1361]  step_time: 0.0084
+Test: [1000/1361]  step_time: 0.0125
+Test: [1200/1361]  step_time: 0.0082
+test loss: 0.12594070
+Epoch 1 step 48987. auc 0.802245
+Epoch:[1/2] [49000/64013]  eta: 0:07:23  loss: 0.12181589  step_time: 0.028379  lr: 22.0148
+Epoch:[1/2] [49200/64013]  eta: 0:07:17  loss: 0.12164564  step_time: 0.028771  lr: 21.6334
+Epoch:[1/2] [49400/64013]  eta: 0:07:11  loss: 0.12175237  step_time: 0.028629  lr: 21.2553
+Epoch:[1/2] [49600/64013]  eta: 0:07:05  loss: 0.12180798  step_time: 0.028600  lr: 20.8805
+Epoch:[1/2] [49800/64013]  eta: 0:06:59  loss: 0.12174984  step_time: 0.028758  lr: 20.5091
+Test: [200/1361]  step_time: 0.0084
+Test: [400/1361]  step_time: 0.0360
+Test: [600/1361]  step_time: 0.0232
+Test: [800/1361]  step_time: 0.0185
+Test: [1000/1361]  step_time: 0.0098
+Test: [1200/1361]  step_time: 0.0216
+test loss: 0.12575296
+Epoch 1 step 49987. auc 0.802316
+Epoch:[1/2] [50000/64013]  eta: 0:06:53  loss: 0.12189147  step_time: 0.028630  lr: 20.1410
+Epoch:[1/2] [50200/64013]  eta: 0:06:47  loss: 0.12160127  step_time: 0.028641  lr: 19.7762
+Epoch:[1/2] [50400/64013]  eta: 0:06:41  loss: 0.12180202  step_time: 0.028409  lr: 19.4148
+Epoch:[1/2] [50600/64013]  eta: 0:06:36  loss: 0.12153073  step_time: 0.029020  lr: 19.0567
+Epoch:[1/2] [50800/64013]  eta: 0:06:30  loss: 0.12179064  step_time: 0.028667  lr: 18.7019
+Test: [200/1361]  step_time: 0.0169
+Test: [400/1361]  step_time: 0.0183
+Test: [600/1361]  step_time: 0.0084
+Test: [800/1361]  step_time: 0.0201
+Test: [1000/1361]  step_time: 0.0150
+Test: [1200/1361]  step_time: 0.0081
+test loss: 0.12575313
+Epoch 1 step 50987. auc 0.802499
+Epoch:[1/2] [51000/64013]  eta: 0:06:24  loss: 0.12154786  step_time: 0.028382  lr: 18.3505
+Epoch:[1/2] [51200/64013]  eta: 0:06:18  loss: 0.12159502  step_time: 0.028385  lr: 18.0024
+Epoch:[1/2] [51400/64013]  eta: 0:06:12  loss: 0.12182446  step_time: 0.028719  lr: 17.6576
+Epoch:[1/2] [51600/64013]  eta: 0:06:06  loss: 0.12169689  step_time: 0.028754  lr: 17.3162
+Epoch:[1/2] [51800/64013]  eta: 0:06:00  loss: 0.12170978  step_time: 0.028522  lr: 16.9781
+Test: [200/1361]  step_time: 0.0082
+Test: [400/1361]  step_time: 0.0087
+Test: [600/1361]  step_time: 0.0242
+Test: [800/1361]  step_time: 0.0081
+Test: [1000/1361]  step_time: 0.0085
+Test: [1200/1361]  step_time: 0.0146
+test loss: 0.12571527
+Epoch 1 step 51987. auc 0.802660
+Epoch:[1/2] [52000/64013]  eta: 0:05:54  loss: 0.12155683  step_time: 0.028726  lr: 16.6433
+Epoch:[1/2] [52200/64013]  eta: 0:05:48  loss: 0.12151445  step_time: 0.028502  lr: 16.3119
+Epoch:[1/2] [52400/64013]  eta: 0:05:42  loss: 0.12108230  step_time: 0.028706  lr: 15.9838
+Epoch:[1/2] [52600/64013]  eta: 0:05:36  loss: 0.12195675  step_time: 0.028513  lr: 15.6590
+Epoch:[1/2] [52800/64013]  eta: 0:05:30  loss: 0.12139194  step_time: 0.028688  lr: 15.3376
+Test: [200/1361]  step_time: 0.0182
+Test: [400/1361]  step_time: 0.0092
+Test: [600/1361]  step_time: 0.0192
+Test: [800/1361]  step_time: 0.0123
+Test: [1000/1361]  step_time: 0.0322
+Test: [1200/1361]  step_time: 0.0157
+test loss: 0.12572718
+Epoch 1 step 52987. auc 0.802472
+Epoch:[1/2] [53000/64013]  eta: 0:05:24  loss: 0.12147129  step_time: 0.028660  lr: 15.0195
+Epoch:[1/2] [53200/64013]  eta: 0:05:19  loss: 0.12189850  step_time: 0.028544  lr: 14.7047
+Epoch:[1/2] [53400/64013]  eta: 0:05:13  loss: 0.12142901  step_time: 0.028580  lr: 14.3933
+Epoch:[1/2] [53600/64013]  eta: 0:05:07  loss: 0.12147301  step_time: 0.028603  lr: 14.0852
+Epoch:[1/2] [53800/64013]  eta: 0:05:01  loss: 0.12145139  step_time: 0.028922  lr: 13.7804
+Test: [200/1361]  step_time: 0.0166
+Test: [400/1361]  step_time: 0.0253
+Test: [600/1361]  step_time: 0.0081
+Test: [800/1361]  step_time: 0.0082
+Test: [1000/1361]  step_time: 0.0080
+Test: [1200/1361]  step_time: 0.0085
+test loss: 0.12579198
+Epoch 1 step 53987. auc 0.802616
+Epoch:[1/2] [54000/64013]  eta: 0:04:55  loss: 0.12166350  step_time: 0.028531  lr: 13.4790
+Epoch:[1/2] [54200/64013]  eta: 0:04:49  loss: 0.12170350  step_time: 0.033522  lr: 13.1809
+Epoch:[1/2] [54400/64013]  eta: 0:04:43  loss: 0.12169191  step_time: 0.028635  lr: 12.8861
+Epoch:[1/2] [54600/64013]  eta: 0:04:37  loss: 0.12166584  step_time: 0.028402  lr: 12.5947
+Epoch:[1/2] [54800/64013]  eta: 0:04:31  loss: 0.12169672  step_time: 0.028743  lr: 12.3066
+Test: [200/1361]  step_time: 0.0083
+Test: [400/1361]  step_time: 0.0202
+Test: [600/1361]  step_time: 0.0141
+Test: [800/1361]  step_time: 0.0195
+Test: [1000/1361]  step_time: 0.0240
+Test: [1200/1361]  step_time: 0.0176
+test loss: 0.12560542
+Epoch 1 step 54987. auc 0.803035
+Epoch:[1/2] [55000/64013]  eta: 0:04:25  loss: 0.12172061  step_time: 0.028582  lr: 12.0218
+Epoch:[1/2] [55200/64013]  eta: 0:04:19  loss: 0.12149563  step_time: 0.028641  lr: 11.7404
+Epoch:[1/2] [55400/64013]  eta: 0:04:14  loss: 0.12140624  step_time: 0.028896  lr: 11.4623
+Epoch:[1/2] [55600/64013]  eta: 0:04:08  loss: 0.12143945  step_time: 0.028686  lr: 11.1875
+Epoch:[1/2] [55800/64013]  eta: 0:04:02  loss: 0.12156980  step_time: 0.028504  lr: 10.9161
+Test: [200/1361]  step_time: 0.0087
+Test: [400/1361]  step_time: 0.0086
+Test: [600/1361]  step_time: 0.0308
+Test: [800/1361]  step_time: 0.0091
+Test: [1000/1361]  step_time: 0.0187
+Test: [1200/1361]  step_time: 0.0084
+test loss: 0.12560247
+Epoch 1 step 55987. auc 0.803059
+Epoch:[1/2] [56000/64013]  eta: 0:03:56  loss: 0.12175328  step_time: 0.028509  lr: 10.6480
+Epoch:[1/2] [56200/64013]  eta: 0:03:50  loss: 0.12142017  step_time: 0.028704  lr: 10.3832
+Epoch:[1/2] [56400/64013]  eta: 0:03:44  loss: 0.12155309  step_time: 0.028549  lr: 10.1218
+Epoch:[1/2] [56600/64013]  eta: 0:03:38  loss: 0.12159552  step_time: 0.028514  lr: 9.8637
+Epoch:[1/2] [56800/64013]  eta: 0:03:32  loss: 0.12128728  step_time: 0.028810  lr: 9.6089
+Test: [200/1361]  step_time: 0.0088
+Test: [400/1361]  step_time: 0.0286
+Test: [600/1361]  step_time: 0.0161
+Test: [800/1361]  step_time: 0.0159
+Test: [1000/1361]  step_time: 0.0164
+Test: [1200/1361]  step_time: 0.0169
+test loss: 0.12561749
+Epoch 1 step 56987. auc 0.803008
+Epoch:[1/2] [57000/64013]  eta: 0:03:26  loss: 0.12141804  step_time: 0.028721  lr: 9.3575
+Epoch:[1/2] [57200/64013]  eta: 0:03:20  loss: 0.12139409  step_time: 0.028670  lr: 9.1094
+Epoch:[1/2] [57400/64013]  eta: 0:03:14  loss: 0.12119047  step_time: 0.028596  lr: 8.8646
+Epoch:[1/2] [57600/64013]  eta: 0:03:09  loss: 0.12172259  step_time: 0.028754  lr: 8.6232
+Epoch:[1/2] [57800/64013]  eta: 0:03:03  loss: 0.12096575  step_time: 0.028513  lr: 8.3851
+Test: [200/1361]  step_time: 0.0173
+Test: [400/1361]  step_time: 0.0162
+Test: [600/1361]  step_time: 0.0179
+Test: [800/1361]  step_time: 0.0082
+Test: [1000/1361]  step_time: 0.0086
+Test: [1200/1361]  step_time: 0.0082
+test loss: 0.12557413
+Epoch 1 step 57987. auc 0.803187
+Epoch:[1/2] [58000/64013]  eta: 0:02:57  loss: 0.12114776  step_time: 0.028541  lr: 8.1503
+Epoch:[1/2] [58200/64013]  eta: 0:02:51  loss: 0.12141343  step_time: 0.028571  lr: 7.9189
+Epoch:[1/2] [58400/64013]  eta: 0:02:45  loss: 0.12164292  step_time: 0.028661  lr: 7.6908
+Epoch:[1/2] [58600/64013]  eta: 0:02:39  loss: 0.12120046  step_time: 0.028839  lr: 7.4660
+Epoch:[1/2] [58800/64013]  eta: 0:02:33  loss: 0.12118452  step_time: 0.028389  lr: 7.2446
+Test: [200/1361]  step_time: 0.0081
+Test: [400/1361]  step_time: 0.0080
+Test: [600/1361]  step_time: 0.0243
+Test: [800/1361]  step_time: 0.0082
+Test: [1000/1361]  step_time: 0.0242
+Test: [1200/1361]  step_time: 0.0085
+test loss: 0.12558264
+Epoch 1 step 58987. auc 0.803331
+Epoch:[1/2] [59000/64013]  eta: 0:02:27  loss: 0.12129464  step_time: 0.028621  lr: 7.0265
+Epoch:[1/2] [59200/64013]  eta: 0:02:22  loss: 0.12120362  step_time: 0.075650  lr: 6.8117
+Epoch:[1/2] [59400/64013]  eta: 0:02:16  loss: 0.12146908  step_time: 0.028630  lr: 6.6003
+Epoch:[1/2] [59600/64013]  eta: 0:02:10  loss: 0.12129103  step_time: 0.028680  lr: 6.3922
+Epoch:[1/2] [59800/64013]  eta: 0:02:04  loss: 0.12148827  step_time: 0.028494  lr: 6.1874
+Test: [200/1361]  step_time: 0.0153
+Test: [400/1361]  step_time: 0.0084
+Test: [600/1361]  step_time: 0.0157
+Test: [800/1361]  step_time: 0.0080
+Test: [1000/1361]  step_time: 0.0081
+Test: [1200/1361]  step_time: 0.0080
+test loss: 0.12562330
+Epoch 1 step 59987. auc 0.803229
+Epoch:[1/2] [60000/64013]  eta: 0:01:58  loss: 0.12125997  step_time: 0.028510  lr: 5.9860
+Epoch:[1/2] [60200/64013]  eta: 0:01:52  loss: 0.12164409  step_time: 0.028406  lr: 5.7879
+Epoch:[1/2] [60400/64013]  eta: 0:01:46  loss: 0.12143815  step_time: 0.028701  lr: 5.5931
+Epoch:[1/2] [60600/64013]  eta: 0:01:40  loss: 0.12125884  step_time: 0.028462  lr: 5.4017
+Epoch:[1/2] [60800/64013]  eta: 0:01:34  loss: 0.12126249  step_time: 0.028860  lr: 5.2136
+Test: [200/1361]  step_time: 0.0116
+Test: [400/1361]  step_time: 0.0208
+Test: [600/1361]  step_time: 0.0088
+Test: [800/1361]  step_time: 0.0081
+Test: [1000/1361]  step_time: 0.0083
+Test: [1200/1361]  step_time: 0.0083
+test loss: 0.12557887
+Epoch 1 step 60987. auc 0.803312
+Epoch:[1/2] [61000/64013]  eta: 0:01:28  loss: 0.12116395  step_time: 0.028671  lr: 5.0288
+Epoch:[1/2] [61200/64013]  eta: 0:01:23  loss: 0.12131133  step_time: 0.028522  lr: 4.8474
+Epoch:[1/2] [61400/64013]  eta: 0:01:17  loss: 0.12126201  step_time: 0.028366  lr: 4.6693
+Epoch:[1/2] [61600/64013]  eta: 0:01:11  loss: 0.12117572  step_time: 0.028463  lr: 4.4945
+Epoch:[1/2] [61800/64013]  eta: 0:01:05  loss: 0.12131891  step_time: 0.029055  lr: 4.3231
+Test: [200/1361]  step_time: 0.0161
+Test: [400/1361]  step_time: 0.0149
+Test: [600/1361]  step_time: 0.0082
+Test: [800/1361]  step_time: 0.0158
+Test: [1000/1361]  step_time: 0.0083
+Test: [1200/1361]  step_time: 0.0103
+test loss: 0.12557478
+Epoch 1 step 61987. auc 0.803208
+Epoch:[1/2] [62000/64013]  eta: 0:00:59  loss: 0.12129589  step_time: 0.028533  lr: 4.1550
+Epoch:[1/2] [62200/64013]  eta: 0:00:53  loss: 0.12127676  step_time: 0.028348  lr: 3.9902
+Epoch:[1/2] [62400/64013]  eta: 0:00:47  loss: 0.12133425  step_time: 0.028419  lr: 3.8288
+Epoch:[1/2] [62600/64013]  eta: 0:00:41  loss: 0.12124068  step_time: 0.028533  lr: 3.6707
+Epoch:[1/2] [62800/64013]  eta: 0:00:35  loss: 0.12119655  step_time: 0.028640  lr: 3.5159
+Test: [200/1361]  step_time: 0.0090
+Test: [400/1361]  step_time: 0.0105
+Test: [600/1361]  step_time: 0.0082
+Test: [800/1361]  step_time: 0.0235
+Test: [1000/1361]  step_time: 0.0231
+Test: [1200/1361]  step_time: 0.0161
+test loss: 0.12561445
+Epoch 1 step 62987. auc 0.802974
+Epoch:[1/2] [63000/64013]  eta: 0:00:29  loss: 0.12105100  step_time: 0.028311  lr: 3.3645
+Epoch:[1/2] [63200/64013]  eta: 0:00:23  loss: 0.12139121  step_time: 0.028845  lr: 3.2164
+Epoch:[1/2] [63400/64013]  eta: 0:00:18  loss: 0.12099548  step_time: 0.028523  lr: 3.0716
+Epoch:[1/2] [63600/64013]  eta: 0:00:12  loss: 0.12120298  step_time: 0.028536  lr: 2.9302
+Epoch:[1/2] [63800/64013]  eta: 0:00:06  loss: 0.12114699  step_time: 0.028620  lr: 2.7921
+Test: [200/1361]  step_time: 0.0083
+Test: [400/1361]  step_time: 0.0160
+Test: [600/1361]  step_time: 0.0082
+Test: [800/1361]  step_time: 0.0174
+Test: [1000/1361]  step_time: 0.0141
+Test: [1200/1361]  step_time: 0.0096
+test loss: 0.12566498
+Epoch 1 step 63987. auc 0.803062
+Epoch:[1/2] [64000/64013]  eta: 0:00:00  loss: 0.12121493  step_time: 0.028692  lr: 2.6573
+Finished epoch 1 in 0:54:09. 
+DLL 2023-05-21 19:10:05.191480 - () best_auc : 0.80333 None best_validation_loss : 0.12557  training_loss : 0.12121  best_epoch : 1.92  average_train_throughput : 2.28e+06 samples/s

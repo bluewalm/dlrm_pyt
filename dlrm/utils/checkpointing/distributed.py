@@ -80,12 +80,18 @@ class DistributedCheckpointLoader:
             torch.distributed.barrier()
 
 
-def make_distributed_checkpoint_loader(device_mapping, rank: int, device: str = "cpu") -> DistributedCheckpointLoader:
+def make_distributed_checkpoint_loader(
+        device_mapping, 
+        rank: int, 
+        device: str = "cpu", 
+        config: Dict[str, Any] = {}, 
+) -> DistributedCheckpointLoader:
     embedding_indices = device_mapping["embedding"][rank]
     return DistributedCheckpointLoader(
         loader=DlrmCheckpointLoader(
             embedding_indices=embedding_indices,
             device=device,
+            config=config
         ),
         device_mapping=device_mapping,
         rank=rank
@@ -93,10 +99,10 @@ def make_distributed_checkpoint_loader(device_mapping, rank: int, device: str = 
 
 
 def make_distributed_checkpoint_writer(
-        device_mapping,
-        rank: int,
-        is_main_process: bool,
-        config: Dict[str, Any],
+        device_mapping, 
+        rank: int, 
+        is_main_process: bool, 
+        config: Dict[str, Any], 
 ) -> DistributedCheckpointWriter:
     embedding_indices = device_mapping["embedding"][rank]
     return DistributedCheckpointWriter(
@@ -108,3 +114,4 @@ def make_distributed_checkpoint_writer(
         rank=rank,
         main_process=is_main_process
     )
+

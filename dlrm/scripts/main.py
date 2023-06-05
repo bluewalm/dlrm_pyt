@@ -17,7 +17,7 @@ import itertools
 import os
 import sys
 from absl import app, flags, logging
-from apex import optimizers as apex_optim
+from apex import amp, parallel, optimizers as apex_optim
 
 from dlrm.data.feature_spec import FeatureSpec
 from dlrm.model.distributed import DistributedDlrm
@@ -31,18 +31,21 @@ from time import time
 import dllogger
 import numpy as np
 import torch
+import json
 from absl import app, flags
 
 import dlrm.scripts.utils as utils
 from dlrm.data.data_loader import get_data_loaders
 from dlrm.data.utils import prefetcher, get_embedding_sizes
 
+from pytorch_embeddings import decomposed_embeddings
+
 FLAGS = flags.FLAGS
 
 # Basic run settings
 flags.DEFINE_enum("mode", default='train', enum_values=['train', 'test', 'inference_benchmark'],
                   help="Select task to be performed")
-flags.DEFINE_integer("seed", 12345, "Random seed")
+flags.DEFINE_integer("seed", 1, "Random seed")
 
 # Training flags
 flags.DEFINE_integer("batch_size", 65536, "Batch size used for training")
@@ -63,14 +66,22 @@ flags.DEFINE_integer("decay_power", 2, "Polynomial learning rate decay power")
 flags.DEFINE_float("decay_end_lr", 0, "LR after the decay ends")
 
 # Model configuration
-flags.DEFINE_enum("embedding_type", "custom_cuda",
+flags.DEFINE_enum("embedding_type", "multi_table",
                   ["joint", "custom_cuda", "multi_table", "joint_sparse", "joint_fused"],
                   help="The type of the embedding operation to use")
+flags.DEFINE_list("embedding_compression_type", None,
+               help="The type of the embedding compression to use. To be given per embedding table. \
+                    Can be native or fpd \
+                    Only relevant when 'embedding_type' is set to 'multi_table'. Otherwise ignored. ")
+flags.DEFINE_list("frobenius_rank", None, "the dimension of factor-[l,h] we reduce over. given per embedding table. ")
+flags.DEFINE_list("frobenius_blocks", None, "given per fpd embedding table. ")
+flags.DEFINE_boolean("alternating_gradients", False, "alternate gradients for fpd training")
+flags.DEFINE_boolean("silent", False, "do not display verbose information about decomposed embeddings")
 flags.DEFINE_integer("embedding_dim", 128, "Dimensionality of embedding space for categorical features")
 flags.DEFINE_list("top_mlp_sizes", [1024, 1024, 512, 256, 1], "Linear layer sizes for the top MLP")
 flags.DEFINE_list("bottom_mlp_sizes", [512, 256, 128], "Linear layer sizes for the bottom MLP")
 flags.DEFINE_enum("interaction_op", default="cuda_dot", enum_values=["cuda_dot", "dot", "cat"],
-                  help="Type of interaction operation to perform.")
+                  help="Type of interaction operation to perform. WARNING! cuda_dot kernels don't work on H100! use dot instead. ")
 
 # Data configuration
 flags.DEFINE_string("dataset", None, "Path to dataset directory")
@@ -120,9 +131,9 @@ flags.DEFINE_boolean("amp", False, "If True the script will use Automatic Mixed 
 flags.DEFINE_boolean("cuda_graphs", False, "Use CUDA Graphs")
 
 # inference benchmark
-flags.DEFINE_list("inference_benchmark_batch_sizes", default=[1, 64, 4096],
+flags.DEFINE_list("inference_benchmark_batch_sizes", default=[64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144],
                   help="Batch sizes for inference throughput and latency measurements")
-flags.DEFINE_integer("inference_benchmark_steps", 200,
+flags.DEFINE_integer("inference_benchmark_steps", 100000,
                      "Number of steps for measuring inference latency and throughput")
 
 # Miscellaneous
@@ -186,7 +197,7 @@ def load_feature_spec(flags):
         num_numerical = flags.synthetic_dataset_numerical_features
         categorical_sizes = [int(s) for s in FLAGS.synthetic_dataset_table_sizes]
         return FeatureSpec.get_default_feature_spec(number_of_numerical_features=num_numerical,
-                                                    categorical_feature_cardinalities=categorical_sizes)
+                                             categorical_feature_cardinalities=categorical_sizes)
     fspec_path = os.path.join(flags.dataset, flags.feature_spec)
     return FeatureSpec.from_yaml(fspec_path)
 
@@ -286,14 +297,12 @@ def inference_benchmark_nongraphed(model, data_loader, num_batches=100):
     base_device = FLAGS.base_device
     latencies = []
 
-    y_true = []
-    y_score = []
-
     with torch.no_grad():
         for step, (numerical_features, categorical_features, click) in enumerate(data_loader):
             if step > num_batches:
                 break
 
+            torch.cuda.synchronize()
             step_start_time = time()
 
             numerical_features = numerical_features.to(base_device)
@@ -308,14 +317,6 @@ def inference_benchmark_nongraphed(model, data_loader, num_batches=100):
 
             if step >= FLAGS.benchmark_warmup_steps:
                 latencies.append(step_time)
-
-            y_true.append(click)
-            y_score.append(inference_result.reshape([-1]).clone())
-
-    y_true = torch.cat(y_true)
-    y_score = torch.sigmoid(torch.cat(y_score)).float()
-    auc = utils.roc_auc_score(y_true, y_score)
-    print('auc: ', auc)
 
     return latencies
 
@@ -353,9 +354,6 @@ def inference_benchmark_graphed(model, data_loader, num_batches=100):
         inference_result = model(numerical, static_categorical).squeeze()
 
     torch.cuda.synchronize()
-    # Inference
-    y_true = []
-    y_score = []
 
     with torch.no_grad():
         for step, (numerical_features, categorical_features, click) in enumerate(data_loader):
@@ -375,12 +373,7 @@ def inference_benchmark_graphed(model, data_loader, num_batches=100):
 
             if step >= FLAGS.benchmark_warmup_steps:
                 latencies.append(step_time)
-            y_true.append(click)
-            y_score.append(inference_result.reshape([-1]).clone())
-    y_true = torch.cat(y_true)
-    y_score = torch.sigmoid(torch.cat(y_score)).float()
-    auc = utils.roc_auc_score(y_true, y_score)
-    print('auc: ', auc)
+
     return latencies
 
 
@@ -418,25 +411,33 @@ def main(argv):
 
     data_loader_train, data_loader_test = get_data_loaders(FLAGS, device_mapping=device_mapping,
                                                            feature_spec=feature_spec)
-
-    model = DistributedDlrm(
-        vectors_per_gpu=device_mapping['vectors_per_gpu'],
-        embedding_device_mapping=device_mapping['embedding'],
-        embedding_type=FLAGS.embedding_type,
-        embedding_dim=FLAGS.embedding_dim,
-        world_num_categorical_features=len(world_categorical_feature_sizes),
-        categorical_feature_sizes=categorical_feature_sizes,
-        num_numerical_features=num_numerical_features,
-        hash_indices=FLAGS.hash_indices,
-        bottom_mlp_sizes=bottom_mlp_sizes,
-        top_mlp_sizes=FLAGS.top_mlp_sizes,
-        interaction_op=FLAGS.interaction_op,
-        fp16=FLAGS.amp,
-        use_cpp_mlp=FLAGS.optimized_mlp,
-        bottom_features_ordered=FLAGS.bottom_features_ordered,
-        device=device
-    )
-
+    decomposed_embeddings_flags = {
+        'embedding_type' : FLAGS.embedding_compression_type, 
+        'frobenius_rank' : [int(x) for x in FLAGS.frobenius_rank] if FLAGS.frobenius_rank is not None else None, 
+        'frobenius_blocks' : [int(x) for x in FLAGS.frobenius_blocks] if FLAGS.frobenius_blocks is not None else None, 
+        'alternating_gradients' : FLAGS.alternating_gradients, 
+        'silent' : FLAGS.silent
+    }
+    
+    with decomposed_embeddings(**decomposed_embeddings_flags):
+        model = DistributedDlrm(
+            vectors_per_gpu=device_mapping['vectors_per_gpu'],
+            embedding_device_mapping=device_mapping['embedding'],
+            embedding_type=FLAGS.embedding_type,
+            embedding_dim=FLAGS.embedding_dim,
+            world_num_categorical_features=len(world_categorical_feature_sizes),
+            categorical_feature_sizes=categorical_feature_sizes,
+            num_numerical_features=num_numerical_features,
+            hash_indices=FLAGS.hash_indices,
+            bottom_mlp_sizes=bottom_mlp_sizes,
+            top_mlp_sizes=FLAGS.top_mlp_sizes,
+            interaction_op=FLAGS.interaction_op,
+            fp16=FLAGS.amp,
+            use_cpp_mlp=FLAGS.optimized_mlp,
+            bottom_features_ordered=FLAGS.bottom_features_ordered,
+            device=device
+        )
+    print(model)
     dist.setup_distributed_print(is_main_process())
 
     # DDP introduces a gradient average through allreduce(mean), which doesn't apply to bottom model.
@@ -488,7 +489,11 @@ def main(argv):
         config=FLAGS.flag_values_dict()
     )
 
-    checkpoint_loader = make_distributed_checkpoint_loader(device_mapping=device_mapping, rank=rank)
+    checkpoint_loader = make_distributed_checkpoint_loader(
+        device_mapping=device_mapping, 
+        rank=rank, 
+        config=FLAGS.flag_values_dict()
+    )
 
     if FLAGS.load_checkpoint_path:
         checkpoint_loader.load_checkpoint(model, FLAGS.load_checkpoint_path)
@@ -500,7 +505,10 @@ def main(argv):
         if world_size <= 1:
             return model
 
-        model.top_model = torch.nn.parallel.DistributedDataParallel(model.top_model)
+        if use_gpu:
+            model.top_model = parallel.DistributedDataParallel(model.top_model)
+        else:  # Use other backend for CPU
+            model.top_model = torch.nn.parallel.DistributedDataParallel(model.top_model)
         return model
 
     if FLAGS.mode == 'test':
@@ -510,6 +518,7 @@ def main(argv):
         results = {'best_auc': auc, 'best_validation_loss': valid_loss}
         if is_main_process():
             dllogger.log(data=results, step=tuple())
+            print('best_auc: ', auc)
         return
     elif FLAGS.mode == 'inference_benchmark':
         if world_size > 1:
@@ -539,15 +548,16 @@ def main(argv):
             results.update(subresult)
         if is_main_process():
             dllogger.log(data=results, step=tuple())
+            print(json.dumps(results, indent=4))
         return
-
+    
     if FLAGS.save_checkpoint_path and not FLAGS.bottom_features_ordered and is_main_process():
         logging.warning("Saving checkpoint without --bottom_features_ordered flag will result in "
                         "a device-order dependent model. Consider using --bottom_features_ordered "
                         "if you plan to load the checkpoint in different device configurations.")
-
+    
     loss_fn = torch.nn.BCEWithLogitsLoss(reduction="mean")
-
+    
     # Print per 16384 * 2000 samples by default
     default_print_freq = 16384 * 2000 // FLAGS.batch_size
     print_freq = default_print_freq if FLAGS.print_freq is None else FLAGS.print_freq
@@ -837,3 +847,6 @@ def dist_evaluate(model, data_loader):
 
 if __name__ == '__main__':
     app.run(main)
+
+
+

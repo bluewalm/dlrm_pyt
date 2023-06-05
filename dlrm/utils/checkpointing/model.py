@@ -48,9 +48,17 @@ class DlrmCheckpointWriter:
 
     def save_embeddings(self, checkpoint_path: str, model):
         self._ensure_directory(checkpoint_path)
-        for embedding_index, weight in zip(self._embedding_indices, model.bottom_model.embeddings.weights):
-            self._save_as_bytes(weight.data, join(checkpoint_path, _get_embedding_file(embedding_index)))
-            torch.save({"shape": weight.shape}, join(checkpoint_path, _get_embedding_meta_file(embedding_index)))
+        if (self._config["embedding_type"] == "multi_table") and (self._config["embedding_compression_type"] not in (None, "native")):
+            for embedding_index, embedding in zip(self._embedding_indices, model.bottom_model.embeddings.embeddings):
+                embedding_path = join(checkpoint_path, _get_embedding_file(embedding_index))
+                state_dict = embedding.state_dict()
+                torch.save(state_dict, embedding_path)
+                shape = (embedding.num_embeddings, embedding.embedding_dim)
+                torch.save({"shape": shape}, join(checkpoint_path, _get_embedding_meta_file(embedding_index)))
+        else:
+            for embedding_index, weight in zip(self._embedding_indices, model.bottom_model.embeddings.weights):
+                self._save_as_bytes(weight.data, join(checkpoint_path, _get_embedding_file(embedding_index)))
+                torch.save({"shape": weight.shape}, join(checkpoint_path, _get_embedding_meta_file(embedding_index)))
 
     def save_bottom_mlp(self, checkpoint_path: str, model):
         self._ensure_directory(checkpoint_path)
@@ -90,15 +98,22 @@ class DlrmCheckpointLoader:
     (for handling multiple model configurations)
     """
 
-    def __init__(self, embedding_indices: Sequence[int], device: str = "cpu"):
+    def __init__(self, embedding_indices: Sequence[int], device: str = "cpu", config: Dict[str, Any] = {}):
         self._embedding_indices = embedding_indices
         self._device = device
-
+        self._config = config
+    
     def load_embeddings(self, checkpoint_path: str, model):
-        embedding_weights = (self._load_from_bytes(join(checkpoint_path, _get_embedding_file(index)),
-                                                   self._get_embedding_shape(checkpoint_path, index))
-                             for index in self._embedding_indices)
-        model.bottom_model.embeddings.load_weights(embedding_weights)
+        if (self._config["embedding_type"] == "multi_table") and (self._config["embedding_compression_type"] not in (None, "native")):
+            for embedding_index, embedding in zip(self._embedding_indices, model.bottom_model.embeddings.embeddings):
+                embedding_path = join(checkpoint_path, _get_embedding_file(embedding_index))
+                state_dict = torch.load(embedding_path, map_location=self._device)
+                embedding.load_state_dict(state_dict)
+        else:
+            embedding_weights = (self._load_from_bytes(join(checkpoint_path, _get_embedding_file(index)),
+                                                       self._get_embedding_shape(checkpoint_path, index))
+                                 for index in self._embedding_indices)
+            model.bottom_model.embeddings.load_weights(embedding_weights)
 
     def load_bottom_mlp(self, checkpoint_path: str, model):
         bottom_mlp_state = self._load(checkpoint_path, _BOTTOM_MLP_FILE)
@@ -132,3 +147,4 @@ class DlrmCheckpointLoader:
     def _get_embedding_shape(self, checkpoint_path: str, index: int) -> tuple:
         embedding_meta = torch.load(join(checkpoint_path, _get_embedding_meta_file(index)))
         return embedding_meta["shape"]
+
