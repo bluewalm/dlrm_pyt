@@ -1,0 +1,391 @@
+Not using distributed mode
+DistributedDlrm(
+  interaction_op=dot, hash_indices=False
+  (bottom_model): DlrmBottom(
+    (embeddings): MultiTableEmbeddings(
+      (embeddings): ModuleList(
+        (0): Embedding(embedding_type=frobenius, num_embeddings=292775614, embedding_dim=128, precision=fp16, size=2.092 MB, frobenius_rank=8, frobenius_blocks=4)
+        (1): Embedding(embedding_type=frobenius, num_embeddings=227605432, embedding_dim=128, precision=fp16, size=1.844 MB, frobenius_rank=8, frobenius_blocks=4)
+        (2): Embedding(embedding_type=frobenius, num_embeddings=187188510, embedding_dim=128, precision=fp16, size=1.672 MB, frobenius_rank=8, frobenius_blocks=4)
+        (3): Embedding(embedding_type=frobenius, num_embeddings=130229467, embedding_dim=128, precision=fp16, size=1.396 MB, frobenius_rank=8, frobenius_blocks=4)
+        (4): Embedding(embedding_type=frobenius, num_embeddings=40790948, embedding_dim=128, precision=fp16, size=0.782 MB, frobenius_rank=8, frobenius_blocks=4)
+        (5): Embedding(embedding_type=native, num_embeddings=3067956, embedding_dim=128, precision=fp16, size=749.0127 MB)
+        (6): Embedding(embedding_type=native, num_embeddings=590152, embedding_dim=128, precision=fp16, size=144.0801 MB)
+        (7): Embedding(embedding_type=native, num_embeddings=405283, embedding_dim=128, precision=fp16, size=98.946 MB)
+        (8): Embedding(embedding_type=native, num_embeddings=39061, embedding_dim=128, precision=fp16, size=9.5364 MB)
+        (9): Embedding(embedding_type=native, num_embeddings=20266, embedding_dim=128, precision=fp16, size=4.9478 MB)
+        (10): Embedding(embedding_type=native, num_embeddings=17296, embedding_dim=128, precision=fp16, size=4.2227 MB)
+        (11): Embedding(embedding_type=native, num_embeddings=12974, embedding_dim=128, precision=fp16, size=3.1675 MB)
+        (12): Embedding(embedding_type=native, num_embeddings=11939, embedding_dim=128, precision=fp16, size=2.9148 MB)
+        (13): Embedding(embedding_type=native, num_embeddings=7425, embedding_dim=128, precision=fp16, size=1.8127 MB)
+        (14): Embedding(embedding_type=native, num_embeddings=7123, embedding_dim=128, precision=fp16, size=1.739 MB)
+        (15): Embedding(embedding_type=native, num_embeddings=2209, embedding_dim=128, precision=fp16, size=0.5393 MB)
+        (16): Embedding(embedding_type=native, num_embeddings=1544, embedding_dim=128, precision=fp16, size=0.377 MB)
+        (17): Embedding(embedding_type=native, num_embeddings=977, embedding_dim=128, precision=fp16, size=0.2385 MB)
+        (18): Embedding(embedding_type=native, num_embeddings=155, embedding_dim=128, precision=fp16, size=0.0378 MB)
+        (19): Embedding(embedding_type=native, num_embeddings=109, embedding_dim=128, precision=fp16, size=0.0266 MB)
+        (20): Embedding(embedding_type=native, num_embeddings=64, embedding_dim=128, precision=fp16, size=0.0156 MB)
+        (21): Embedding(embedding_type=native, num_embeddings=37, embedding_dim=128, precision=fp16, size=0.009 MB)
+        (22): Embedding(embedding_type=native, num_embeddings=15, embedding_dim=128, precision=fp16, size=0.0037 MB)
+        (23): Embedding(embedding_type=native, num_embeddings=11, embedding_dim=128, precision=fp16, size=0.0027 MB)
+        (24-25): 2 x Embedding(embedding_type=native, num_embeddings=4, embedding_dim=128, precision=fp16, size=0.001 MB)
+      )
+    )
+    (mlp): TorchMlp(
+      (layers): Sequential(
+        (0): Linear(in_features=13, out_features=512, bias=True)
+        (1): ReLU(inplace=True)
+        (2): Linear(in_features=512, out_features=256, bias=True)
+        (3): ReLU(inplace=True)
+        (4): Linear(in_features=256, out_features=128, bias=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (top_model): DlrmTop(
+    (mlp): TorchMlp(
+      (layers): Sequential(
+        (0): Linear(in_features=480, out_features=1024, bias=True)
+        (1): ReLU(inplace=True)
+        (2): Linear(in_features=1024, out_features=1024, bias=True)
+        (3): ReLU(inplace=True)
+        (4): Linear(in_features=1024, out_features=512, bias=True)
+        (5): ReLU(inplace=True)
+        (6): Linear(in_features=512, out_features=256, bias=True)
+        (7): ReLU(inplace=True)
+      )
+    )
+    (out): Linear(in_features=256, out_features=1, bias=True)
+  )
+)
+&&&& RUNNING TensorRT.trtexec [TensorRT v8601] # trtexec --onnx=./model.onnx --staticPlugins=/usr/local/lib/python3.10/dist-packages/pytorch_embeddings/frobenius_operator/tensorrt/libfrobenius_operatorPlugin.so --loadInputs=numerical_features:./numerical_features.dat,categorical_features:./categorical_features.dat --inputIOFormats=fp16:chw,int32:chw --outputIOFormats=fp16:chw --fp16 --minShapes=numerical_features:32768x13,categorical_features:32768x26 --optShapes=numerical_features:32768x13,categorical_features:32768x26 --maxShapes=numerical_features:32768x13,categorical_features:32768x26 --builderOptimizationLevel=5 --maxAuxStreams=5 --memPoolSize=workspace:16384 --saveEngine=./model.engine --skipInference
+[11/12/2023-21:55:34] [I] === Model Options ===
+[11/12/2023-21:55:34] [I] Format: ONNX
+[11/12/2023-21:55:34] [I] Model: ./model.onnx
+[11/12/2023-21:55:34] [I] Output:
+[11/12/2023-21:55:34] [I] === Build Options ===
+[11/12/2023-21:55:34] [I] Max batch: explicit batch
+[11/12/2023-21:55:34] [I] Memory Pools: workspace: 16384 MiB, dlaSRAM: default, dlaLocalDRAM: default, dlaGlobalDRAM: default
+[11/12/2023-21:55:34] [I] minTiming: 1
+[11/12/2023-21:55:34] [I] avgTiming: 8
+[11/12/2023-21:55:34] [I] Precision: FP32+FP16
+[11/12/2023-21:55:34] [I] LayerPrecisions: 
+[11/12/2023-21:55:34] [I] Layer Device Types: 
+[11/12/2023-21:55:34] [I] Calibration: 
+[11/12/2023-21:55:34] [I] Refit: Disabled
+[11/12/2023-21:55:34] [I] Version Compatible: Disabled
+[11/12/2023-21:55:34] [I] TensorRT runtime: full
+[11/12/2023-21:55:34] [I] Lean DLL Path: 
+[11/12/2023-21:55:34] [I] Tempfile Controls: { in_memory: allow, temporary: allow }
+[11/12/2023-21:55:34] [I] Exclude Lean Runtime: Disabled
+[11/12/2023-21:55:34] [I] Sparsity: Disabled
+[11/12/2023-21:55:34] [I] Safe mode: Disabled
+[11/12/2023-21:55:34] [I] Build DLA standalone loadable: Disabled
+[11/12/2023-21:55:34] [I] Allow GPU fallback for DLA: Disabled
+[11/12/2023-21:55:34] [I] DirectIO mode: Disabled
+[11/12/2023-21:55:34] [I] Restricted mode: Disabled
+[11/12/2023-21:55:34] [I] Skip inference: Enabled
+[11/12/2023-21:55:34] [I] Save engine: ./model.engine
+[11/12/2023-21:55:34] [I] Load engine: 
+[11/12/2023-21:55:34] [I] Profiling verbosity: 0
+[11/12/2023-21:55:34] [I] Tactic sources: Using default tactic sources
+[11/12/2023-21:55:34] [I] timingCacheMode: local
+[11/12/2023-21:55:34] [I] timingCacheFile: 
+[11/12/2023-21:55:34] [I] Heuristic: Disabled
+[11/12/2023-21:55:34] [I] Preview Features: Use default preview flags.
+[11/12/2023-21:55:34] [I] MaxAuxStreams: 5
+[11/12/2023-21:55:34] [I] BuilderOptimizationLevel: 5
+[11/12/2023-21:55:34] [I] Input(s): fp16:chw
+[11/12/2023-21:55:34] [I] Input(s): int32:chw
+[11/12/2023-21:55:34] [I] Output(s): fp16:chw
+[11/12/2023-21:55:34] [I] Input build shape: numerical_features=32768x13+32768x13+32768x13
+[11/12/2023-21:55:34] [I] Input build shape: categorical_features=32768x26+32768x26+32768x26
+[11/12/2023-21:55:34] [I] Input calibration shapes: model
+[11/12/2023-21:55:34] [I] === System Options ===
+[11/12/2023-21:55:34] [I] Device: 0
+[11/12/2023-21:55:34] [I] DLACore: 
+[11/12/2023-21:55:34] [I] Plugins: /usr/local/lib/python3.10/dist-packages/pytorch_embeddings/frobenius_operator/tensorrt/libfrobenius_operatorPlugin.so
+[11/12/2023-21:55:34] [I] setPluginsToSerialize:
+[11/12/2023-21:55:34] [I] dynamicPlugins:
+[11/12/2023-21:55:34] [I] ignoreParsedPluginLibs: 0
+[11/12/2023-21:55:34] [I] 
+[11/12/2023-21:55:34] [I] === Inference Options ===
+[11/12/2023-21:55:34] [I] Batch: Explicit
+[11/12/2023-21:55:34] [I] Input inference shape: categorical_features=32768x26
+[11/12/2023-21:55:34] [I] Input inference shape: numerical_features=32768x13
+[11/12/2023-21:55:34] [I] Iterations: 10
+[11/12/2023-21:55:34] [I] Duration: 3s (+ 200ms warm up)
+[11/12/2023-21:55:34] [I] Sleep time: 0ms
+[11/12/2023-21:55:34] [I] Idle time: 0ms
+[11/12/2023-21:55:34] [I] Inference Streams: 1
+[11/12/2023-21:55:34] [I] ExposeDMA: Disabled
+[11/12/2023-21:55:34] [I] Data transfers: Enabled
+[11/12/2023-21:55:34] [I] Spin-wait: Disabled
+[11/12/2023-21:55:34] [I] Multithreading: Disabled
+[11/12/2023-21:55:34] [I] CUDA Graph: Disabled
+[11/12/2023-21:55:34] [I] Separate profiling: Disabled
+[11/12/2023-21:55:34] [I] Time Deserialize: Disabled
+[11/12/2023-21:55:34] [I] Time Refit: Disabled
+[11/12/2023-21:55:34] [I] NVTX verbosity: 0
+[11/12/2023-21:55:34] [I] Persistent Cache Ratio: 0
+[11/12/2023-21:55:34] [I] Inputs:
+[11/12/2023-21:55:34] [I] categorical_features<-./categorical_features.dat
+[11/12/2023-21:55:34] [I] numerical_features<-./numerical_features.dat
+[11/12/2023-21:55:34] [I] === Reporting Options ===
+[11/12/2023-21:55:34] [I] Verbose: Disabled
+[11/12/2023-21:55:34] [I] Averages: 10 inferences
+[11/12/2023-21:55:34] [I] Percentiles: 90,95,99
+[11/12/2023-21:55:34] [I] Dump refittable layers:Disabled
+[11/12/2023-21:55:34] [I] Dump output: Disabled
+[11/12/2023-21:55:34] [I] Profile: Disabled
+[11/12/2023-21:55:34] [I] Export timing to JSON file: 
+[11/12/2023-21:55:34] [I] Export output to JSON file: 
+[11/12/2023-21:55:34] [I] Export profile to JSON file: 
+[11/12/2023-21:55:34] [I] 
+[11/12/2023-21:55:34] [I] === Device Information ===
+[11/12/2023-21:55:34] [I] Selected Device: NVIDIA A100-PCIE-40GB
+[11/12/2023-21:55:34] [I] Compute Capability: 8.0
+[11/12/2023-21:55:34] [I] SMs: 108
+[11/12/2023-21:55:34] [I] Device Global Memory: 40377 MiB
+[11/12/2023-21:55:34] [I] Shared Memory per SM: 164 KiB
+[11/12/2023-21:55:34] [I] Memory Bus Width: 5120 bits (ECC enabled)
+[11/12/2023-21:55:34] [I] Application Compute Clock Rate: 1.41 GHz
+[11/12/2023-21:55:34] [I] Application Memory Clock Rate: 1.215 GHz
+[11/12/2023-21:55:34] [I] 
+[11/12/2023-21:55:34] [I] Note: The application clock rates do not reflect the actual clock rates that the GPU is currently running at.
+[11/12/2023-21:55:34] [I] 
+[11/12/2023-21:55:34] [I] TensorRT version: 8.6.1
+[11/12/2023-21:55:34] [I] Loading standard plugins
+[11/12/2023-21:55:34] [I] Loading supplied plugin library: /usr/local/lib/python3.10/dist-packages/pytorch_embeddings/frobenius_operator/tensorrt/libfrobenius_operatorPlugin.so
+[11/12/2023-21:55:34] [I] [TRT] [MemUsageChange] Init CUDA: CPU +1, GPU +0, now: CPU 19, GPU 8363 (MiB)
+[11/12/2023-21:55:39] [I] [TRT] [MemUsageChange] Init builder kernel library: CPU +1658, GPU +310, now: CPU 1754, GPU 8673 (MiB)
+[11/12/2023-21:55:39] [I] Start parsing network model.
+[11/12/2023-21:55:40] [I] [TRT] ----------------------------------------------------------------
+[11/12/2023-21:55:40] [I] [TRT] Input filename:   ./model.onnx
+[11/12/2023-21:55:40] [I] [TRT] ONNX IR version:  0.0.8
+[11/12/2023-21:55:40] [I] [TRT] Opset version:    18
+[11/12/2023-21:55:40] [I] [TRT] Producer name:    pytorch
+[11/12/2023-21:55:40] [I] [TRT] Producer version: 2.1.0
+[11/12/2023-21:55:40] [I] [TRT] Domain:           
+[11/12/2023-21:55:40] [I] [TRT] Model version:    0
+[11/12/2023-21:55:40] [I] [TRT] Doc string:       
+[11/12/2023-21:55:40] [I] [TRT] ----------------------------------------------------------------
+[11/12/2023-21:55:41] [I] [TRT] No importer registered for op: frobenius_operator. Attempting to import as plugin.
+[11/12/2023-21:55:41] [I] [TRT] Searching for plugin: frobenius_operator, plugin_version: 1, plugin_namespace: 
+[11/12/2023-21:55:41] [I] [TRT] Successfully created plugin: frobenius_operator
+[11/12/2023-21:55:41] [I] [TRT] No importer registered for op: frobenius_operator. Attempting to import as plugin.
+[11/12/2023-21:55:41] [I] [TRT] Searching for plugin: frobenius_operator, plugin_version: 1, plugin_namespace: 
+[11/12/2023-21:55:41] [I] [TRT] Successfully created plugin: frobenius_operator
+[11/12/2023-21:55:41] [I] [TRT] No importer registered for op: frobenius_operator. Attempting to import as plugin.
+[11/12/2023-21:55:41] [I] [TRT] Searching for plugin: frobenius_operator, plugin_version: 1, plugin_namespace: 
+[11/12/2023-21:55:41] [I] [TRT] Successfully created plugin: frobenius_operator
+[11/12/2023-21:55:41] [I] [TRT] No importer registered for op: frobenius_operator. Attempting to import as plugin.
+[11/12/2023-21:55:41] [I] [TRT] Searching for plugin: frobenius_operator, plugin_version: 1, plugin_namespace: 
+[11/12/2023-21:55:41] [I] [TRT] Successfully created plugin: frobenius_operator
+[11/12/2023-21:55:41] [I] [TRT] No importer registered for op: frobenius_operator. Attempting to import as plugin.
+[11/12/2023-21:55:41] [I] [TRT] Searching for plugin: frobenius_operator, plugin_version: 1, plugin_namespace: 
+[11/12/2023-21:55:41] [I] [TRT] Successfully created plugin: frobenius_operator
+[11/12/2023-21:55:42] [I] Finished parsing network model. Parse time: 2.25285
+[11/12/2023-21:55:42] [I] [TRT] [MemUsageChange] Init cuBLAS/cuBLASLt: CPU +7, GPU +10, now: CPU 2796, GPU 8683 (MiB)
+[11/12/2023-21:55:42] [I] [TRT] [MemUsageChange] Init cuDNN: CPU +1, GPU +10, now: CPU 2797, GPU 8693 (MiB)
+[11/12/2023-21:55:42] [I] [TRT] Local timing cache in use. Profiling results in this builder pass will not be stored.
+[11/12/2023-21:55:43] [I] [TRT] Graph optimization time: 1.54867 seconds.
+[11/12/2023-21:55:43] [I] [TRT] [MemUsageChange] Init cuBLAS/cuBLASLt: CPU +0, GPU +10, now: CPU 2806, GPU 8685 (MiB)
+[11/12/2023-21:55:43] [I] [TRT] [MemUsageChange] Init cuDNN: CPU +0, GPU +8, now: CPU 2806, GPU 8693 (MiB)
+[11/12/2023-21:55:43] [I] [TRT] Local timing cache in use. Profiling results in this builder pass will not be stored.
+[11/12/2023-21:55:45] [I] [TRT] Graph optimization time: 1.54419 seconds.
+[11/12/2023-21:56:04] [I] [TRT] [MS] Number of streams used is 6
+[11/12/2023-21:56:04] [I] [TRT] [MS] Number of events used is 7
+[11/12/2023-21:56:04] [I] [TRT] Detected 2 inputs and 1 output network tensors.
+[11/12/2023-21:56:07] [I] [TRT] Total Host Persistent Memory: 1104
+[11/12/2023-21:56:07] [I] [TRT] Total Device Persistent Memory: 0
+[11/12/2023-21:56:07] [I] [TRT] Total Scratch Memory: 651296768
+[11/12/2023-21:56:07] [I] [TRT] [MemUsageStats] Peak memory usage of TRT CPU/GPU memory allocators: CPU 3078 MiB, GPU 3076 MiB
+[11/12/2023-21:56:07] [I] [TRT] [BlockAssignment] Started assigning block shifts. This will take 24 steps to complete.
+[11/12/2023-21:56:07] [I] [TRT] [BlockAssignment] Algorithm ShiftNTopDown took 0.582203ms to assign 22 blocks to 24 nodes requiring 816447488 bytes.
+[11/12/2023-21:56:07] [I] [TRT] Total Activation Memory: 816447488
+[11/12/2023-21:56:09] [I] [TRT] [MemUsageChange] Init cuBLAS/cuBLASLt: CPU +1, GPU +8, now: CPU 7164, GPU 10893 (MiB)
+[11/12/2023-21:56:09] [I] [TRT] [MemUsageChange] Init cuDNN: CPU +0, GPU +10, now: CPU 7164, GPU 10903 (MiB)
+[11/12/2023-21:56:09] [I] [TRT] [MemUsageChange] Init cuBLAS/cuBLASLt: CPU +0, GPU +10, now: CPU 5111, GPU 10879 (MiB)
+[11/12/2023-21:56:09] [I] [TRT] [MemUsageChange] Init cuDNN: CPU +0, GPU +8, now: CPU 5111, GPU 10887 (MiB)
+[11/12/2023-21:56:09] [I] [TRT] Local timing cache in use. Profiling results in this builder pass will not be stored.
+[11/12/2023-21:56:11] [I] [TRT] Graph optimization time: 1.52845 seconds.
+[11/12/2023-21:56:23] [I] [TRT] [MS] Number of streams used is 6
+[11/12/2023-21:56:23] [I] [TRT] [MS] Number of events used is 6
+[11/12/2023-21:56:23] [I] [TRT] Detected 2 inputs and 1 output network tensors.
+[11/12/2023-21:56:26] [I] [TRT] Total Host Persistent Memory: 944
+[11/12/2023-21:56:26] [I] [TRT] Total Device Persistent Memory: 0
+[11/12/2023-21:56:26] [I] [TRT] Total Scratch Memory: 325648384
+[11/12/2023-21:56:26] [I] [TRT] [MemUsageStats] Peak memory usage of TRT CPU/GPU memory allocators: CPU 3078 MiB, GPU 5137 MiB
+[11/12/2023-21:56:26] [I] [TRT] [BlockAssignment] Started assigning block shifts. This will take 22 steps to complete.
+[11/12/2023-21:56:26] [I] [TRT] [BlockAssignment] Algorithm ShiftNTopDown took 0.537217ms to assign 21 blocks to 22 nodes requiring 405211648 bytes.
+[11/12/2023-21:56:26] [I] [TRT] Total Activation Memory: 405209088
+[11/12/2023-21:56:27] [I] [TRT] [MemUsageChange] Init cuBLAS/cuBLASLt: CPU +0, GPU +8, now: CPU 7248, GPU 11943 (MiB)
+[11/12/2023-21:56:27] [I] [TRT] [MemUsageChange] Init cuDNN: CPU +1, GPU +8, now: CPU 7249, GPU 11951 (MiB)
+[11/12/2023-21:56:28] [I] [TRT] [MemUsageChange] TensorRT-managed allocation in building engine: CPU +0, GPU +1035, now: CPU 0, GPU 1035 (MiB)
+[11/12/2023-21:56:30] [I] Engine built in 56.2383 sec.
+[11/12/2023-21:56:30] [I] [TRT] Loaded engine size: 1034 MiB
+[11/12/2023-21:56:31] [I] [TRT] [MemUsageChange] Init cuBLAS/cuBLASLt: CPU +0, GPU +10, now: CPU 5203, GPU 9865 (MiB)
+[11/12/2023-21:56:31] [I] [TRT] [MemUsageChange] Init cuDNN: CPU +0, GPU +8, now: CPU 5203, GPU 9873 (MiB)
+[11/12/2023-21:56:31] [I] [TRT] [MemUsageChange] TensorRT-managed allocation in engine deserialization: CPU +0, GPU +1034, now: CPU 0, GPU 1034 (MiB)
+[11/12/2023-21:56:31] [I] Engine deserialized in 0.637711 sec.
+[11/12/2023-21:56:31] [I] Skipped inference phase since --skipInference is added.
+&&&& PASSED TensorRT.trtexec [TensorRT v8601] # trtexec --onnx=./model.onnx --staticPlugins=/usr/local/lib/python3.10/dist-packages/pytorch_embeddings/frobenius_operator/tensorrt/libfrobenius_operatorPlugin.so --loadInputs=numerical_features:./numerical_features.dat,categorical_features:./categorical_features.dat --inputIOFormats=fp16:chw,int32:chw --outputIOFormats=fp16:chw --fp16 --minShapes=numerical_features:32768x13,categorical_features:32768x26 --optShapes=numerical_features:32768x13,categorical_features:32768x26 --maxShapes=numerical_features:32768x13,categorical_features:32768x26 --builderOptimizationLevel=5 --maxAuxStreams=5 --memPoolSize=workspace:16384 --saveEngine=./model.engine --skipInference
+{
+    "pytorch (auc)": 0.8030218482017517,
+    "torchscript (auc)": 0.8030452728271484,
+    "tensorrt (auc)": 0.8030219674110413
+}
+{
+    "pytorch mean_throughput": 7036518.765996797,
+    "pytorch mean_latency": 0.004656848235571794,
+    "pytorch p90_latency": 0.004532063007354736,
+    "pytorch p95_latency": 0.004534599781036377,
+    "pytorch p99_latency": 0.004535511970520019
+}
+{
+    "torchscript mean_throughput": 7816851.96900222,
+    "torchscript mean_latency": 0.004191968855229922,
+    "torchscript p90_latency": 0.0041506290435791016,
+    "torchscript p95_latency": 0.0041506290435791016,
+    "torchscript p99_latency": 0.004150826692581177
+}
+&&&& RUNNING TensorRT.trtexec [TensorRT v8601] # trtexec --loadEngine=./model.engine --staticPlugins=/usr/local/lib/python3.10/dist-packages/pytorch_embeddings/frobenius_operator/tensorrt/libfrobenius_operatorPlugin.so --inputIOFormats=fp16:chw,int32:chw --outputIOFormats=fp16:chw --fp16 --loadInputs=numerical_features:./numerical_features.dat,categorical_features:./categorical_features.dat --shapes=numerical_features:32768x13,categorical_features:32768x26 --iterations=10010 --avgRuns=10000 --infStreams=1 --noDataTransfers --useSpinWait
+[11/12/2023-21:57:20] [I] === Model Options ===
+[11/12/2023-21:57:20] [I] Format: *
+[11/12/2023-21:57:20] [I] Model: 
+[11/12/2023-21:57:20] [I] Output:
+[11/12/2023-21:57:20] [I] === Build Options ===
+[11/12/2023-21:57:20] [I] Max batch: explicit batch
+[11/12/2023-21:57:20] [I] Memory Pools: workspace: default, dlaSRAM: default, dlaLocalDRAM: default, dlaGlobalDRAM: default
+[11/12/2023-21:57:20] [I] minTiming: 1
+[11/12/2023-21:57:20] [I] avgTiming: 8
+[11/12/2023-21:57:20] [I] Precision: FP32+FP16
+[11/12/2023-21:57:20] [I] LayerPrecisions: 
+[11/12/2023-21:57:20] [I] Layer Device Types: 
+[11/12/2023-21:57:20] [I] Calibration: 
+[11/12/2023-21:57:20] [I] Refit: Disabled
+[11/12/2023-21:57:20] [I] Version Compatible: Disabled
+[11/12/2023-21:57:20] [I] TensorRT runtime: full
+[11/12/2023-21:57:20] [I] Lean DLL Path: 
+[11/12/2023-21:57:20] [I] Tempfile Controls: { in_memory: allow, temporary: allow }
+[11/12/2023-21:57:20] [I] Exclude Lean Runtime: Disabled
+[11/12/2023-21:57:20] [I] Sparsity: Disabled
+[11/12/2023-21:57:20] [I] Safe mode: Disabled
+[11/12/2023-21:57:20] [I] Build DLA standalone loadable: Disabled
+[11/12/2023-21:57:20] [I] Allow GPU fallback for DLA: Disabled
+[11/12/2023-21:57:20] [I] DirectIO mode: Disabled
+[11/12/2023-21:57:20] [I] Restricted mode: Disabled
+[11/12/2023-21:57:20] [I] Skip inference: Disabled
+[11/12/2023-21:57:20] [I] Save engine: 
+[11/12/2023-21:57:20] [I] Load engine: ./model.engine
+[11/12/2023-21:57:20] [I] Profiling verbosity: 0
+[11/12/2023-21:57:20] [I] Tactic sources: Using default tactic sources
+[11/12/2023-21:57:20] [I] timingCacheMode: local
+[11/12/2023-21:57:20] [I] timingCacheFile: 
+[11/12/2023-21:57:20] [I] Heuristic: Disabled
+[11/12/2023-21:57:20] [I] Preview Features: Use default preview flags.
+[11/12/2023-21:57:20] [I] MaxAuxStreams: -1
+[11/12/2023-21:57:20] [I] BuilderOptimizationLevel: -1
+[11/12/2023-21:57:20] [I] Input(s): fp16:chw
+[11/12/2023-21:57:20] [I] Input(s): int32:chw
+[11/12/2023-21:57:20] [I] Output(s): fp16:chw
+[11/12/2023-21:57:20] [I] Input build shape: numerical_features=32768x13+32768x13+32768x13
+[11/12/2023-21:57:20] [I] Input build shape: categorical_features=32768x26+32768x26+32768x26
+[11/12/2023-21:57:20] [I] Input calibration shapes: model
+[11/12/2023-21:57:20] [I] === System Options ===
+[11/12/2023-21:57:20] [I] Device: 0
+[11/12/2023-21:57:20] [I] DLACore: 
+[11/12/2023-21:57:20] [I] Plugins: /usr/local/lib/python3.10/dist-packages/pytorch_embeddings/frobenius_operator/tensorrt/libfrobenius_operatorPlugin.so
+[11/12/2023-21:57:20] [I] setPluginsToSerialize:
+[11/12/2023-21:57:20] [I] dynamicPlugins:
+[11/12/2023-21:57:20] [I] ignoreParsedPluginLibs: 0
+[11/12/2023-21:57:20] [I] 
+[11/12/2023-21:57:20] [I] === Inference Options ===
+[11/12/2023-21:57:20] [I] Batch: Explicit
+[11/12/2023-21:57:20] [I] Input inference shape: categorical_features=32768x26
+[11/12/2023-21:57:20] [I] Input inference shape: numerical_features=32768x13
+[11/12/2023-21:57:20] [I] Iterations: 10010
+[11/12/2023-21:57:20] [I] Duration: 3s (+ 200ms warm up)
+[11/12/2023-21:57:20] [I] Sleep time: 0ms
+[11/12/2023-21:57:20] [I] Idle time: 0ms
+[11/12/2023-21:57:20] [I] Inference Streams: 1
+[11/12/2023-21:57:20] [I] ExposeDMA: Disabled
+[11/12/2023-21:57:20] [I] Data transfers: Disabled
+[11/12/2023-21:57:20] [I] Spin-wait: Enabled
+[11/12/2023-21:57:20] [I] Multithreading: Disabled
+[11/12/2023-21:57:20] [I] CUDA Graph: Disabled
+[11/12/2023-21:57:20] [I] Separate profiling: Disabled
+[11/12/2023-21:57:20] [I] Time Deserialize: Disabled
+[11/12/2023-21:57:20] [I] Time Refit: Disabled
+[11/12/2023-21:57:20] [I] NVTX verbosity: 0
+[11/12/2023-21:57:20] [I] Persistent Cache Ratio: 0
+[11/12/2023-21:57:20] [I] Inputs:
+[11/12/2023-21:57:20] [I] categorical_features<-./categorical_features.dat
+[11/12/2023-21:57:20] [I] numerical_features<-./numerical_features.dat
+[11/12/2023-21:57:20] [I] === Reporting Options ===
+[11/12/2023-21:57:20] [I] Verbose: Disabled
+[11/12/2023-21:57:20] [I] Averages: 10000 inferences
+[11/12/2023-21:57:20] [I] Percentiles: 90,95,99
+[11/12/2023-21:57:20] [I] Dump refittable layers:Disabled
+[11/12/2023-21:57:20] [I] Dump output: Disabled
+[11/12/2023-21:57:20] [I] Profile: Disabled
+[11/12/2023-21:57:20] [I] Export timing to JSON file: 
+[11/12/2023-21:57:20] [I] Export output to JSON file: 
+[11/12/2023-21:57:20] [I] Export profile to JSON file: 
+[11/12/2023-21:57:20] [I] 
+[11/12/2023-21:57:21] [I] === Device Information ===
+[11/12/2023-21:57:21] [I] Selected Device: NVIDIA A100-PCIE-40GB
+[11/12/2023-21:57:21] [I] Compute Capability: 8.0
+[11/12/2023-21:57:21] [I] SMs: 108
+[11/12/2023-21:57:21] [I] Device Global Memory: 40377 MiB
+[11/12/2023-21:57:21] [I] Shared Memory per SM: 164 KiB
+[11/12/2023-21:57:21] [I] Memory Bus Width: 5120 bits (ECC enabled)
+[11/12/2023-21:57:21] [I] Application Compute Clock Rate: 1.41 GHz
+[11/12/2023-21:57:21] [I] Application Memory Clock Rate: 1.215 GHz
+[11/12/2023-21:57:21] [I] 
+[11/12/2023-21:57:21] [I] Note: The application clock rates do not reflect the actual clock rates that the GPU is currently running at.
+[11/12/2023-21:57:21] [I] 
+[11/12/2023-21:57:21] [I] TensorRT version: 8.6.1
+[11/12/2023-21:57:21] [I] Loading standard plugins
+[11/12/2023-21:57:21] [I] Loading supplied plugin library: /usr/local/lib/python3.10/dist-packages/pytorch_embeddings/frobenius_operator/tensorrt/libfrobenius_operatorPlugin.so
+[11/12/2023-21:57:22] [I] Engine loaded in 1.30574 sec.
+[11/12/2023-21:57:22] [I] [TRT] Loaded engine size: 1034 MiB
+[11/12/2023-21:57:23] [I] [TRT] [MemUsageChange] Init cuBLAS/cuBLASLt: CPU +6, GPU +12, now: CPU 2088, GPU 11235 (MiB)
+[11/12/2023-21:57:23] [I] [TRT] [MemUsageChange] Init cuDNN: CPU +2, GPU +10, now: CPU 2090, GPU 11245 (MiB)
+[11/12/2023-21:57:23] [I] [TRT] [MemUsageChange] TensorRT-managed allocation in engine deserialization: CPU +0, GPU +1034, now: CPU 0, GPU 1034 (MiB)
+[11/12/2023-21:57:23] [I] Engine deserialized in 0.655022 sec.
+[11/12/2023-21:57:23] [I] [TRT] [MS] Running engine with multi stream info
+[11/12/2023-21:57:23] [I] [TRT] [MS] Number of aux streams is 5
+[11/12/2023-21:57:23] [I] [TRT] [MS] Number of total worker streams is 6
+[11/12/2023-21:57:23] [I] [TRT] [MS] The main stream provided by execute/enqueue calls is the first worker stream
+[11/12/2023-21:57:23] [I] [TRT] [MemUsageChange] Init cuBLAS/cuBLASLt: CPU +0, GPU +10, now: CPU 2089, GPU 11237 (MiB)
+[11/12/2023-21:57:23] [I] [TRT] [MemUsageChange] Init cuDNN: CPU +1, GPU +8, now: CPU 2090, GPU 11245 (MiB)
+[11/12/2023-21:57:23] [I] [TRT] [MemUsageChange] TensorRT-managed allocation in IExecutionContext creation: CPU +0, GPU +386, now: CPU 0, GPU 1420 (MiB)
+[11/12/2023-21:57:23] [I] Setting persistentCacheLimit to 0 bytes.
+[11/12/2023-21:57:23] [I] Using values loaded from ./numerical_features.dat for input numerical_features
+[11/12/2023-21:57:23] [I] Input binding for numerical_features with dimensions 32768x13 is created.
+[11/12/2023-21:57:23] [I] Using values loaded from ./categorical_features.dat for input categorical_features
+[11/12/2023-21:57:23] [I] Input binding for categorical_features with dimensions 32768x26 is created.
+[11/12/2023-21:57:23] [I] Output binding for output with dimensions 32768x1 is created.
+[11/12/2023-21:57:23] [I] Starting inference
+[11/12/2023-21:57:52] [I] Warmup completed 18 queries over 200 ms
+[11/12/2023-21:57:52] [I] Timing trace has 10010 queries over 28.8475 s
+[11/12/2023-21:57:52] [I] 
+[11/12/2023-21:57:52] [I] === Trace details ===
+[11/12/2023-21:57:52] [I] Trace averages of 10000 runs:
+[11/12/2023-21:57:52] [I] Average on 10000 runs - GPU latency: 2.87923 ms - Host latency: 2.87923 ms (enqueue 0.121903 ms)
+[11/12/2023-21:57:52] [I] 
+[11/12/2023-21:57:52] [I] === Performance summary ===
+[11/12/2023-21:57:52] [I] Throughput: 346.997 qps
+[11/12/2023-21:57:52] [I] Latency: min = 2.81085 ms, max = 3.58789 ms, mean = 2.87927 ms, median = 2.87891 ms, percentile(90%) = 2.91406 ms, percentile(95%) = 2.91797 ms, percentile(99%) = 2.94336 ms
+[11/12/2023-21:57:52] [I] Enqueue Time: min = 0.111328 ms, max = 0.240234 ms, mean = 0.121902 ms, median = 0.121094 ms, percentile(90%) = 0.126953 ms, percentile(95%) = 0.129883 ms, percentile(99%) = 0.136719 ms
+[11/12/2023-21:57:52] [I] H2D Latency: min = 0 ms, max = 0 ms, mean = 0 ms, median = 0 ms, percentile(90%) = 0 ms, percentile(95%) = 0 ms, percentile(99%) = 0 ms
+[11/12/2023-21:57:52] [I] GPU Compute Time: min = 2.81085 ms, max = 3.58789 ms, mean = 2.87927 ms, median = 2.87891 ms, percentile(90%) = 2.91406 ms, percentile(95%) = 2.91797 ms, percentile(99%) = 2.94336 ms
+[11/12/2023-21:57:52] [I] D2H Latency: min = 0 ms, max = 0 ms, mean = 0 ms, median = 0 ms, percentile(90%) = 0 ms, percentile(95%) = 0 ms, percentile(99%) = 0 ms
+[11/12/2023-21:57:52] [I] Total Host Walltime: 28.8475 s
+[11/12/2023-21:57:52] [I] Total GPU Compute Time: 28.8215 s
+[11/12/2023-21:57:52] [I] Explanations of the performance metrics are printed in the verbose logs.
+[11/12/2023-21:57:52] [I] 
+&&&& PASSED TensorRT.trtexec [TensorRT v8601] # trtexec --loadEngine=./model.engine --staticPlugins=/usr/local/lib/python3.10/dist-packages/pytorch_embeddings/frobenius_operator/tensorrt/libfrobenius_operatorPlugin.so --inputIOFormats=fp16:chw,int32:chw --outputIOFormats=fp16:chw --fp16 --loadInputs=numerical_features:./numerical_features.dat,categorical_features:./categorical_features.dat --shapes=numerical_features:32768x13,categorical_features:32768x26 --iterations=10010 --avgRuns=10000 --infStreams=1 --noDataTransfers --useSpinWait
+=== Performance summary ===[11/12/2023-21:57:52] [I] Throughput: 346.997 qps[11/12/2023-21:57:52] [I] Latency: min = 2.81085 ms, max = 3.58789 ms, mean = 2.87927 ms, median = 2.87891 ms, percentile(90%) = 2.91406 ms, percentile(95%) = 2.91797 ms, percentile(99%) = 2.94336 ms[11/12/2023-21:57:52] [I] Enqueue Time: min = 0.111328 ms, max = 0.240234 ms, mean = 0.121902 ms, median = 0.121094 ms, percentile(90%) = 0.126953 ms, percentile(95%) = 0.129883 ms, percentile(99%) = 0.136719 ms[11/12/2023-21:57:52] [I] H2D Latency: min = 0 ms, max = 0 ms, mean = 0 ms, median = 0 ms, percentile(90%) = 0 ms, percentile(95%) = 0 ms, percentile(99%) = 0 ms[11/12/2023-21:57:52] [I] GPU Compute Time: min = 2.81085 ms, max = 3.58789 ms, mean = 2.87927 ms, median = 2.87891 ms, percentile(90%) = 2.91406 ms, percentile(95%) = 2.91797 ms, percentile(99%) = 2.94336 ms[11/12/2023-21:57:52] [I] D2H Latency: min = 0 ms, max = 0 ms, mean = 0 ms, median = 0 ms, percentile(90%) = 0 ms, percentile(95%) = 0 ms, percentile(99%) = 0 ms[11/12/2023-21:57:52] [I] Total Host Walltime: 28.8475 s[11/12/2023-21:57:52] [I] Total GPU Compute Time: 28.8215 s[11/12/2023-21:57:52] [I] Explanations of the performance metrics are printed in the verbose logs.[11/12/2023-21:57:52] [I] &&&& PASSED TensorRT.trtexec [TensorRT v8601] # trtexec --loadEngine=./model.engine --staticPlugins=/usr/local/lib/python3.10/dist-packages/pytorch_embeddings/frobenius_operator/tensorrt/libfrobenius_operatorPlugin.so --inputIOFormats=fp16:chw,int32:chw --outputIOFormats=fp16:chw --fp16 --loadInputs=numerical_features:./numerical_features.dat,categorical_features:./categorical_features.dat --shapes=numerical_features:32768x13,categorical_features:32768x26 --iterations=10010 --avgRuns=10000 --infStreams=1 --noDataTransfers --useSpinWait
